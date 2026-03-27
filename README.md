@@ -48,10 +48,10 @@ npm install
 ```
 
 ### 3. Commandes disponibles
-- ``npm run dev`` : Lance le serveur de développement sur localhost:3000.
-- ``npm run build`` : Compile l'application pour la production.
-- ``npm run start`` : Lance l'application compilée.
-- ``npm run lint`` : Analyse le code pour détecter les erreurs (+ accessibilité).
+Avoir **pnpm** installé sur la machine (plus rapide et efficace que ``npm`` ou ``yarn``).
+
+- ``pnpm i`` : Installer les packages du projet
+- ``pnpm dev`` : Compile l'application pour la production.
 
 ### 4. Structure des dossiers
 - ``/app/ui/`` : Eléments réutilisables.
