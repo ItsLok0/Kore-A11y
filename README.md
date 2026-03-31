@@ -57,6 +57,16 @@ Avoir **pnpm** installé sur la machine (plus rapide et efficace que ``npm`` ou 
 - ``/ui/`` : Eléments réutilisables.
 - ``/component/`` : Éléments de structure (SkipLink, Navbar, Footer).
 
+### 5. Méthodologie & Workflow (IA-Assisted)
+Bien que ce projet soit réalisé en autonomie, j'ai choisi d'intégrer l'``Intelligence Artificielle (Gemini & Claude)`` non pas comme un simple générateur de code, mais comme un partenaire ``stratégique`` pour simuler un flux de travail professionnel de type ``SCRUM``.
+
+Pour garantir la rigueur du projet, j'ai utilisé l'IA pour :
+- ``Définition du Product Backlog :`` En agissant comme un Product Owner, l'IA a aidé à découper les fonctionnalités complexes en ``User Stories``.
+- ``Planification Agile :`` Chaque étape du développement est documentée via des GitHub Issues, permettant un suivi précis et une approche itérative (Sprints).
+- ``Garde-fou A11y :`` L'IA m'accompagne dans la vérification théorique des normes ``WCAG 2.2`` avant chaque implémentation technique.
+
+``Pourquoi cette approche ?`` L'objectif est de démontrer ma capacité à piloter un projet de A à Z, en utilisant les outils modernes pour structurer ma pensée, optimiser mon temps de développement et garantir une qualité de code conforme aux standards de l'industrie.
+
 ---
 
 ## Focus Accessibilité

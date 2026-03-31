@@ -1,26 +1,29 @@
-import { defineConfig, globalIgnores } from "eslint/config";
-import nextVitals from "eslint-config-next/core-web-vitals";
-import nextTs from "eslint-config-next/typescript";
-import jsxa11y from "eslint-plugin-jsx-a11y";
+import js from "@eslint/js";
+import nextPlugin from "@next/eslint-plugin-next";
+import a11yPlugin from "eslint-plugin-jsx-a11y";
 
-const eslintConfig = defineConfig([
-  ...nextVitals,
-  ...nextTs,
+export default [
+  {
+    ignores: [
+      "node_modules/**",
+      ".next/**",
+      "dist/**",
+      "public/**",
+    ],
+  },
+  js.configs.recommended,
   {
     plugins: {
-      "jsx-a11y": jsxa11y,
+      "@next/next": nextPlugin,
+      "jsx-a11y": a11yPlugin,
     },
     rules: {
-      ...jsxa11y.configs.recommended.rules,
-      "jsx-a11y/alt-text": "error", 
+      ...nextPlugin.configs.recommended.rules,
+      ...a11yPlugin.configs.recommended.rules,
+      "jsx-a11y/alt-text": "error",
+      "jsx-a11y/aria-props": "error",
+      "jsx-a11y/interactive-supports-focus": "error",
+      "jsx-a11y/no-autofocus": "warn",
     },
   },
-  globalIgnores([
-    ".next/**",
-    "out/**",
-    "build/**",
-    "next-env.d.ts",
-  ]),
-]);
-
-export default eslintConfig;
+];
