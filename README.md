@@ -54,8 +54,8 @@ Avoir **pnpm** installé sur la machine (plus rapide et efficace que ``npm`` ou 
 - ``pnpm dev`` : Compile l'application pour la production.
 
 ### 4. Structure des dossiers
-- ``/app/ui/`` : Eléments réutilisables.
-- ``/app/components/`` : Éléments de structure (SkipLink, Navbar, Footer).
+- ``/ui/`` : Eléments réutilisables.
+- ``/component/`` : Éléments de structure (SkipLink, Navbar, Footer).
 
 ---
 
@@ -66,7 +66,6 @@ Chaque composant présent dans cette bibliothèque est audité selon les critèr
 - **Navigation clavier** : Gestion du focus (``tabindex``, ``focus-visible``).
 - **Sémantique** : Utilisation de HTML5 sémantique pour une meilleure lecture par les technologies d'assistance.
 - **Signaux ARIA** : Utilisation des attributs ``aria`` quand c'est nécessaire.
-- **Skip Links** : Présence d'un lien d'évitement dès le premier élément focusable.
 
 ---
 
