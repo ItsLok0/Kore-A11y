@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import { Open_Sans } from "next/font/google";
+import "@/app/globals.css";
+import SkipLink from "@/component/layout/skip-link";
 
-const inter = Inter({
+const open_sans = Open_Sans  ({
   subsets: ["latin"],
-  variable: "--font-sans",
+  weight: '400',
 });
 
 export const metadata: Metadata = {
@@ -18,13 +19,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={inter.variable}>
-      <body>
-        <header></header>
-        <main id="main-content">
-          {children}
-        </main>
-        <footer></footer>
+    <html lang="fr">
+      <body className={`${open_sans.className} antialiased flex min-h-screen h-auto flex-col`}>
+        <div className="skipLink">
+          { <SkipLink /> }
+        </div>
+        <header>  
+          <button className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
+            Btn header
+          </button>
+        </header>
+        { children }
       </body>
     </html>
   );
