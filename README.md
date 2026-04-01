@@ -1,4 +1,4 @@
-# Portfolio A11y — Next.js 16
+# Portfolio A11y — Next.js 16 (WIP - Work in progress)
 
 [Site en ligne](https://portfolio-a11y-pierre.vercel.app/)
 
