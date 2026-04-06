@@ -1,6 +1,6 @@
-# Portfolio A11y — Next.js 16
+# Portfolio A11y — Next.js 16 (WIP - Work in progress)
 
-[Site en ligne](https://portfolio-a11y-pierre.vercel.app/)
+[Site en ligne](https://kore-a11y-pierre.vercel.app/)
 
 - [Next.js: 16](https://nextjs.org/)
 - [Tailwind: 4](https://tailwindcss.com/)
