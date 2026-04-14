@@ -1,8 +1,7 @@
-'use client';
-
-import { Button } from "@/ui/button";
-import { Heading } from "@/ui/heading";
-import { Text } from "@/ui/text";
+import { Button } from "@/component/ui/button";
+import { Heading } from "@/component/ui/heading";
+import { Text } from "@/component/ui/text";
+import { Input } from "@/component/ui/input";
 
 export default function Home() {
   return (
@@ -27,6 +26,9 @@ export default function Home() {
         <Text variant="small" className="italic">
           Small : avril 2026
         </Text>
+      </div>
+      <div className="inputs">
+        <Input label="test" type="text" defaultValue="bonjour" />
       </div>
       <div className="exemple-btn flex justify-around flex-wrap gap-4">
         <Button

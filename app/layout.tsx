@@ -1,12 +1,7 @@
 import type { Metadata } from "next";
-import { Open_Sans } from "next/font/google";
 import "@/app/globals.css";
 import SkipLink from "@/component/layout/skip-link";
-
-const open_sans = Open_Sans  ({
-  subsets: ["latin"],
-  weight: '400',
-});
+import { open_sans } from "@/component/ui/fonts";
 
 export const metadata: Metadata = {
   title: "Portfolio A11y",
