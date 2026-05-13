@@ -1,10 +1,7 @@
-'use client';
-
 import { Button } from "@/app/ui/components/Button/button";
 import { Heading } from "@/app/ui/components/heading";
 import { Text } from "@/app/ui/components/text";
 import { ButtonLink } from "@/app/ui/components/Button/buttonlink";
-import { useState } from 'react';
 import {
   faTrash,
   faPaperPlane,
@@ -14,14 +11,6 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function ButtonDemoPage() {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const simulateLoading = () => {
-    setIsLoading(true);
-    /*global setTimeout*/
-    setTimeout(() => setIsLoading(false), 2500);
-  };
-
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-10 p-3 sm:p-6">
 
@@ -143,13 +132,6 @@ export default function ButtonDemoPage() {
                 Chargement — <Text variant="code">isLoading</Text>
               </Text>
               <div className="flex flex-wrap gap-3">
-                <Button
-                  variant="primary"
-                  isLoading={isLoading}
-                  onClick={simulateLoading}
-                >
-                  {isLoading ? 'Chargement...' : 'Simuler un chargement'}
-                </Button>
                 <Button variant="outline" isLoading>
                   En cours...
                 </Button>
