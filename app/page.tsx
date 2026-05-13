@@ -4,7 +4,7 @@ import { Text } from '@/app/ui/components/text';
 import { Input } from '@/app/ui/components/input';
 import Link from 'next/link';
 import { TextArea } from './ui/components/textarea';
-import { Checkbox } from './ui/components/Checkbox/checkbox';
+import { Checkbox } from './ui/components/Checkbox_temp/checkbox';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
