@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { Button } from "@/app/ui/components/Button/button";
 import { Heading } from "@/app/ui/components/heading";
 import { Text } from "@/app/ui/components/text";
@@ -9,6 +10,12 @@ import {
   faArrowRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ButtonLoadingDemo } from "@/app/ui/components/Button/buttonLoadingDemo";
+
+export const metadata: Metadata = {
+  title: 'Composant Button',
+  description: 'Démonstration du composant Button : variants, tailles, états et accessibilité.',
+};
 
 export default function ButtonDemoPage() {
   return (
@@ -127,21 +134,7 @@ export default function ButtonDemoPage() {
             </div>
 
             {/* Loading */}
-            <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
-              <Text variant="caption" className="font-bold text-text-muted">
-                Chargement — <Text variant="code">isLoading</Text>
-              </Text>
-              <div className="flex flex-wrap gap-3">
-                <Button variant="outline" isLoading>
-                  En cours...
-                </Button>
-              </div>
-              <Text variant="small" className="text-text-muted">
-                <Text variant="code">aria-busy="true"</Text> est ajouté
-                automatiquement. Le bouton est désactivé pendant le chargement
-                pour éviter les doubles soumissions.
-              </Text>
-            </div>
+            <ButtonLoadingDemo />
 
           </div>
         </section>
