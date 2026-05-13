@@ -1,5 +1,5 @@
-import { Checkbox } from '@/app/ui/components/Checkbox_temp/checkbox';
-import { CheckboxGroup } from '@/app/ui/components/Checkbox_temp/checkboxGroup';
+import { Checkbox } from '@/app/ui/components/Checkbox/checkbox';
+import { CheckboxGroup } from '@/app/ui/components/Checkbox/checkboxGroup';
 import { Heading } from '@/app/ui/components/heading';
 import { Text } from '@/app/ui/components/text';
 import { Metadata } from 'next';
