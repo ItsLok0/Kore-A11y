@@ -48,7 +48,7 @@ export default function BadgeDemoPage() {
           <div className="space-y-1">
             <Heading as="h2" level={2}>Icône seule</Heading>
             <Text variant="small">
-              Sans label visible, le <Text variant="code">srText</Text> est obligatoire
+              Sans label visible, le <Text as="span" variant="code">srText</Text> est obligatoire
               pour que les lecteurs d'écran comprennent le statut.
             </Text>
           </div>
@@ -73,7 +73,7 @@ export default function BadgeDemoPage() {
         <section className="flex flex-col gap-8 border-b pb-12">
           <div className="space-y-1">
             <Heading as="h2" level={2}>Icône personnalisée</Heading>
-            <Text variant="small">La prop <Text variant="code">icon</Text> remplace l'icône par défaut.</Text>
+            <Text variant="small">La prop <Text as="span" variant="code">icon</Text> remplace l'icône par défaut.</Text>
           </div>
           <div className="flex flex-wrap justify-center gap-4 rounded-3xl border border-border-subtle bg-bg-subtle/30 p-6 sm:p-8">
             <Badge variant="info" label="Nouveauté" icon={faStar} />
@@ -144,7 +144,7 @@ export default function BadgeDemoPage() {
             </div>
             <div className="space-y-2">
               <Text className="text-sm font-bold underline">Lecteurs d'écran</Text>
-              <Text variant="small">Utilisation de <Text variant="code">aria-hidden</Text>, <Text variant="code">sr-only</Text> et <Text variant="code">role="status"</Text>.</Text>
+              <Text variant="small">Utilisation de <Text as="span" variant="code">aria-hidden</Text>, <Text as="span" variant="code">sr-only</Text> et <Text as="span" variant="code">role="status"</Text>.</Text>
             </div>
           </div>
         </section>

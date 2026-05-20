@@ -117,11 +117,11 @@ export default function HomePage() {
                             <Text variant="caption" className="text-primary font-bold">Composant : Heading</Text>
                             <Heading as="h3" level={3}>Structure & Navigation</Heading>
                             <Text variant="body">
-                                Garantit une structure de document logique. La prop <Text variant="code">as</Text> définit la balise HTML, tandis que <Text variant="code">level</Text> gère le style visuel, permettant de respecter la hiérarchie sans sacrifier le design.
+                                Garantit une structure de document logique. La prop <Text variant="code">as</Text> définit la balise HTML, tandis que <Text as="span" variant="code">level</Text> gère le style visuel, permettant de respecter la hiérarchie sans sacrifier le design.
                             </Text>
                             <div className="p-3 bg-primary-subtle rounded-lg border border-primary/10">
                                 <Text variant="small" className="text-primary-700">
-                                    <Text as='span' variant='small' className='font-bold'>Information :</Text> Ici tous les <Text variant="code">as</Text> sont en H4 pour ne pas casser la hiérarchie sémantique de la page.
+                                    <Text as='span' variant='small' className='font-bold'>Information :</Text> Ici tous les <Text as="span" variant="code">as</Text> sont en H4 pour ne pas casser la hiérarchie sémantique de la page.
                                 </Text>
                             </div>
                         </div>
@@ -134,7 +134,7 @@ export default function HomePage() {
                           <Text variant="body">Corps de texte standard pour la lecture.</Text>
                           <div className="flex items-center gap-2">
                               <Text variant="small" className="text-secondary">Libellé :</Text>
-                              <Text variant="code">Component.tsx</Text>
+                              <Text as="span" variant="code">Component.tsx</Text>
                           </div>
                           <Text variant="caption" className='text-secondary'>MÉTADONNÉES EN MAJUSCULES</Text>
                       </div>
@@ -178,8 +178,8 @@ export default function HomePage() {
                           <Text variant="caption" className="text-primary">Composant : Input</Text>
                           <Heading as="h3" level={3}>Saisie de données 11.2</Heading>
                           <Text variant="body">
-                              Liaison explicite entre label et champ via <Text variant="code">id</Text>. 
-                              Les messages d'erreur et descriptions sont liés via <Text variant="code">aria-describedby</Text>.
+                              Liaison explicite entre label et champ via <Text as="span" variant="code">id</Text>. 
+                              Les messages d'erreur et descriptions sont liés via <Text as="span" variant="code">aria-describedby</Text>.
                           </Text>
                       </div>
                   </div>
@@ -198,7 +198,7 @@ export default function HomePage() {
                           <Text variant="caption" className="text-primary">Composant : TextArea</Text>
                           <Heading as="h3" level={3}>Zones de texte</Heading>
                           <Text variant="body">
-                              Hérite de toute la logique d'accessibilité de l'Input standard. Il supporte les attributs natifs <Text variant="code">rows</Text> et <Text variant="code">cols</Text> tout 
+                              Hérite de toute la logique d'accessibilité de l'Input standard. Il supporte les attributs natifs <Text as="span" variant="code">rows</Text> et <Text as="span" variant="code">cols</Text> tout 
                               en conservant un design fluide et responsive.
                           </Text>
                       </div>
@@ -221,7 +221,7 @@ export default function HomePage() {
                           <Heading as="h3" level={3}>Indicateurs de choix binaires</Heading>
                           <Text variant="body">
                               L'input est imbriqué dans le label pour maximiser la surface de clic (UX). 
-                              L'utilisation de <Text variant="code">useId</Text> garantit une liaison robuste entre 
+                              L'utilisation de <Text as="span" variant="code">useId</Text> garantit une liaison robuste entre 
                               le texte, la description et l'état visuel pour les technologies d'assistance.
                           </Text>
                       </div>

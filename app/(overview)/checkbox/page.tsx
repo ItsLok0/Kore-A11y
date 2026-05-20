@@ -59,8 +59,8 @@ export default function CheckboxDemoPage() {
           <div className="space-y-1">
             <Heading as="h2" level={2}>Tailles</Heading>
             <Text variant="small">
-              3 tailles disponibles via la prop <Text variant="code">size</Text>.
-              La taille <Text variant="code">md</Text> est celle par défaut.
+              3 tailles disponibles via la prop <Text as="span" variant="code">size</Text>.
+              La taille <Text as="span" variant="code">md</Text> est celle par défaut.
             </Text>
           </div>
           <div className="flex flex-wrap items-center gap-8 rounded-3xl border border-border-subtle bg-bg-subtle/30 p-6 sm:p-8">
@@ -75,9 +75,9 @@ export default function CheckboxDemoPage() {
           <div className="space-y-1">
             <Heading as="h2" level={2}>États spéciaux</Heading>
             <Text variant="small">
-              Les états <Text variant="code">error</Text>,{' '}
-              <Text variant="code">disabled</Text> et{' '}
-              <Text variant="code">required</Text> communiqués visuellement
+              Les états <Text as="span" variant="code">error</Text>,{' '}
+              <Text as="span" variant="code">disabled</Text> et{' '}
+              <Text as="span" variant="code">required</Text> communiqués visuellement
               et aux technologies d'assistance.
             </Text>
           </div>
@@ -86,7 +86,7 @@ export default function CheckboxDemoPage() {
 
             <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
               <Text variant="caption" className="font-bold text-text-muted">
-                Erreur — <Text variant="code">error</Text>
+                Erreur — <Text as="span" variant="code">error</Text>
               </Text>
               <Checkbox
                 label="J'accepte de recevoir la newsletter"
@@ -94,16 +94,16 @@ export default function CheckboxDemoPage() {
                 errorMessage="Vous devez accepter pour continuer."
               />
               <Text variant="small" className="text-text-muted">
-                <Text variant="code">aria-invalid="true"</Text> +{' '}
-                <Text variant="code">aria-describedby</Text> lié au message.
+                <Text as="span" variant="code">aria-invalid="true"</Text> +{' '}
+                <Text as="span" variant="code">aria-describedby</Text> lié au message.
                 L'erreur est annoncée via{' '}
-                <Text variant="code">aria-live="polite"</Text>.
+                <Text as="span" variant="code">aria-live="polite"</Text>.
               </Text>
             </div>
 
             <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
               <Text variant="caption" className="font-bold text-text-muted">
-                Obligatoire — <Text variant="code">required</Text>
+                Obligatoire — <Text as="span" variant="code">required</Text>
               </Text>
               <Checkbox
                 label="J'accepte les CGU"
@@ -111,15 +111,15 @@ export default function CheckboxDemoPage() {
               />
               <Text variant="small" className="text-text-muted">
                 L'astérisque visuel est en{' '}
-                <Text variant="code">aria-hidden="true"</Text>. L'attribut
-                natif <Text variant="code">required</Text> porte l'information
+                <Text as="span" variant="code">aria-hidden="true"</Text>. L'attribut
+                natif <Text as="span" variant="code">required</Text> porte l'information
                 pour les AT.
               </Text>
             </div>
 
             <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
               <Text variant="caption" className="font-bold text-text-muted">
-                Désactivé — <Text variant="code">disabled</Text>
+                Désactivé — <Text as="span" variant="code">disabled</Text>
               </Text>
               <Checkbox
                 label="Sauvegarder les préférences"
@@ -127,7 +127,7 @@ export default function CheckboxDemoPage() {
                 description="Action momentanément indisponible."
               />
               <Text variant="small" className="text-text-muted">
-                L'attribut natif <Text variant="code">disabled</Text> retire
+                L'attribut natif <Text as="span" variant="code">disabled</Text> retire
                 l'élément de l'ordre de tabulation et signale l'état aux AT.
               </Text>
             </div>
@@ -153,8 +153,8 @@ export default function CheckboxDemoPage() {
             <Heading as="h2" level={2}>Checkbox Group</Heading>
             <Text variant="small">
               Pour sélectionner plusieurs options dans une liste sémantique.
-              Utilise <Text variant="code">fieldset</Text> +{' '}
-              <Text variant="code">legend</Text> pour que les lecteurs
+              Utilise <Text as="span" variant="code">fieldset</Text> +{' '}
+              <Text as="span" variant="code">legend</Text> pour que les lecteurs
               d'écran lisent le contexte du groupe.
             </Text>
           </div>
@@ -217,7 +217,7 @@ export default function CheckboxDemoPage() {
                 Label imbriqué
               </Text>
               <Text variant="small">
-                L'input est imbriqué dans le <Text variant="code">label</Text>{' '}
+                L'input est imbriqué dans le <Text as="span" variant="code">label</Text>{' '}
                 pour une liaison implicite. La zone de clic englobe le texte
                 entier, améliorant l'ergonomie sur mobile.
               </Text>
@@ -228,8 +228,8 @@ export default function CheckboxDemoPage() {
               </Text>
               <Text variant="small">
                 Le groupe utilise les balises sémantiques{' '}
-                <Text variant="code">fieldset</Text> +{' '}
-                <Text variant="code">legend</Text>. Indispensable pour que
+                <Text as="span" variant="code">fieldset</Text> +{' '}
+                <Text as="span" variant="code">legend</Text>. Indispensable pour que
                 les AT lisent le contexte avant chaque option.
               </Text>
             </div>
@@ -239,9 +239,9 @@ export default function CheckboxDemoPage() {
               </Text>
               <Text variant="small">
                 Les erreurs sont annoncées via{' '}
-                <Text variant="code">aria-live="polite"</Text>. Le champ
-                porte <Text variant="code">aria-invalid="true"</Text> et{' '}
-                <Text variant="code">aria-describedby</Text> pointe vers
+                <Text as="span" variant="code">aria-live="polite"</Text>. Le champ
+                porte <Text as="span" variant="code">aria-invalid="true"</Text> et{' '}
+                <Text as="span" variant="code">aria-describedby</Text> pointe vers
                 le message.
               </Text>
             </div>
@@ -251,8 +251,8 @@ export default function CheckboxDemoPage() {
               </Text>
               <Text variant="small">
                 L'astérisque visuel est en{' '}
-                <Text variant="code">aria-hidden="true"</Text>. L'attribut
-                natif <Text variant="code">required</Text> porte
+                <Text as="span" variant="code">aria-hidden="true"</Text>. L'attribut
+                natif <Text as="span" variant="code">required</Text> porte
                 l'information pour les technologies d'assistance.
               </Text>
             </div>

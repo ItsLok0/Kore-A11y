@@ -12,6 +12,7 @@ const links = [
     { name: 'Inputs & \n Textareas', href: '/input' },
     { name: 'Checkbox', href: '/checkbox' },
     { name: 'Badge', href: '/badge' },
+    { name: 'Status Indicator', href: '/statusIndicator' },
 ];
  
 export default function NavLinks() {

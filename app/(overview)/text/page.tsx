@@ -27,7 +27,7 @@ export default function TypographyDemoPage() {
             <Heading as="h2" level={2}>Hiérarchie visuelle</Heading>
             <Text variant="small">
               Les 6 niveaux de titres disponibles via la prop{' '}
-              <Text variant="code">level</Text>. Le style est indépendant
+              <Text as="span" variant="code">level</Text>. Le style est indépendant
               de la balise HTML rendue.
             </Text>
           </div>
@@ -46,8 +46,8 @@ export default function TypographyDemoPage() {
           <div className="space-y-1">
             <Heading as="h2" level={2}>Sémantique vs Visuel</Heading>
             <Text variant="small">
-              La prop <Text variant="code">as</Text> contrôle la balise HTML,
-              la prop <Text variant="code">level</Text> contrôle le style visuel.
+              La prop <Text as="span" variant="code">as</Text> contrôle la balise HTML,
+              la prop <Text as="span" variant="code">level</Text> contrôle le style visuel.
               Les deux sont totalement indépendants.
             </Text>
           </div>
@@ -57,8 +57,8 @@ export default function TypographyDemoPage() {
                 Démonstration
               </Text>
               <Text variant="small">
-                Balise <Text variant="code">h3</Text> dans le DOM,
-                style <Text variant="code">level={1}</Text> appliqué visuellement.
+                Balise <Text as="span" variant="code">h3</Text> dans le DOM,
+                style <Text as="span" variant="code">level={1}</Text> appliqué visuellement.
               </Text>
               <Heading as="h3" level={1}>Style H1 / Balise H3</Heading>
             </div>
@@ -106,7 +106,7 @@ export default function TypographyDemoPage() {
                 pour la lecture longue.
               </Text>
               <Text variant="body" className="font-bold italic">
-                Supporte les utilitaires Tailwind via <Text variant="code">className</Text>.
+                Supporte les utilitaires Tailwind via <Text as="span" variant="code">className</Text>.
               </Text>
             </div>
 
@@ -150,14 +150,14 @@ export default function TypographyDemoPage() {
           <div className="space-y-1">
             <Heading as="h2" level={2}>Polymorphisme</Heading>
             <Text variant="small">
-              La prop <Text variant="code">as</Text> permet de rendre n'importe
+              La prop <Text as="span" variant="code">as</Text> permet de rendre n'importe
               quelle balise HTML tout en conservant le style de la variante choisie.
             </Text>
           </div>
           <div className="grid gap-6 md:grid-cols-2">
             <div className="flex flex-col gap-3 rounded-2xl border border-dashed border-border-subtle p-6">
               <Text variant="small" className="italic">
-                Rendu <Text variant="code">&lt;label&gt;</Text>
+                Rendu <Text as="span" variant="code">&lt;label&gt;</Text>
               </Text>
               <Text
                 variant="body"
@@ -170,7 +170,7 @@ export default function TypographyDemoPage() {
             </div>
             <div className="flex flex-col gap-3 rounded-2xl border border-dashed border-border-subtle p-6">
               <Text variant="small" className="italic">
-                Rendu <Text variant="code">&lt;span&gt;</Text>
+                Rendu <Text as="span" variant="code">&lt;span&gt;</Text>
               </Text>
               <Text
                 variant="body"
@@ -182,7 +182,7 @@ export default function TypographyDemoPage() {
             </div>
             <div className="flex flex-col gap-3 rounded-2xl border border-dashed border-border-subtle p-6">
               <Text variant="small" className="italic">
-                Rendu <Text variant="code">&lt;figcaption&gt;</Text>
+                Rendu <Text as="span" variant="code">&lt;figcaption&gt;</Text>
               </Text>
               <Text variant="caption" as="figcaption" className="italic">
                 Légende d'une figure ou image
@@ -190,11 +190,11 @@ export default function TypographyDemoPage() {
             </div>
             <div className="flex flex-col gap-3 rounded-2xl border border-dashed border-border-subtle p-6">
               <Text variant="small" className="italic">
-                Rendu <Text variant="code">&lt;p&gt;</Text> (défaut)
+                Rendu <Text as="span" variant="code">&lt;p&gt;</Text> (défaut)
               </Text>
               <Text variant="body">
-                Sans prop <Text variant="code">as</Text>, le rendu
-                par défaut est un <Text variant="code">&lt;p&gt;</Text>.
+                Sans prop <Text as="span" variant="code">as</Text>, le rendu
+                par défaut est un <Text as="span" variant="code">&lt;p&gt;</Text>.
               </Text>
             </div>
           </div>
@@ -211,7 +211,7 @@ export default function TypographyDemoPage() {
                 Unités relatives
               </Text>
               <Text variant="small">
-                Toutes les tailles utilisent des unités <Text variant="code">rem</Text>,
+                Toutes les tailles utilisent des unités <Text as="span" variant="code">rem</Text>,
                 respectant le redimensionnement du texte défini par l'utilisateur
                 dans les préférences du navigateur.
               </Text>
@@ -221,7 +221,7 @@ export default function TypographyDemoPage() {
                 Structure de document
               </Text>
               <Text variant="small">
-                La séparation <Text variant="code">as</Text> / <Text variant="code">level</Text>{' '}
+                La séparation <Text as="span" variant="code">as</Text> / <Text as="span" variant="code">level</Text>{' '}
                 garantit une hiérarchie de titres cohérente dans le DOM,
                 essentielle pour la navigation au lecteur d'écran.
               </Text>

@@ -25,6 +25,24 @@ export default function RootLayout({
         <Header />
         <main id="main-content" tabIndex={-1} className="flex-1">
           { children }
+
+          {/* Régions d'annonce pour les lecteurs d'écran */}
+          <div
+            id="announcer"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            className="sr-only"
+            tabIndex={-1}
+          />
+          <div
+            id="announcer-assertive"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+            className="sr-only"
+            tabIndex={-1}
+          />
         </main>
       </body>
     </html>

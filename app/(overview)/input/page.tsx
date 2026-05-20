@@ -28,8 +28,8 @@ export default function InputDemoPage() {
           <div className="space-y-1">
             <Heading as="h2" level={2}>Tailles</Heading>
             <Text variant="small">
-              3 tailles disponibles via la prop <Text variant="code">size</Text>.
-              La taille <Text variant="code">md</Text> est celle par défaut.
+              3 tailles disponibles via la prop <Text as="span" variant="code">size</Text>.
+              La taille <Text as="span" variant="code">md</Text> est celle par défaut.
             </Text>
           </div>
           <div className="flex flex-col gap-4 rounded-3xl border border-border-subtle bg-bg-subtle/30 p-6 sm:p-8">
@@ -44,9 +44,9 @@ export default function InputDemoPage() {
           <div className="space-y-1">
             <Heading as="h2" level={2}>Types natifs</Heading>
             <Text variant="small">
-              La prop <Text variant="code">type</Text> accepte tous les types HTML
-              sauf <Text variant="code">checkbox</Text>, <Text variant="code">radio</Text>,{' '}
-              <Text variant="code">file</Text> et <Text variant="code">range</Text> —
+              La prop <Text as="span" variant="code">type</Text> accepte tous les types HTML
+              sauf <Text as="span" variant="code">checkbox</Text>, <Text as="span" variant="code">radio</Text>,{' '}
+              <Text as="span" variant="code">file</Text> et <Text as="span" variant="code">range</Text> —
               couverts par des composants dédiés.
             </Text>
           </div>
@@ -65,8 +65,8 @@ export default function InputDemoPage() {
           <div className="space-y-1">
             <Heading as="h2" level={2}>États</Heading>
             <Text variant="small">
-              Les états <Text variant="code">error</Text>,{' '}
-              <Text variant="code">disabled</Text> et <Text variant="code">required</Text> sont
+              Les états <Text as="span" variant="code">error</Text>,{' '}
+              <Text as="span" variant="code">disabled</Text> et <Text as="span" variant="code">required</Text> sont
               communiqués visuellement et aux technologies d'assistance.
             </Text>
           </div>
@@ -75,7 +75,7 @@ export default function InputDemoPage() {
 
             <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
               <Text variant="caption" className="font-bold text-text-muted">
-                Erreur — <Text variant="code">error</Text>
+                Erreur — <Text as="span" variant="code">error</Text>
               </Text>
               <Input
                 label="Mot de passe"
@@ -86,26 +86,26 @@ export default function InputDemoPage() {
                 defaultValue="123"
               />
               <Text variant="small" className="text-text-muted">
-                <Text variant="code">aria-invalid="true"</Text> +{' '}
-                <Text variant="code">aria-describedby</Text> lié au message d'erreur.
-                L'erreur est annoncée via <Text variant="code">aria-live="polite"</Text>.
+                <Text as="span" variant="code">aria-invalid="true"</Text> +{' '}
+                <Text as="span" variant="code">aria-describedby</Text> lié au message d'erreur.
+                L'erreur est annoncée via <Text as="span" variant="code">aria-live="polite"</Text>.
               </Text>
             </div>
 
             <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
               <Text variant="caption" className="font-bold text-text-muted">
-                Désactivé — <Text variant="code">disabled</Text>
+                Désactivé — <Text as="span" variant="code">disabled</Text>
               </Text>
               <Input label="Champ désactivé" disabled placeholder="Non modifiable" />
               <Text variant="small" className="text-text-muted">
-                L'attribut natif <Text variant="code">disabled</Text> retire le champ
+                L'attribut natif <Text as="span" variant="code">disabled</Text> retire le champ
                 de l'ordre de tabulation et signale l'état aux lecteurs d'écran.
               </Text>
             </div>
 
             <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
               <Text variant="caption" className="font-bold text-text-muted">
-                Obligatoire — <Text variant="code">required</Text>
+                Obligatoire — <Text as="span" variant="code">required</Text>
               </Text>
               <Input
                 label="Email"
@@ -115,14 +115,14 @@ export default function InputDemoPage() {
               />
               <Text variant="small" className="text-text-muted">
                 L'astérisque est masqué aux lecteurs d'écran via{' '}
-                <Text variant="code">aria-hidden="true"</Text>. L'attribut natif{' '}
-                <Text variant="code">required</Text> porte l'information.
+                <Text as="span" variant="code">aria-hidden="true"</Text>. L'attribut natif{' '}
+                <Text as="span" variant="code">required</Text> porte l'information.
               </Text>
             </div>
 
             <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
               <Text variant="caption" className="font-bold text-text-muted">
-                Avec description — <Text variant="code">description</Text>
+                Avec description — <Text as="span" variant="code">description</Text>
               </Text>
               <Input
                 label="Nom d'utilisateur"
@@ -130,8 +130,8 @@ export default function InputDemoPage() {
                 placeholder="jdupont42"
               />
               <Text variant="small" className="text-text-muted">
-                La description est liée via <Text variant="code">aria-describedby</Text>.
-                Elle est masquée en <Text variant="code">sr-only</Text> si une erreur
+                La description est liée via <Text as="span" variant="code">aria-describedby</Text>.
+                Elle est masquée en <Text as="span" variant="code">sr-only</Text> si une erreur
                 est active.
               </Text>
             </div>
@@ -145,8 +145,8 @@ export default function InputDemoPage() {
             <Heading as="h2" level={2}>TextArea — Formats</Heading>
             <Text variant="small">
               Hérite de toute la logique d'accessibilité de l'Input. Supporte
-              les props natives <Text variant="code">rows</Text> et{' '}
-              <Text variant="code">cols</Text>.
+              les props natives <Text as="span" variant="code">rows</Text> et{' '}
+              <Text as="span" variant="code">cols</Text>.
             </Text>
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -181,9 +181,9 @@ export default function InputDemoPage() {
           <div className="space-y-1">
             <Heading as="h2" level={2}>TextArea — États</Heading>
             <Text variant="small">
-              Mêmes états que l'Input : <Text variant="code">error</Text>,{' '}
-              <Text variant="code">required</Text>, <Text variant="code">disabled</Text> et{' '}
-              <Text variant="code">description</Text>.
+              Mêmes états que l'Input : <Text as="span" variant="code">error</Text>,{' '}
+              <Text as="span" variant="code">required</Text>, <Text as="span" variant="code">disabled</Text> et{' '}
+              <Text as="span" variant="code">description</Text>.
             </Text>
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -238,8 +238,8 @@ export default function InputDemoPage() {
                 Liaison label / champ
               </Text>
               <Text variant="small">
-                Chaque champ est lié à son label via un <Text variant="code">id</Text>{' '}
-                généré par <Text variant="code">useId()</Text>, garantissant
+                Chaque champ est lié à son label via un <Text as="span" variant="code">id</Text>{' '}
+                généré par <Text as="span" variant="code">useId()</Text>, garantissant
                 l'unicité même avec plusieurs instances sur la même page.
               </Text>
             </div>
@@ -248,10 +248,10 @@ export default function InputDemoPage() {
                 Messages d'erreur
               </Text>
               <Text variant="small">
-                Les erreurs sont annoncées via <Text variant="code">aria-live="polite"</Text> +{' '}
-                <Text variant="code">role="alert"</Text>. Le champ porte{' '}
-                <Text variant="code">aria-invalid="true"</Text> et{' '}
-                <Text variant="code">aria-describedby</Text> pointe vers le message.
+                Les erreurs sont annoncées via <Text as="span" variant="code">aria-live="polite"</Text> +{' '}
+                <Text as="span" variant="code">role="alert"</Text>. Le champ porte{' '}
+                <Text as="span" variant="code">aria-invalid="true"</Text> et{' '}
+                <Text as="span" variant="code">aria-describedby</Text> pointe vers le message.
               </Text>
             </div>
             <div className="space-y-2">
@@ -259,8 +259,8 @@ export default function InputDemoPage() {
                 Champ obligatoire
               </Text>
               <Text variant="small">
-                L'astérisque visuel est en <Text variant="code">aria-hidden="true"</Text>.
-                L'attribut natif <Text variant="code">required</Text> porte
+                L'astérisque visuel est en <Text as="span" variant="code">aria-hidden="true"</Text>.
+                L'attribut natif <Text as="span" variant="code">required</Text> porte
                 l'information pour les technologies d'assistance.
               </Text>
             </div>
@@ -270,9 +270,9 @@ export default function InputDemoPage() {
               </Text>
               <Text variant="small">
                 Quand une erreur est active, la description passe en{' '}
-                <Text variant="code">sr-only</Text> pour éviter la double
+                <Text as="span" variant="code">sr-only</Text> pour éviter la double
                 annonce. L'erreur reste prioritaire dans{' '}
-                <Text variant="code">aria-describedby</Text>.
+                <Text as="span" variant="code">aria-describedby</Text>.
               </Text>
             </div>
           </div>

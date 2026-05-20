@@ -37,8 +37,8 @@ export default function ButtonDemoPage() {
             <Heading as="h2" level={2}>Variants</Heading>
             <Text variant="small">
               7 variants couvrant tous les contextes sémantiques de l'interface.
-              Chaque variant possède ses propres états <Text variant="code">hover</Text>,{' '}
-              <Text variant="code">active</Text> et <Text variant="code">focus</Text>.
+              Chaque variant possède ses propres états <Text as="span" variant="code">hover</Text>,{' '}
+              <Text as="span" variant="code">active</Text> et <Text as="span" variant="code">focus</Text>.
             </Text>
           </div>
           <div className="flex flex-wrap justify-center gap-4 rounded-3xl border border-border-subtle bg-bg-subtle/30 p-6 sm:p-8">
@@ -57,8 +57,8 @@ export default function ButtonDemoPage() {
           <div className="space-y-1">
             <Heading as="h2" level={2}>Tailles</Heading>
             <Text variant="small">
-              3 tailles disponibles via la prop <Text variant="code">size</Text>.
-              La taille <Text variant="code">md</Text> est celle par défaut.
+              3 tailles disponibles via la prop <Text as="span" variant="code">size</Text>.
+              La taille <Text as="span" variant="code">md</Text> est celle par défaut.
             </Text>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-4 rounded-3xl border border-border-subtle bg-bg-subtle/30 p-6 sm:p-8">
@@ -74,7 +74,7 @@ export default function ButtonDemoPage() {
             <Heading as="h2" level={2}>Avec icônes</Heading>
             <Text variant="small">
               Les icônes renforcent la lisibilité. Elles sont toujours accompagnées
-              d'un texte visible ou d'un <Text variant="code">aria-label</Text> explicite.
+              d'un texte visible ou d'un <Text as="span" variant="code">aria-label</Text> explicite.
             </Text>
           </div>
           <div className="flex flex-wrap justify-center gap-4 rounded-3xl border border-border-subtle bg-bg-subtle/30 p-6 sm:p-8">
@@ -100,10 +100,10 @@ export default function ButtonDemoPage() {
           <div className="space-y-1">
             <Heading as="h2" level={2}>États</Heading>
             <Text variant="small">
-              Les états <Text variant="code">disabled</Text> et{' '}
-              <Text variant="code">isLoading</Text> bloquent l'interaction et
+              Les états <Text as="span" variant="code">disabled</Text> et{' '}
+              <Text as="span" variant="code">isLoading</Text> bloquent l'interaction et
               communiquent l'état aux technologies d'assistance via{' '}
-              <Text variant="code">aria-busy</Text>.
+              <Text as="span" variant="code">aria-busy</Text>.
             </Text>
           </div>
 
@@ -112,7 +112,7 @@ export default function ButtonDemoPage() {
             {/* Disabled */}
             <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
               <Text variant="caption" className="font-bold text-text-muted">
-                Désactivé — <Text variant="code">disabled</Text>
+                Désactivé — <Text as="span" variant="code">disabled</Text>
               </Text>
               <div className="flex flex-wrap gap-3">
                 <Button variant="primary" disabled>Primary</Button>
@@ -121,8 +121,8 @@ export default function ButtonDemoPage() {
                 <Button variant="outline" disabled>Outline</Button>
               </div>
               <Text variant="small" className="text-text-muted">
-                L'attribut natif <Text variant="code">disabled</Text> est appliqué
-                directement sur le <Text variant="code">&lt;button&gt;</Text>,
+                L'attribut natif <Text as="span" variant="code">disabled</Text> est appliqué
+                directement sur le <Text as="span" variant="code">&lt;button&gt;</Text>,
                 le rendant inatteignable au clavier et à la souris.
               </Text>
             </div>
@@ -138,7 +138,7 @@ export default function ButtonDemoPage() {
           <div className="space-y-1">
             <Heading as="h2" level={2}>Pleine largeur</Heading>
             <Text variant="small">
-              La prop <Text variant="code">fullWidth</Text> étend le bouton
+              La prop <Text as="span" variant="code">fullWidth</Text> étend le bouton
               à 100% de son conteneur. Utile pour les formulaires mobiles.
             </Text>
           </div>
@@ -232,16 +232,16 @@ export default function ButtonDemoPage() {
               <Text className="text-sm font-bold underline">Focus visible</Text>
               <Text variant="small">
                 Chaque bouton affiche un double anneau de focus via{' '}
-                <Text variant="code">--focus-ring</Text> sur{' '}
-                <Text variant="code">focus-visible</Text>, conforme au critère
+                <Text as="span" variant="code">--focus-ring</Text> sur{' '}
+                <Text as="span" variant="code">focus-visible</Text>, conforme au critère
                 RGAA 10.5. Testable à la touche Tab.
               </Text>
             </div>
             <div className="space-y-2">
               <Text className="text-sm font-bold underline">États communiqués</Text>
               <Text variant="small">
-                <Text variant="code">disabled</Text> bloque nativement le focus.{' '}
-                <Text variant="code">aria-busy</Text> annonce le chargement aux
+                <Text as="span" variant="code">disabled</Text> bloque nativement le focus.{' '}
+                <Text as="span" variant="code">aria-busy</Text> annonce le chargement aux
                 lecteurs d'écran sans retirer le focus de l'élément.
               </Text>
             </div>
@@ -249,7 +249,7 @@ export default function ButtonDemoPage() {
               <Text className="text-sm font-bold underline">Icône seule</Text>
               <Text variant="small">
                 Un bouton sans texte visible exige un{' '}
-                <Text variant="code">aria-label</Text> explicite pour être
+                <Text as="span" variant="code">aria-label</Text> explicite pour être
                 compréhensible hors contexte visuel — conforme RGAA 11.9.
               </Text>
             </div>
@@ -257,7 +257,7 @@ export default function ButtonDemoPage() {
               <Text className="text-sm font-bold underline">Contraste</Text>
               <Text variant="small">
                 Tous les variants respectent un ratio minimum de 4.5:1 sur fond
-                blanc et sur <Text variant="code">--color-bg-page</Text>,
+                blanc et sur <Text as="span" variant="code">--color-bg-page</Text>,
                 certifié WCAG AA.
               </Text>
             </div>
