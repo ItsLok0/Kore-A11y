@@ -71,7 +71,7 @@ export function AutoSaveDemo() {
           variant="outline"
           size="sm"
           onClick={simulate}
-          disabled={running}
+          isLoading={running}
           aria-label="Simuler une sauvegarde automatique"
         >
           Simuler
@@ -125,7 +125,7 @@ export function ConnectionDemo() {
           variant="outline"
           size="sm"
           onClick={toggle}
-          disabled={status === 'loading'}
+          isLoading={status === 'loading'}
           aria-label={`Simuler un changement de connexion - ${status === 'success' ? 'déconnecter' : 'reconnecter'}`}
         >
           {status === 'success' ? 'Déconnecter' : 'Reconnecter'}
@@ -177,7 +177,7 @@ export function ValidationDemo() {
           variant="outline"
           size="sm"
           onClick={start}
-          disabled={running}
+          isLoading={running}
           aria-label="Lancer la simulation de validation"
         >
           Lancer
