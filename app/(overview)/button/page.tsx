@@ -8,6 +8,9 @@ import {
   faPaperPlane,
   faPlus,
   faArrowRight,
+  faExternalLink,
+  faHouse,
+  faBookOpen,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ButtonLoadingDemo } from "@/app/ui/components/Button/buttonLoadingDemo";
@@ -23,7 +26,7 @@ export default function ButtonDemoPage() {
 
       {/* Header */}
       <div className="text-center">
-        <Heading as="h1">Button</Heading>
+        <Heading as="h1">Button & ButtonLink</Heading>
         <Text variant="lead" className="font-bold text-primary">
           Boutons accessibles & sémantiques
         </Text>
@@ -48,7 +51,7 @@ export default function ButtonDemoPage() {
             <Button variant="success">Success</Button>
             <Button variant="outline">Outline</Button>
             <Button variant="ghost">Ghost</Button>
-            <Button variant="link">Link</Button>
+            <ButtonLink href="#" variant="link">Link</ButtonLink>
           </div>
         </section>
 
@@ -59,6 +62,8 @@ export default function ButtonDemoPage() {
             <Text variant="small">
               3 tailles disponibles via la prop <Text as="span" variant="code">size</Text>.
               La taille <Text as="span" variant="code">md</Text> est celle par défaut.
+              Applicable sur <Text as="span" variant="code">Button</Text> et{' '}
+              <Text as="span" variant="code">ButtonLink</Text>.
             </Text>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-4 rounded-3xl border border-border-subtle bg-bg-subtle/30 p-6 sm:p-8">
@@ -90,7 +95,6 @@ export default function ButtonDemoPage() {
             <Button variant="outline" iconRight={faArrowRight}>
               Suivant
             </Button>
-            {/* Icône seule — aria-label obligatoire */}
             <Button variant="ghost" aria-label="Supprimer l'élément" iconOnly={faTrash} />
           </div>
         </section>
@@ -106,10 +110,7 @@ export default function ButtonDemoPage() {
               <Text as="span" variant="code">aria-busy</Text>.
             </Text>
           </div>
-
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-
-            {/* Disabled */}
             <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
               <Text variant="caption" className="font-bold text-text-muted">
                 Désactivé — <Text as="span" variant="code">disabled</Text>
@@ -126,10 +127,7 @@ export default function ButtonDemoPage() {
                 le rendant inatteignable au clavier et à la souris.
               </Text>
             </div>
-
-            {/* Loading */}
             <ButtonLoadingDemo />
-
           </div>
         </section>
 
@@ -149,7 +147,163 @@ export default function ButtonDemoPage() {
           </div>
         </section>
 
-        {/* ── SECTION 6 : CAS D'USAGE RÉELS ── */}
+        {/* ── SECTION 6 : BUTTONLINK ── */}
+        <section className="flex flex-col gap-8 border-b pb-12">
+          <div className="space-y-1">
+            <Heading as="h2" level={2}>ButtonLink</Heading>
+            <Text variant="small">
+              Composant de navigation sémantique. Rend un{' '}
+              <Text as="span" variant="code">&lt;a&gt;</Text> via{' '}
+              <Text as="span" variant="code">next/link</Text> avec les mêmes
+              styles que <Text as="span" variant="code">Button</Text> —
+              jamais un <Text as="span" variant="code">&lt;button&gt;</Text>
+              pour naviguer.
+            </Text>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+
+            {/* Variants */}
+            <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
+              <Text variant="caption" className="font-bold text-text-muted">
+                Variants disponibles
+              </Text>
+              <div className="flex flex-wrap gap-3">
+                <ButtonLink href="#" variant="primary">Primary</ButtonLink>
+                <ButtonLink href="#" variant="outline">Outline</ButtonLink>
+                <ButtonLink href="#" variant="ghost">Ghost</ButtonLink>
+                <ButtonLink href="#" variant="link">Link</ButtonLink>
+              </div>
+              <Text variant="small" className="text-text-muted">
+                Tous les variants de <Text as="span" variant="code">Button</Text>{' '}
+                sont disponibles sur <Text as="span" variant="code">ButtonLink</Text>.
+              </Text>
+            </div>
+
+            {/* Navigation interne */}
+            <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
+              <Text variant="caption" className="font-bold text-text-muted">
+                Navigation interne
+              </Text>
+              <div className="flex flex-wrap gap-3">
+                <ButtonLink href="/" variant="outline" size="md">
+                  <FontAwesomeIcon icon={faHouse} aria-hidden="true" />
+                  Accueil
+                </ButtonLink>
+                <ButtonLink href="/typography" variant="ghost" size="md">
+                  <FontAwesomeIcon icon={faBookOpen} aria-hidden="true" />
+                  Typographie
+                </ButtonLink>
+              </div>
+              <Text variant="small" className="text-text-muted">
+                Navigation interne via <Text as="span" variant="code">next/link</Text> —
+                prefetch automatique, pas de rechargement de page.
+              </Text>
+            </div>
+
+            {/* Navigation externe */}
+            <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
+              <Text variant="caption" className="font-bold text-text-muted">
+                Navigation externe — <Text as="span" variant="code">external</Text>
+              </Text>
+              <div className="flex flex-wrap gap-3">
+                <ButtonLink
+                  href="https://github.com/ItsLok0/kore-a11y"
+                  variant="primary"
+                  external
+                >
+                  <FontAwesomeIcon icon={faExternalLink} aria-hidden="true" />
+                  Voir sur GitHub
+                </ButtonLink>
+                <ButtonLink
+                  href="https://www.w3.org/WAI/WCAG22/quickref"
+                  variant="outline"
+                  external
+                >
+                  WCAG 2.2
+                </ButtonLink>
+              </div>
+              <Text variant="small" className="text-text-muted">
+                <Text as="span" variant="code">external</Text> ajoute{' '}
+                <Text as="span" variant="code">target="_blank"</Text> +{' '}
+                <Text as="span" variant="code">rel="noopener noreferrer"</Text> +
+                un <Text as="span" variant="code">sr-only</Text> annoncant
+                l'ouverture dans un nouvel onglet — RGAA 13.2.
+              </Text>
+            </div>
+
+            {/* Tailles */}
+            <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
+              <Text variant="caption" className="font-bold text-text-muted">
+                Tailles
+              </Text>
+              <div className="flex flex-wrap items-center gap-3">
+                <ButtonLink href="#" variant="outline" size="sm">
+                  Small
+                </ButtonLink>
+                <ButtonLink href="#" variant="outline" size="md">
+                  Medium
+                </ButtonLink>
+                <ButtonLink href="#" variant="outline" size="lg">
+                  Large
+                </ButtonLink>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* ── SECTION 7 : BUTTON VS BUTTONLINK ── */}
+        <section className="flex flex-col gap-8 border-b pb-12">
+          <div className="space-y-1">
+            <Heading as="h2" level={2}>Button vs ButtonLink</Heading>
+            <Text variant="small">
+              La règle sémantique fondamentale — une action déclenche un{' '}
+              <Text as="span" variant="code">&lt;button&gt;</Text>, une navigation
+              déclenche un <Text as="span" variant="code">&lt;a&gt;</Text>.
+            </Text>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+
+            <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
+              <Text variant="caption" className="font-bold text-success">
+                ✓ Button — Actions
+              </Text>
+              <div className="flex flex-wrap gap-3">
+                <Button variant="primary">Enregistrer</Button>
+                <Button variant="danger" iconLeft={faTrash}>Supprimer</Button>
+                <Button variant="outline">Annuler</Button>
+              </div>
+              <Text variant="small" className="text-text-muted">
+                Soumettre un formulaire, ouvrir une modale, déclencher
+                une action — toujours un <Text as="span" variant="code">&lt;button&gt;</Text>.
+              </Text>
+            </div>
+
+            <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
+              <Text variant="caption" className="font-bold text-success">
+                ✓ ButtonLink — Navigation
+              </Text>
+              <div className="flex flex-wrap gap-3">
+                <ButtonLink href="#" variant="primary" iconRight={faArrowRight}>
+                  Commencer
+                </ButtonLink>
+                <ButtonLink href="#" variant="link">
+                  En savoir plus
+                </ButtonLink>
+              </div>
+              <Text variant="small" className="text-text-muted">
+                Changer de page, lien externe, ancre — toujours un{' '}
+                <Text as="span" variant="code">&lt;a&gt;</Text>. Les lecteurs
+                d'écran distinguent "bouton" et "lien" dans leur navigation.
+              </Text>
+            </div>
+
+          </div>
+        </section>
+
+        {/* ── CAS D'USAGE ── */}
         <section className="flex flex-col gap-8 border-b pb-12">
           <div className="space-y-1">
             <Heading as="h2" level={2}>Cas d'usage</Heading>
@@ -159,7 +313,6 @@ export default function ButtonDemoPage() {
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
 
-            {/* Formulaire */}
             <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
               <Text variant="caption" className="font-bold text-text-muted">
                 Actions de formulaire
@@ -170,41 +323,34 @@ export default function ButtonDemoPage() {
               </div>
             </div>
 
-            {/* Confirmation dangereuse */}
             <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
               <Text variant="caption" className="font-bold text-text-muted">
                 Confirmation dangereuse
               </Text>
               <div className="flex gap-3">
-                <Button variant="danger" iconRight={faTrash}>
-                  Supprimer
-                </Button>
+                <Button variant="danger" iconLeft={faTrash}>Supprimer</Button>
                 <Button variant="outline">Annuler</Button>
               </div>
             </div>
 
-            {/* Appel à l'action */}
             <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
               <Text variant="caption" className="font-bold text-text-muted">
                 Appel à l'action
               </Text>
               <div className="flex flex-wrap gap-3">
-
-                {/* Navigation externe */}
-                <ButtonLink href="https://github.com/ItsLok0/kore-a11y" variant="primary" size="md" external>
-                    Voir sur GitHub
-                    <FontAwesomeIcon icon={faArrowRight} aria-hidden="true" />
+                <ButtonLink
+                  href="https://github.com/ItsLok0/kore-a11y"
+                  variant="primary"
+                  size="md"
+                  external
+                  iconRight={faArrowRight}
+                >
+                  Voir sur GitHub
                 </ButtonLink>
-
-                {/* Navigation interne */}
-                <ButtonLink href="/" variant="link" size="md">
-                    Accueil
-                    <FontAwesomeIcon icon={faArrowRight} aria-hidden="true" />
-                </ButtonLink>
+                <ButtonLink href="/" variant="outline" size="md" iconOnly={faHouse} ariaLabel="Accueil"/>
               </div>
             </div>
 
-            {/* Taille réduite */}
             <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
               <Text variant="caption" className="font-bold text-text-muted">
                 Actions compactes
@@ -212,8 +358,7 @@ export default function ButtonDemoPage() {
               <div className="flex flex-wrap gap-2">
                 <Button variant="outline" size="sm">Filtrer</Button>
                 <Button variant="outline" size="sm">Exporter</Button>
-                <Button variant="ghost" size="sm">
-                  <FontAwesomeIcon icon={faPlus} aria-hidden="true" />
+                <Button variant="ghost" size="sm" iconLeft={faPlus}>
                   Ajouter
                 </Button>
               </div>
@@ -229,12 +374,11 @@ export default function ButtonDemoPage() {
           </Heading>
           <div className="grid gap-8 md:grid-cols-2">
             <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Focus visible</Text>
+              <Text className="text-sm font-bold underline">Focus visible — RGAA 10.5</Text>
               <Text variant="small">
-                Chaque bouton affiche un double anneau de focus via{' '}
+                Chaque bouton et lien affiche un double anneau de focus via{' '}
                 <Text as="span" variant="code">--focus-ring</Text> sur{' '}
-                <Text as="span" variant="code">focus-visible</Text>, conforme au critère
-                RGAA 10.5. Testable à la touche Tab.
+                <Text as="span" variant="code">focus-visible</Text>. Testable à la touche Tab.
               </Text>
             </div>
             <div className="space-y-2">
@@ -246,19 +390,19 @@ export default function ButtonDemoPage() {
               </Text>
             </div>
             <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Icône seule</Text>
+              <Text className="text-sm font-bold underline">Icône seule — RGAA 11.9</Text>
               <Text variant="small">
                 Un bouton sans texte visible exige un{' '}
                 <Text as="span" variant="code">aria-label</Text> explicite pour être
-                compréhensible hors contexte visuel — conforme RGAA 11.9.
+                compréhensible hors contexte visuel.
               </Text>
             </div>
             <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Contraste</Text>
+              <Text className="text-sm font-bold underline">Liens externes — RGAA 13.2</Text>
               <Text variant="small">
-                Tous les variants respectent un ratio minimum de 4.5:1 sur fond
-                blanc et sur <Text as="span" variant="code">--color-bg-page</Text>,
-                certifié WCAG AA.
+                La prop <Text as="span" variant="code">external</Text> ajoute automatiquement
+                un <Text as="span" variant="code">sr-only</Text> annonçant l'ouverture
+                dans un nouvel onglet, évitant toute surprise de navigation.
               </Text>
             </div>
           </div>
