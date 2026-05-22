@@ -14,14 +14,14 @@ export type BadgeVariant = "neutral" | "success" | "danger" | "warning" | "info"
 
 // Avec Label
 type BadgeWithLabel = {
-    label: string;
+    children: React.ReactNode;
     icon?: IconDefinition;
     srText?: string;
 }
 
 // Icon only
 type BadgeIcon = {
-    label?: never;
+    children?: never;
     icon: IconDefinition;
     srText: string;
 }
@@ -71,6 +71,7 @@ const variantStyles: Record<BadgeVariant, {
 export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
     (
         {
+            children,
             variant = "info",
             className,
             ...props
@@ -78,7 +79,11 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
     ) => {
         const config = variantStyles[variant];
         const icon   = props.icon ?? config.defaultIcon;
-        const label  = 'label' in props ? props.label : undefined;
+
+        // Récupération du contenu de children pour les AT
+        const childrenArray = React.Children.toArray(children);
+        const label = childrenArray[0]?.toString();
+
         const srText = 'srText' in props ? props.srText : undefined;
 
         return (
@@ -99,12 +104,13 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
                 />
 
                 {/* Texte visible */}
-                {label &&
+                {children && (
                     <span
                         aria-hidden="true"
                     >
-                        {label}
-                    </span>}
+                        {children}
+                    </span>
+                )}
 
                 {/* Texte pour les lecteurs d'écran */}
                 <span className="sr-only">

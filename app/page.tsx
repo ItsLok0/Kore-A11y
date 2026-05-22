@@ -18,7 +18,7 @@ export default function HomePage() {
                         <span className="flex h-2 w-2" aria-hidden="true">
                             <span className="inline-flex rounded-full h-2 w-2 bg-primary"></span>
                         </span>
-                        <Text variant="caption" className="font-bold text-text-secondary">Phase 2 en cours : Bibliothèque d'atomes (UI Kit)</Text>
+                        <Text variant="caption" className="font-bold text-text-secondary">Phase 3 en cours : Composant complexes (Patterns ARIA)</Text>
                     </div>
                     <Heading as="h1" className="text-5xl md:text-6xl font-extrabold">
                         Kore <span className="text-primary">A11Y</span>
@@ -51,21 +51,21 @@ export default function HomePage() {
 
                         {/* Phase 2 */}
                         <li className="flex items-center gap-2">
-                            <Text aria-hidden="true" as='span' className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white">
-                                2
+                            <Text aria-hidden="true" as='span' className="flex h-5 w-5 items-center justify-center rounded-full bg-success text-[10px] font-bold text-white">
+                                <FontAwesomeIcon icon={faCheck} className='w-3' />
                             </Text>
-                            <Text variant="small" className="font-bold text-primary">Phase 2 : Atomes UI
-                                <Text as="span" className="sr-only">, En cours</Text>
+                            <Text variant="small" className="font-bold text-success">Phase 2 : Atomes UI
+                                <Text as="span" className="sr-only">, Terminé</Text>
                             </Text>
                         </li>
 
                         {/* Phase 3 */}
-                        <li className="flex items-center gap-2 text-text-muted">
-                            <Text aria-hidden="true" as='span' className="flex h-5 w-5 items-center justify-center rounded-full border border-border-subtle text-[10px]">
+                        <li className="flex items-center gap-2">
+                            <Text aria-hidden="true" as='span' className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white">
                                 3
                             </Text>
-                            <Text variant="small" className="font-bold text-text-muted">Phase 3 : Patterns
-                                <Text as="span" className="sr-only">, À venir</Text>
+                            <Text variant="small" className="font-bold text-primary">Phase 3 : Patterns
+                                <Text as="span" className="sr-only">, En cours</Text>
                             </Text>
                         </li>
 

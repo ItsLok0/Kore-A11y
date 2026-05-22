@@ -35,11 +35,11 @@ export default function BadgeDemoPage() {
             </Text>
           </div>
           <div className="flex flex-wrap justify-center gap-4 rounded-3xl border border-border-subtle bg-bg-subtle/30 p-6 sm:p-8">
-            <Badge variant="success" label="Succès" />
-            <Badge variant="danger" label="Erreur" />
-            <Badge variant="warning" label="Avertissement" />
-            <Badge variant="info" label="Information" />
-            <Badge variant="neutral" label="Neutre" />
+            <Badge variant="success">Succès</Badge>
+            <Badge variant="danger">Erreur</Badge>
+            <Badge variant="warning">Avertissement</Badge>
+            <Badge variant="info">Information</Badge>
+            <Badge variant="neutral">Neutre</Badge>
           </div>
         </section>
 
@@ -76,9 +76,9 @@ export default function BadgeDemoPage() {
             <Text variant="small">La prop <Text as="span" variant="code">icon</Text> remplace l'icône par défaut.</Text>
           </div>
           <div className="flex flex-wrap justify-center gap-4 rounded-3xl border border-border-subtle bg-bg-subtle/30 p-6 sm:p-8">
-            <Badge variant="info" label="Nouveauté" icon={faStar} />
-            <Badge variant="warning" label="Critique" icon={faTriangleExclamation} />
-            <Badge variant="success" label="Déployé" icon={faRocket} />
+            <Badge variant="info" icon={faStar}>Personnalisé</Badge>
+            <Badge variant="warning" icon={faTriangleExclamation}>Avertissement</Badge>
+            <Badge variant="success" icon={faRocket}>Succès</Badge>
           </div>
         </section>
 
@@ -94,9 +94,9 @@ export default function BadgeDemoPage() {
             <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
               <Text variant="caption" className="font-bold text-text-muted">Statut utilisateur</Text>
               <div className="flex flex-wrap gap-3">
-                <Badge variant="success" label="En ligne" />
-                <Badge variant="neutral" label="Inactif" />
-                <Badge variant="danger" label="Banni" />
+                <Badge variant="success">En ligne</Badge>
+                <Badge variant="neutral">Inactif</Badge>
+                <Badge variant="danger">Banni</Badge>
               </div>
             </div>
 
@@ -104,10 +104,10 @@ export default function BadgeDemoPage() {
             <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
               <Text variant="caption" className="font-bold text-text-muted">Étiquettes de contenu</Text>
               <div className="flex flex-wrap gap-3">
-                <Badge variant="info" label="Nouveau" />
-                <Badge variant="warning" label="Bêta" />
-                <Badge variant="success" label="Stable" />
-                <Badge variant="danger" label="Déprécié" />
+                <Badge variant="info">Nouveau</Badge>
+                <Badge variant="warning">Bêta</Badge>
+                <Badge variant="success">Stable</Badge>
+                <Badge variant="danger">Déprécié</Badge>
               </div>
             </div>
 
@@ -115,9 +115,9 @@ export default function BadgeDemoPage() {
             <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
               <Text variant="caption" className="font-bold text-text-muted">Validation</Text>
               <div className="flex flex-wrap gap-3">
-                <Badge variant="success" label="Champ valide" />
-                <Badge variant="danger" label="Champ invalide" />
-                <Badge variant="warning" label="Optionnel" />
+                <Badge variant="success">Champ valide</Badge>
+                <Badge variant="danger">Champ invalide</Badge>
+                <Badge variant="warning">Optionnel</Badge>
               </div>
             </div>
 
@@ -125,10 +125,10 @@ export default function BadgeDemoPage() {
             <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
               <Text variant="caption" className="font-bold text-text-muted">Priorités</Text>
               <div className="flex flex-wrap gap-3">
-                <Badge variant="danger" label="Urgent" />
-                <Badge variant="warning" label="Moyen" />
-                <Badge variant="info" label="Faible" />
-                <Badge variant="neutral" label="En attente" />
+                <Badge variant="danger">Urgent</Badge>
+                <Badge variant="warning">Moyen</Badge>
+                <Badge variant="info">Faible</Badge>
+                <Badge variant="neutral">En attente</Badge>
               </div>
             </div>
           </div>

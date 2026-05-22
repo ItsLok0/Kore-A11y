@@ -164,11 +164,11 @@ export default function StatusIndicatorPage() {
                     Avec un Badge
                 </Text>
                 <div className="flex flex-wrap items-center gap-3">
-                    <Badge variant="danger" label="Echec" />
+                    <Badge variant="danger">Echec</Badge>
                     <StatusIndicator status="danger" label="Mise à jour échouée" />
                 </div>
                 <div className="flex flex-wrap items-center gap-3">
-                    <Badge variant="success" label="Stable" />
+                    <Badge variant="success">Stable</Badge>
                     <StatusIndicator status="success" label="Dernière version installée" />
                 </div>
             </div>

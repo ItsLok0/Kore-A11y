@@ -103,9 +103,6 @@ export const ButtonLink = React.forwardRef<HTMLAnchorElement, ButtonLinkProps>(
       ? { target: '_blank', rel: 'noopener noreferrer' }
       : {};
 
-      // eslint-disable-next-line no-undef
-      console.log("Variante reçue :", variant, "Style appliqué :", variantStyles[variant]);
-
     return (
       <Link
         ref={ref}
