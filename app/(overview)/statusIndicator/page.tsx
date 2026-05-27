@@ -217,7 +217,7 @@ export default function StatusIndicatorPage() {
                 <Text as="span" variant="code">polite</Text> attend la fin de la
                 lecture en cours. <Text as="span" variant="code">assertive</Text>{' '}
                 (via <Text as="span" variant="code">critical</Text>) interrompt
-                immédiatement — réservé aux erreurs critiques.
+                immédiatement (réservé aux erreurs critiques).
               </Text>
             </div>
             <div className="space-y-2">
