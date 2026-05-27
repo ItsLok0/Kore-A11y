@@ -74,7 +74,7 @@ const sizeStyles: Record<ButtonSize, string> = {
 };
 
 const baseStyles = [
-    'inline-flex items-center justify-center',
+    'relative inline-flex items-center justify-center',
     'font-medium leading-none rounded-md',
     'select-none whitespace-nowrap',
     'disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:none',

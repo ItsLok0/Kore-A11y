@@ -13,6 +13,7 @@ const links = [
     { name: 'Checkbox', href: '/checkbox' },
     { name: 'Badge', href: '/badge' },
     { name: 'Status Indicator', href: '/statusIndicator' },
+    { name: 'Card', href: '/card' },
 ];
  
 export default function NavLinks() {
