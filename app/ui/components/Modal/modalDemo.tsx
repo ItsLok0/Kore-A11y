@@ -21,7 +21,7 @@ export function BasicModalDemo() {
                 title="Titre de la modale"
             >
                 <Text variant="small">
-                    Contenu de la modale. Naviguez au clavier —
+                    Contenu de la modale. Naviguez au clavier pour vérifier que
                     le focus reste piégé ici jusqu'à la fermeture.
                 </Text>
             </Modal>
@@ -70,7 +70,7 @@ export function FormModalDemo() {
                             placeholder="votre@email.com"
                         />
                     </div>
-                    <div className="mt-2 flex justify-end gap-3 mt-4">
+                    <div className="flex justify-end gap-3 mt-4">
                         <Button variant="secondary" onClick={() => setIsOpen(false)}>
                             Annuler
                         </Button>

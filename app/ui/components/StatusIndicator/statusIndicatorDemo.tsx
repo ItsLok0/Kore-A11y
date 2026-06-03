@@ -184,7 +184,7 @@ export function ValidationDemo() {
         </Button>
       </div>
       <Text variant="small" className="text-text-muted">
-        Cycle automatique en 4 étapes — chaque changement est annoncé
+        Cycle automatique en 4 étapes, chaque changement est annoncé
         aux AT via <Text as="span" variant="code">useAnnouncer</Text>.
       </Text>
     </div>

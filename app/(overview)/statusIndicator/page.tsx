@@ -36,8 +36,7 @@ export default function StatusIndicatorPage() {
             <Heading as="h2" level={2}>Variants</Heading>
             <Text variant="small">
               6 variants couvrant tous les états sémantiques. Chaque variant
-              combine icône et label — jamais la couleur seule —
-              conformément au <Text as="span" variant="code">RGAA 3.1</Text>.
+              combine icône et label, jamais la couleur seule.
             </Text>
           </div>
           <div className="flex flex-wrap justify-center gap-6 rounded-3xl border border-border-subtle bg-bg-subtle/30 p-6 sm:p-8">

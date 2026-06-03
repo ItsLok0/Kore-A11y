@@ -35,7 +35,7 @@ export default function CardDemoPage() {
             <Heading as="h2" level={2}>Card statique</Heading>
             <Text variant="small">
               Sans prop <Text as="span" variant="code">href</Text>, la carte est purement
-              informative. Aucun élément interactif — le titre est un simple texte.
+              informative. Aucun élément interactif, le titre est un simple texte.
             </Text>
           </div>
           <div className="flex flex-wrap justify-center gap-6 rounded-3xl border border-border-subtle bg-bg-subtle/30 p-6 sm:p-8">
@@ -60,7 +60,7 @@ export default function CardDemoPage() {
               "Redundant Click Target" : le pseudo-élément{' '}
               <Text as="span" variant="code">::after</Text> du lien de titre s'étend
               sur toute la carte via <Text as="span" variant="code">after:absolute after:inset-0</Text>.
-              Un seul élément est focusable à la touche Tab — le titre.
+              Un seul élément est focusable à la touche Tab, le titre.
             </Text>
           </div>
           <div className="flex flex-wrap justify-center gap-6 rounded-3xl border border-border-subtle bg-bg-subtle/30 p-6 sm:p-8">
@@ -163,8 +163,8 @@ export default function CardDemoPage() {
               La prop <Text as="span" variant="code">titleLevel</Text> contrôle la
               balise sémantique du titre (<Text as="span" variant="code">h2</Text> à{' '}
               <Text as="span" variant="code">h6</Text>). Par défaut{' '}
-              <Text as="span" variant="code">h3</Text> — à adapter selon la hiérarchie
-              de la page pour respecter le RGAA 9.1.
+              <Text as="span" variant="code">h3</Text> (à adapter selon la hiérarchie
+              de la page).
             </Text>
           </div>
           <div className="flex flex-col gap-4 rounded-3xl border border-border-subtle bg-bg-subtle/30 p-6 sm:p-8">
@@ -194,7 +194,7 @@ export default function CardDemoPage() {
               <Text as="span" variant="code">focus-visible:underline</Text> et la
               carte parente affiche le{' '}
               <Text as="span" variant="code">--focus-ring</Text> via{' '}
-              <Text as="span" variant="code">has-[a:focus-visible]</Text> —
+              <Text as="span" variant="code">has-[a:focus-visible]</Text>,
               sans JavaScript.
             </Text>
           </div>
@@ -215,7 +215,7 @@ export default function CardDemoPage() {
               className="w-72 rounded-lg border border-border-subtle bg-bg-surface p-5"
             >
               <Text variant="small" className="text-text-secondary">
-                Chaque carte est indépendante — le focus ring s'applique
+                Chaque carte est indépendante, le focus ring s'applique
                 uniquement à la carte active.
               </Text>
             </Card>

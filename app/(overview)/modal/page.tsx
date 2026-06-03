@@ -32,7 +32,7 @@ export default function ModalPage() {
                     <div className="space-y-1">
                         <Heading as="h2" level={2}>Ouverture & fermeture</Heading>
                         <Text variant="small">
-                            La modale s'ouvre via <Text as="span" variant="code">showModal()</Text> —
+                            La modale s'ouvre via <Text as="span" variant="code">showModal()</Text>,
                             le backdrop natif de <Text as="span" variant="code">&lt;dialog&gt;</Text> bloque
                             les interactions avec le reste de la page. Fermeture via le bouton,{" "}
                             <Text as="span" variant="code">Échap</Text>, ou un clic sur le backdrop.
@@ -100,7 +100,7 @@ export default function ModalPage() {
                             </Text>
                             <Text variant="small">
                                 <Text as="span" variant="code">showModal()</Text> place la modale
-                                dans le top layer du navigateur — au-dessus de tout autre contenu,
+                                dans le top layer du navigateur, au-dessus de tout autre contenu,
                                 sans z-index à gérer.{" "}
                                 <Text as="span" variant="code">role="dialog"</Text> et{" "}
                                 <Text as="span" variant="code">aria-modal="true"</Text> sont
@@ -114,7 +114,7 @@ export default function ModalPage() {
                             <Text variant="small">
                                 La navigation clavier est contenue dans la modale tant qu'elle
                                 est ouverte. À la fermeture, le focus retourne sur l'élément
-                                déclencheur — conformément au{" "}
+                                déclencheur, conformément au{" "}
                                 <Text as="span" variant="code">RGAA 12.8</Text>.
                             </Text>
                         </div>

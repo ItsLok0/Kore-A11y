@@ -46,7 +46,7 @@ export default function InputDemoPage() {
             <Text variant="small">
               La prop <Text as="span" variant="code">type</Text> accepte tous les types HTML
               sauf <Text as="span" variant="code">checkbox</Text>, <Text as="span" variant="code">radio</Text>,{' '}
-              <Text as="span" variant="code">file</Text> et <Text as="span" variant="code">range</Text> —
+              <Text as="span" variant="code">file</Text> et <Text as="span" variant="code">range</Text>,
               couverts par des composants dédiés.
             </Text>
           </div>

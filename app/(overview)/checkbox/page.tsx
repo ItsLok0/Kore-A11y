@@ -140,7 +140,7 @@ export default function CheckboxDemoPage() {
               <Checkbox label="J'accepte la politique de confidentialité" required />
               <Checkbox
                 label="Je souhaite recevoir les offres partenaires"
-                description="Optionnel — décochez à tout moment."
+                description="Optionnel, décochez à tout moment."
               />
             </div>
 

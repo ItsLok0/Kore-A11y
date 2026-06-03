@@ -155,7 +155,7 @@ export default function ButtonDemoPage() {
               Composant de navigation sémantique. Rend un{' '}
               <Text as="span" variant="code">&lt;a&gt;</Text> via{' '}
               <Text as="span" variant="code">next/link</Text> avec les mêmes
-              styles que <Text as="span" variant="code">Button</Text> —
+              styles que <Text as="span" variant="code">Button</Text>,
               jamais un <Text as="span" variant="code">&lt;button&gt;</Text>
               pour naviguer.
             </Text>
@@ -196,7 +196,7 @@ export default function ButtonDemoPage() {
                 </ButtonLink>
               </div>
               <Text variant="small" className="text-text-muted">
-                Navigation interne via <Text as="span" variant="code">next/link</Text> —
+                Navigation interne via <Text as="span" variant="code">next/link</Text>,
                 prefetch automatique, pas de rechargement de page.
               </Text>
             </div>
@@ -228,7 +228,7 @@ export default function ButtonDemoPage() {
                 <Text as="span" variant="code">target="_blank"</Text> +{' '}
                 <Text as="span" variant="code">rel="noopener noreferrer"</Text> +
                 un <Text as="span" variant="code">sr-only</Text> annoncant
-                l'ouverture dans un nouvel onglet — RGAA 13.2.
+                l'ouverture dans un nouvel onglet.
               </Text>
             </div>
 
@@ -258,7 +258,7 @@ export default function ButtonDemoPage() {
           <div className="space-y-1">
             <Heading as="h2" level={2}>Button vs ButtonLink</Heading>
             <Text variant="small">
-              La règle sémantique fondamentale — une action déclenche un{' '}
+              La règle sémantique fondamentale, une action déclenche un{' '}
               <Text as="span" variant="code">&lt;button&gt;</Text>, une navigation
               déclenche un <Text as="span" variant="code">&lt;a&gt;</Text>.
             </Text>
@@ -268,7 +268,7 @@ export default function ButtonDemoPage() {
 
             <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
               <Text variant="caption" className="font-bold text-success">
-                ✓ Button — Actions
+                ✓ Button / Actions
               </Text>
               <div className="flex flex-wrap gap-3">
                 <Button variant="primary">Enregistrer</Button>
@@ -277,13 +277,13 @@ export default function ButtonDemoPage() {
               </div>
               <Text variant="small" className="text-text-muted">
                 Soumettre un formulaire, ouvrir une modale, déclencher
-                une action — toujours un <Text as="span" variant="code">&lt;button&gt;</Text>.
+                une action (toujours un <Text as="span" variant="code">&lt;button&gt;</Text>).
               </Text>
             </div>
 
             <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-bg-surface p-6">
               <Text variant="caption" className="font-bold text-success">
-                ✓ ButtonLink — Navigation
+                ✓ ButtonLink / Navigation
               </Text>
               <div className="flex flex-wrap gap-3">
                 <ButtonLink href="#" variant="primary" iconRight={faArrowRight}>
@@ -294,7 +294,7 @@ export default function ButtonDemoPage() {
                 </ButtonLink>
               </div>
               <Text variant="small" className="text-text-muted">
-                Changer de page, lien externe, ancre — toujours un{' '}
+                Changer de page, lien externe, ancre  (toujours un{' '})
                 <Text as="span" variant="code">&lt;a&gt;</Text>. Les lecteurs
                 d'écran distinguent "bouton" et "lien" dans leur navigation.
               </Text>
@@ -374,7 +374,7 @@ export default function ButtonDemoPage() {
           </Heading>
           <div className="grid gap-8 md:grid-cols-2">
             <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Focus visible — RGAA 10.5</Text>
+              <Text className="text-sm font-bold underline">Focus visible</Text>
               <Text variant="small">
                 Chaque bouton et lien affiche un double anneau de focus via{' '}
                 <Text as="span" variant="code">--focus-ring</Text> sur{' '}
@@ -390,7 +390,7 @@ export default function ButtonDemoPage() {
               </Text>
             </div>
             <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Icône seule — RGAA 11.9</Text>
+              <Text className="text-sm font-bold underline">Icône seule</Text>
               <Text variant="small">
                 Un bouton sans texte visible exige un{' '}
                 <Text as="span" variant="code">aria-label</Text> explicite pour être
@@ -398,7 +398,7 @@ export default function ButtonDemoPage() {
               </Text>
             </div>
             <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Liens externes — RGAA 13.2</Text>
+              <Text className="text-sm font-bold underline">Liens externes</Text>
               <Text variant="small">
                 La prop <Text as="span" variant="code">external</Text> ajoute automatiquement
                 un <Text as="span" variant="code">sr-only</Text> annonçant l'ouverture
