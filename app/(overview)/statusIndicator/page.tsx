@@ -67,9 +67,9 @@ export default function StatusIndicatorPage() {
                 Label visible (défaut)
               </Text>
               <div className="flex flex-wrap gap-4">
-                <StatusIndicator status="success" label="Sauvegardé"   />
+                <StatusIndicator status="success" label="Sauvegardé" />
                 <StatusIndicator status="loading" label="Chargement..." />
-                <StatusIndicator status="danger"  label="Erreur réseau" />
+                <StatusIndicator status="danger" label="Erreur réseau" />
               </div>
               <Text variant="small" className="text-text-muted">
                 Icône + texte visibles. Idéal pour les espaces avec
@@ -82,9 +82,9 @@ export default function StatusIndicatorPage() {
                 Label sr-only — <Text as="span" variant="code">srOnly</Text>
               </Text>
               <div className="flex flex-wrap gap-4">
-                <StatusIndicator status="success" label="Sauvegardé"    srOnly />
-                <StatusIndicator status="loading" label="Chargement..."  srOnly />
-                <StatusIndicator status="danger"  label="Erreur réseau"  srOnly />
+                <StatusIndicator status="success" label="Sauvegardé" srOnly />
+                <StatusIndicator status="loading" label="Chargement..." srOnly />
+                <StatusIndicator status="danger" label="Erreur réseau" srOnly />
               </div>
               <Text variant="small" className="text-text-muted">
                 Icône seule visuellement. Le label reste annoncé

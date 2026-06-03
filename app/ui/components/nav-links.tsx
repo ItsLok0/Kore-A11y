@@ -14,6 +14,7 @@ const links = [
     { name: 'Badge', href: '/badge' },
     { name: 'Status Indicator', href: '/statusIndicator' },
     { name: 'Card', href: '/card' },
+    { name: 'Modal', href: '/modal' },
 ];
  
 export default function NavLinks() {
