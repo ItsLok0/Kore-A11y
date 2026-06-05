@@ -3,6 +3,7 @@
 import { cn } from '@/lib/utils';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { forwardRef } from 'react';
 import React from "react";
 
