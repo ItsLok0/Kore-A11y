@@ -2,7 +2,6 @@
 
 import { cn } from '@/lib/utils';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import { forwardRef } from 'react';
 import React from "react";

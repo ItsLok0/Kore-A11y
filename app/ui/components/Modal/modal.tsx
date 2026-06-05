@@ -56,17 +56,39 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         const handleKeyDown = (e: React.KeyboardEvent<HTMLDialogElement>) => {
             if (e.key !== 'Tab') return;
 
+            const dialog = resolvedRef.current;
+            if (!dialog) return;
+
             // Sélectionne tous les éléments focusables à l'intérieur du modal
             const focusable = resolvedRef.current?.querySelectorAll<HTMLElement>(
                 'a[href], button:not([disabled]), textarea, input:not([disabled]), select, [tabindex]:not([tabindex="-1"])'
             );
-            if (!focusable?.length) return;
+            if (!focusable?.length){
+                e.preventDefault();
+                return;
+            }
             const first = triggerRef.current = focusable[0];
             const last = focusable[focusable.length - 1];
-            if (e.shiftKey && document.activeElement === first) {
-                e.preventDefault(); last.focus();
-            } else if (!e.shiftKey && document.activeElement === last) {
-                e.preventDefault(); first.focus();
+            const currentActive = document.activeElement;
+
+            // Si focus encore sur le dialog
+            if (currentActive === dialog) {
+                e.preventDefault();
+                if (e.shiftKey) {
+                    last.focus();
+                } else {
+                    first.focus();
+                }
+                return;
+            }
+
+            // Focus trap
+            if (e.shiftKey && currentActive === first) {
+                e.preventDefault(); 
+                last.focus();
+            } else if (!e.shiftKey && currentActive === last) {
+                e.preventDefault(); 
+                first.focus();
             }
         };
 
