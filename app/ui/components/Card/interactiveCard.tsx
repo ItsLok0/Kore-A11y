@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import React, { use, useId } from "react";
+import React, { useId } from "react";
 import { Heading, HeadingTag } from "@/app/ui/components/heading";
 import Link from "next/link";
 
@@ -32,13 +32,13 @@ export const Card = React.forwardRef<HTMLElement, CardProps>(
             <article
                 ref={ref}
                 className={cn(
-                    "relative has-focus-visible:shadow-(--focus-ring)",
+                    "relative has-[a:focus-visible]:shadow-(--focus-ring)",
                     className
                 )}
                 {...props}
             >
                 <Heading as={titleLevel}>
-                    {href && (
+                    {href ? (
                         <Link
                             id={generateId}
                             tabIndex={0}
@@ -51,7 +51,7 @@ export const Card = React.forwardRef<HTMLElement, CardProps>(
                     >
                         {title}
                     </Link>
-                    ) || title}
+                    ) : title}
                 </Heading>
                 <div className="mt-2">
                     {children}
