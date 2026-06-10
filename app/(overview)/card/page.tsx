@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Heading } from "@/app/ui/components/heading";
 import { Text } from "@/app/ui/components/text";
 import { Button } from "@/app/ui/components/Button/button";
-import { Card } from "@/app/ui/components/Card/interactiveCard";
+import { Card } from "@/app/ui/components/Card/card";
 import {
   faStar,
   faBookmark,

@@ -7,14 +7,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { ButtonLink } from '@/app/ui/components/Button/buttonlink';
 import { Badge } from '@/app/ui/components/badge';
-import { Card } from '@/app/ui/components/Card/interactiveCard';
+import { Card } from '@/app/ui/components/Card/card';
 import { cn } from '@/lib/utils';
 
 const atoms = [
     {
         title: 'Button',
         href: '/button',
-        rgaa: 'RGAA 11.9',
         description: 'Actions accessibles avec états de focus renforcés.',
         preview: (
             <div className="flex flex-wrap gap-3 pointer-events-none" aria-hidden="true">
@@ -27,7 +26,6 @@ const atoms = [
     {
         title: 'Input',
         href: '/input',
-        rgaa: 'RGAA 11.1',
         description: 'Champs de saisie avec liaison explicite label/champ et gestion des erreurs.',
         preview: (
             <div className="pointer-events-none" aria-hidden="true">
@@ -43,7 +41,6 @@ const atoms = [
     {
         title: 'Checkbox',
         href: '/checkbox',
-        rgaa: 'RGAA 11.5',
         description: 'Cases à cocher avec rendu cross-browser cohérent et annonces AT.',
         preview: (
             <div className="flex flex-col gap-3 pointer-events-none" aria-hidden="true">
@@ -59,7 +56,6 @@ const atoms = [
     {
         title: 'Badge',
         href: '/badge',
-        rgaa: 'RGAA 3.1',
         description: 'Indicateurs d\'état combinant couleur et texte pour ne jamais transmettre l\'information par la couleur seule.',
         preview: (
             <div className="flex flex-wrap gap-2 pointer-events-none" aria-hidden="true">

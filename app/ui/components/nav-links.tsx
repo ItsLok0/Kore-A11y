@@ -16,6 +16,7 @@ const links = [
     { name: 'Card', href: '/card' },
     { name: 'Modal', href: '/modal' },
     { name: 'Accordion', href: '/accordion' },
+    { name: 'Tab', href: '/tab' },
 ];
  
 export default function NavLinks() {

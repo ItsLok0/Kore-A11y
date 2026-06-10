@@ -82,6 +82,10 @@
     --focus-ring-error: 0 0 0 3px var(--color-bg-surface), 0 0 0 5px var(--color-danger);
   }
 
+  html, body {
+    @apply max-w-full overflow-x-hidden;
+  }
+
   body {
     background-color: var(--color-bg-page);
     color: var(--color-text-primary);

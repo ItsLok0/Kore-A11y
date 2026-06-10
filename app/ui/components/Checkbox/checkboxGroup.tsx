@@ -110,7 +110,7 @@ export const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>
                 <Text
                   as="span"
                   className={cn(
-                    "font-medium leading-6 group-hover:text-blue-600 transition-colors",
+                    "font-medium leading-6 group-hover:text-primary transition-colors",
                     size === 'lg' ? 'text-base' : 'text-sm',
                     error ? "text-danger" : "text-slate-900"
                   )}
@@ -118,7 +118,7 @@ export const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>
                   {option.label}
                 </Text>
                 {option.description && (
-                  <Text as="p" className="text-sm text-slate-500 leading-5">
+                  <Text as="p" className="text-sm text-secondary leading-5">
                     {option.description}
                   </Text>
                 )}
