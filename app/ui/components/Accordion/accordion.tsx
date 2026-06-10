@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import React, { useId, forwardRef, useState } from "react";
-import { Heading } from "@/app/ui/components/heading";
+import { Heading, HeadingTag } from "@/app/ui/components/heading";
 import { Button } from "@/app/ui/components/Button/button";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
@@ -16,13 +16,12 @@ interface AccordionSectionProps {
 
 interface AccordionItemProps {
     section: AccordionSectionProps;
-    headingLevel?: 2 | 3 | 4 | 5 | 6;
-    isLast: boolean;
+    headingLevel?: HeadingTag;
 }
 
 export type AccordionProps = {
   sections: AccordionSectionProps[];
-  headingLevel?: 2 | 3 | 4 | 5 | 6;
+  headingLevel?: HeadingTag;
   className?: string;
 }
 
@@ -30,8 +29,7 @@ export type AccordionProps = {
 const AccordionItem = (
     {
         section,
-        headingLevel = 3,
-        isLast
+        headingLevel = "h3"
     }: AccordionItemProps
 ) => {
     {/* Génération ID + état ouvert/fermé */}
@@ -41,9 +39,9 @@ const AccordionItem = (
     const [isOpen, setIsOpen] = useState(section.defaultOpen ?? false);
 
     return (
-        <div className={cn(!isLast && "border-b-2 border-primary")}>
+        <div className={cn("not-last:border-b-2 not-last:border-primary")}>
             {/* En-tête */}
-            <Heading as={`h${headingLevel}`}>
+            <Heading as={headingLevel}>
                 <Button
                     id={triggerId}
                     variant="ghost"
@@ -93,8 +91,9 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     (
         {
             sections,
-            headingLevel = 3,
+            headingLevel = "h3",
             className,
+            ...props
         }, ref
     ) => {
         return (
@@ -105,6 +104,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
                     "*:first:*:*:first:rounded-t-2xl *:last:*:*:last:rounded-b-2xl",
                     className
                 )}
+                {...props}
             >
                 {/* Boucle sur les sections */}
                 {sections.map((section, index) => (
@@ -112,7 +112,6 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
                         key={index}
                         section={section}
                         headingLevel={headingLevel}
-                        isLast={index === sections.length - 1}
                     />
                 ))}
             </div>

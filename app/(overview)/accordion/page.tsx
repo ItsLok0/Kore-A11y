@@ -140,7 +140,7 @@ export default function AccordionDemoPage() {
             </Text>
           </div>
           <div className="rounded-3xl border border-border-subtle bg-bg-subtle/30 p-6 sm:p-8">
-            <Accordion sections={formulaireSections} headingLevel={3} />
+            <Accordion sections={formulaireSections} headingLevel='h3' />
           </div>
         </section>
 
@@ -156,7 +156,7 @@ export default function AccordionDemoPage() {
             </Text>
           </div>
           <div className="rounded-3xl border border-border-subtle bg-bg-subtle/30 p-6 sm:p-8">
-            <Accordion sections={faqSections} headingLevel={3} />
+            <Accordion sections={faqSections} headingLevel='h3' />
           </div>
         </section>
 
@@ -214,7 +214,7 @@ export default function AccordionDemoPage() {
               <Text variant="caption" className="font-bold text-text-muted">
                 Groupe mixte
               </Text>
-              <Accordion sections={sectionDesactivee} headingLevel={3} />
+              <Accordion sections={sectionDesactivee} headingLevel='h3' />
             </div>
 
           </div>
@@ -238,7 +238,7 @@ export default function AccordionDemoPage() {
                   <Text as="span" variant="code">headingLevel={level}</Text>
                 </Text>
                 <Accordion
-                  headingLevel={level}
+                  headingLevel={`h${level}`}
                   sections={[{
                     title: `Titre h${level}`,
                     content: (
