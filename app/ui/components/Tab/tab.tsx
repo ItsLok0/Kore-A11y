@@ -90,7 +90,7 @@ const TabPanel = (
             hidden={!isActive}
             className={cn(
                 "p-4 focus-visible:outline-none focus-visible:shadow-(--focus-ring)",
-                "rounded-b-md rounded-tr-md"
+                "rounded-b-md rounded-tr-md border border-primary"
             )}
         >
             {content}
@@ -171,7 +171,7 @@ export const Tab = forwardRef<HTMLDivElement, TabProps>(
                 <div
                     role="tablist"
                     aria-labelledby={tabListId}
-                    className="flex gap-2 border-b border-primary"
+                    className="flex gap-2"
                 >
                     {sections.map((section, index) => {
                         const tabId = `tab-${id}-${index}`;

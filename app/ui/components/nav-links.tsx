@@ -9,14 +9,14 @@ const links = [
     { name: 'Home', href: '/' },
     { name: 'Typographie', href: '/text' },
     { name: 'Boutton', href: '/button' },
-    { name: 'Inputs & \n Textareas', href: '/input' },
+    { name: 'Champs de saisie', href: '/input' },
     { name: 'Checkbox', href: '/checkbox' },
     { name: 'Badge', href: '/badge' },
     { name: 'Status Indicator', href: '/statusIndicator' },
     { name: 'Card', href: '/card' },
     { name: 'Modal', href: '/modal' },
-    { name: 'Accordion', href: '/accordion' },
-    { name: 'Tab', href: '/tab' },
+    { name: 'Accordéon', href: '/accordion' },
+    { name: 'Onglet', href: '/tab' },
 ];
  
 export default function NavLinks() {
