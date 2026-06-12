@@ -17,38 +17,43 @@ const links = [
     { name: 'Modal', href: '/modal' },
     { name: 'Accordéon', href: '/accordion' },
     { name: 'Onglet', href: '/tab' },
+    { name: 'Tooltip & Popover', href: '/tooltip_&_popover' },
 ];
- 
+
 export default function NavLinks() {
     const pathname = usePathname();
- 
+
     return (
-        <nav className="flex gap-4 p-4 justify-center">
-            { links.map((link) => {
-                return (
-                    <Link
-                        key={link.name}
-                        tabIndex={0}
-                        href={link.href}
-                        className={cn(
-                        'group flex h-12 grow items-center justify-center gap-2 rounded-md bg-bg-surface border-2 border-primary/0 not-focus:border-primary/80 hover:border-primary/0 p-3 text-sm font-medium hover:bg-primary/80 focus:bg-primary/80 md:flex-none md:justify-start md:p-2 md:px-3',
-                        {
-                            'bg-primary/80 border-primary/0 not-focus:border-primary/0': pathname === link.href,
-                        },
-                        )}
-                    >
-                        <Text
-                            as='p'
-                            className={cn(  
-                                'group-hover:text-white group-focus:text-white', 
-                                pathname === link.href ? 'text-white' : 'text-text-primary'
-                            )}
-                        >
-                            {link.name}
-                        </Text>
-                    </Link>
-                );
-            })}
+        <nav className="w-full px-4 py-3">
+            <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+                {links.map((link) => {
+                    const isActive = pathname === link.href;
+                    return (
+                        <li key={link.name}>
+                            <Link
+                                href={link.href}
+                                className={cn(
+                                    'group flex h-10 w-full items-center justify-center rounded-md border-2 px-3 text-sm font-medium',
+                                    'border-primary/0 bg-bg-surface hover:bg-primary/80 hover:border-primary/0 focus:bg-primary/80 focus:hover:border-primary/0',
+                                    'not-focus:border-primary/80',
+                                    isActive && 'bg-primary/80 border-primary/0',
+                                )}
+                            >
+                                <Text
+                                    as="span"
+                                    className={cn(
+                                        'truncate text-center',
+                                        'group-hover:text-white group-focus:text-white ',
+                                        isActive && 'text-white',
+                                    )}
+                                >
+                                    {link.name}
+                                </Text>
+                            </Link>
+                        </li>
+                    );
+                })}
+            </ul>
         </nav>
     );
 }
