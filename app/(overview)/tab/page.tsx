@@ -1,4 +1,7 @@
+import { Button } from '@/app/ui/components/Button/button';
 import { Tab } from '@/app/ui/components/Tab/tab';
+import { Popover } from '@/app/ui/components/Tooltip_Popover/popover';
+import { Tooltip } from '@/app/ui/components/Tooltip_Popover/tooltip';
 import { Heading } from '@/app/ui/components/heading';
 import { Input } from '@/app/ui/components/input';
 import { Text } from '@/app/ui/components/text';
@@ -143,6 +146,19 @@ export default function TabDemoPage() {
           Tabs accessible
         </Text>
       </div>
+
+      <Tooltip content="Texte du tooltip" placement="left">
+        Hover me left
+      </Tooltip>
+      <Tooltip content="Texte du tooltip" placement="right">
+        Hover me right
+      </Tooltip>
+      <Tooltip content="Texte du tooltip" placement="top">
+        Hover me top 
+      </Tooltip>
+      <Tooltip content="Texte du tooltip" placement="bottom">
+        Hover me bottom test 2 22
+      </Tooltip>
 
       <div className="flex w-full max-w-4xl flex-col gap-16">
 
