@@ -248,7 +248,7 @@ export default function HomePage() {
                             <ul className="space-y-3 text-left" aria-label="Composants Phase 4">
                                 <li><Text variant="small">Menu Burger accessible</Text></li>
                                 <li><Text variant="small">Dark Mode Switcher</Text></li>
-                                <li><Text variant="small">Breadcrumbs sémantiques</Text></li>
+                                <li><Text variant="small">Footer Institutionnel</Text></li>
                             </ul>
                         </article>
 
