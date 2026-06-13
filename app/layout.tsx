@@ -4,6 +4,7 @@ import SkipLink from "@/app/layout/skip-link";
 import { open_sans } from "@/app/ui/fonts";
 import Header from "./layout/header";
 import React from "react";
+import ServerBreadcrumbs from "./ui/components/Breadcrumb/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: {
@@ -24,6 +25,7 @@ export default function RootLayout({
         { <SkipLink /> }
         <Header />
         <main id="main-content" tabIndex={-1} className="flex-1">
+          <ServerBreadcrumbs/>
           { children }
 
           {/* Régions d'annonce pour les lecteurs d'écran */}

@@ -18,6 +18,7 @@ const links = [
     { name: 'Accordéon', href: '/accordion' },
     { name: 'Onglet', href: '/tab' },
     { name: 'Tooltip & Popover', href: '/tooltip_&_popover' },
+    { name: 'Breadcrumb', href: '/breadcrumb' }
 ];
 
 export default function NavLinks() {
