@@ -147,19 +147,6 @@ export default function TabDemoPage() {
         </Text>
       </div>
 
-      <Tooltip content="Texte du tooltip" placement="left">
-        Hover me left
-      </Tooltip>
-      <Tooltip content="Texte du tooltip" placement="right">
-        Hover me right
-      </Tooltip>
-      <Tooltip content="Texte du tooltip" placement="top">
-        Hover me top 
-      </Tooltip>
-      <Tooltip content="Texte du tooltip" placement="bottom">
-        Hover me bottom test 2 22
-      </Tooltip>
-
       <div className="flex w-full max-w-4xl flex-col gap-16">
 
         {/* SECTION 1 : CAS MÉTIER */}

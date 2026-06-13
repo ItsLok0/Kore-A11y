@@ -81,7 +81,7 @@ export default function HomePage() {
                             <span className="inline-flex rounded-full h-2 w-2 bg-primary"></span>
                         </span>
                         <Text variant="caption" className="font-bold text-text-secondary">
-                            Phase 3 en cours : Composants complexes (Patterns ARIA)
+                            Phase 4 en cours : Global UI
                         </Text>
                     </div>
 
@@ -143,26 +143,26 @@ export default function HomePage() {
                         <li className="flex items-center gap-2">
                             <span
                                 aria-hidden="true"
-                                className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white"
+                                className="flex h-5 w-5 items-center justify-center rounded-full bg-success text-[10px] font-bold text-white"
                             >
-                                3
+                                <FontAwesomeIcon icon={faCheck} className="w-3" />
                             </span>
-                            <Text variant="small" className="font-bold text-primary">
+                            <Text variant="small" className="font-bold text-success">
                                 Phase 3 : Patterns
-                                <span className="sr-only">, En cours</span>
+                                <span className="sr-only">, Terminé</span>
                             </Text>
                         </li>
 
                         <li className="flex items-center gap-2">
                             <span
                                 aria-hidden="true"
-                                className="flex h-5 w-5 items-center justify-center rounded-full border border-border-subtle text-[10px] text-text-muted"
+                                className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white"
                             >
                                 4
                             </span>
-                            <Text variant="small" className="font-bold text-text-muted">
-                                Phase 4 : Navigation
-                                <span className="sr-only">, À venir</span>
+                            <Text variant="small" className="font-bold text-primary">
+                                Phase 4 : Global UI
+                                <span className="sr-only">, en cours</span>
                             </Text>
                         </li>
 
@@ -239,19 +239,7 @@ export default function HomePage() {
                         </Text>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-
-                        <article className="flex flex-col gap-4 p-6 border border-dashed border-border-subtle rounded-2xl bg-bg-surface/50">
-                            <Text variant="caption" className="text-primary font-bold">
-                                Phase 3 : Patterns ARIA
-                            </Text>
-                            {/* aria-label associe la liste à sa phase pour les lecteurs d'écran */}
-                            <ul className="space-y-3 text-left" aria-label="Composants Phase 3">
-                                <li><Text variant="small">Modales et Focus Trap</Text></li>
-                                <li><Text variant="small">Tabs et navigation clavier</Text></li>
-                                <li><Text variant="small">Tooltips et Popovers</Text></li>
-                            </ul>
-                        </article>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
 
                         <article className="flex flex-col gap-4 p-6 border border-dashed border-border-subtle rounded-2xl bg-bg-surface/50">
                             <Text variant="caption" className="text-primary font-bold">
