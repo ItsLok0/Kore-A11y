@@ -339,7 +339,7 @@ export default function TabDemoPage() {
             </div>
             <div className="space-y-2">
               <Text className="text-sm font-bold underline">
-                Navigation clavier (pattern manuel)
+                Navigation clavier (pattern automatique)
               </Text>
               <Text variant="small">
                 <Text as="span" variant="code">←</Text> <Text as="span" variant="code">→</Text> déplacent
