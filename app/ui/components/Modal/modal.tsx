@@ -42,10 +42,10 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
 
                 dialog.showModal();
                 dialog.focus();
-                document.body.style.overflow = "hidden";
+                document.documentElement.style.overflowY = 'hidden';
             } else {
                 dialog.close();
-                document.body.style.overflow = "";
+                document.documentElement.style.overflowY = "";
 
                 // Restaure le focus
                 triggerRef.current?.focus();

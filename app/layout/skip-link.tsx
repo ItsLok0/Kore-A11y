@@ -1,20 +1,28 @@
 import { cn } from '@/lib/utils';
-import Link from 'next/dist/client/link';
+import { ButtonLink } from '../ui/components/Button/buttonlink';
 
-export  default function SkipLink() {
+export default function SkipLink() {
     return (
-        <div className="skipLink">
-            <Link
-                href="#main-content"
-                tabIndex={0}
-                className={cn(
-                    'sr-only focus:not-sr-only',
-                    'bg-primary text-primary-fg! underline',
-                    'px-4 py-2 m-2'
-                )}
-            >
-                Aller au contenu principal
-            </Link>
-        </div>
+        <nav
+            role='navigation'
+            aria-label='Accès rapide'
+            className={cn(
+                // Classes de base quand le lien est visible
+                "bg-bg-page w-full fixed p-4 top-0 left-0 z-50",
+                // Classes pour le cacher par défaut et l'afficher au focus
+                "-top-20 focus-within:top-1"
+            )}  
+        >
+            <ul className='flex flex-row w-full gap-5'>
+                <li className='w-fit'>
+                    <ButtonLink
+                        href="#main-content"
+                        className='p-2'
+                    >
+                        Aller au contenu principal
+                    </ButtonLink>
+                </li>
+            </ul>
+        </nav>
     );
 }

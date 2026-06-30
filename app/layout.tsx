@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className="scroll-smooth">
+    <html lang="fr">
       <body className={`${open_sans.className} antialiased bg-bg-page text-text-primary`}>
         { <SkipLink /> }
         <Header />

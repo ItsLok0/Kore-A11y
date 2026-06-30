@@ -97,7 +97,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         <button
             ref={ref}
             tabIndex={0}
-            disabled={disabled}
+            disabled={isDisabled}
             aria-disabled={isDisabled}
             aria-busy={isLoading}
             aria-label={iconOnly ? (ariaLabel || (typeof children === 'string' ? children : undefined)) : ariaLabel}

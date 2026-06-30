@@ -186,11 +186,11 @@ export default function ButtonDemoPage() {
                 Navigation interne
               </Text>
               <div className="flex flex-wrap gap-3">
-                <ButtonLink href="/" variant="outline" size="md">
+                <ButtonLink href="#" variant="outline" size="md">
                   <FontAwesomeIcon icon={faHouse} aria-hidden="true" />
                   Accueil
                 </ButtonLink>
-                <ButtonLink href="/typography" variant="ghost" size="md">
+                <ButtonLink href="#" variant="ghost" size="md">
                   <FontAwesomeIcon icon={faBookOpen} aria-hidden="true" />
                   Typographie
                 </ButtonLink>
@@ -208,7 +208,7 @@ export default function ButtonDemoPage() {
               </Text>
               <div className="flex flex-wrap gap-3">
                 <ButtonLink
-                  href="https://github.com/ItsLok0/kore-a11y"
+                  href="#"
                   variant="primary"
                   external
                 >
@@ -216,7 +216,7 @@ export default function ButtonDemoPage() {
                   Voir sur GitHub
                 </ButtonLink>
                 <ButtonLink
-                  href="https://www.w3.org/WAI/WCAG22/quickref"
+                  href="#"
                   variant="outline"
                   external
                 >
@@ -339,7 +339,7 @@ export default function ButtonDemoPage() {
               </Text>
               <div className="flex flex-wrap gap-3">
                 <ButtonLink
-                  href="https://github.com/ItsLok0/kore-a11y"
+                  href="#"
                   variant="primary"
                   size="md"
                   external
@@ -347,7 +347,7 @@ export default function ButtonDemoPage() {
                 >
                   Voir sur GitHub
                 </ButtonLink>
-                <ButtonLink href="/" variant="outline" size="md" iconOnly={faHouse} ariaLabel="Accueil"/>
+                <ButtonLink href="#" variant="outline" size="md" iconOnly={faHouse} ariaLabel="Accueil"/>
               </div>
             </div>
 
