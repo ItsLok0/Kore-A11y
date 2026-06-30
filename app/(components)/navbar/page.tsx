@@ -272,7 +272,7 @@ export default function NavbarDemoPage() {
           </Heading>
           <div className="grid gap-8 md:grid-cols-2">
             <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Focus visible — RGAA 10.7</Text>
+              <Text className="text-sm font-bold underline">Focus visible</Text>
               <Text variant="small">
                 Double anneau de focus via <Text as="span" variant="code">--focus-ring</Text>{' '}
                 (3px blanc / 5px primaire) sur tous les éléments interactifs :
@@ -280,7 +280,7 @@ export default function NavbarDemoPage() {
               </Text>
             </div>
             <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Landmarks — RGAA 12.6</Text>
+              <Text className="text-sm font-bold underline">Landmarks</Text>
               <Text variant="small">
                 Deux landmarks <Text as="span" variant="code">&lt;nav&gt;</Text> distincts
                 avec <Text as="span" variant="code">aria-label</Text> différents :
@@ -288,7 +288,7 @@ export default function NavbarDemoPage() {
               </Text>
             </div>
             <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Focus trap — RGAA 7.3</Text>
+              <Text className="text-sm font-bold underline">Focus trap</Text>
               <Text variant="small">
                 Le menu mobile piège le focus dans le panneau tant qu'il est ouvert.
                 <Text as="span" variant="code">inert</Text> neutralise les liens
@@ -296,7 +296,7 @@ export default function NavbarDemoPage() {
               </Text>
             </div>
             <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Pattern Disclosure — APG W3C</Text>
+              <Text className="text-sm font-bold underline">Pattern Disclosure</Text>
               <Text variant="small">
                 Le dropdown suit le pattern Disclosure (et non Menubar) recommandé
                 par l'APG W3C pour les navigations de sites vitrine. Navigation
