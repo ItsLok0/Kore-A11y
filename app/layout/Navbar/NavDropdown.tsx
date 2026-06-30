@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import { NavItem } from './nav-data';
 import { ButtonLink } from '@/app/ui/components/Button/buttonlink';
 import { cn } from '@/lib/utils';
-import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 interface NavDropdownProps {
   item: NavItem;
@@ -49,14 +49,23 @@ export function NavDropdown({ item, onClickLink }: NavDropdownProps) {
   const hoverUnderline = `${underline} after:scale-x-0 hover:after:scale-x-100 focus-visible:after:scale-x-100`;
 
   return (
-    <div ref={dropdownRef} className="relative w-fit xl:w-auto">
+    <div
+      ref={dropdownRef}
+      className="relative w-fit md:w-auto"
+      onBlurCapture={(e) => {
+        if (
+          e.relatedTarget !== null &&
+          !dropdownRef.current?.contains(e.relatedTarget as Node)
+        ) {
+          setIsOpen(false);
+        }
+      }}
+    >
       <ButtonLink
         ref={buttonRef}
         href='#'
         type="button"
-        role='menuitem'
         variant='link'
-        aria-haspopup="true"
         aria-expanded={isOpen}
         aria-controls={menuId}
         iconRight={faChevronDown}
@@ -65,7 +74,7 @@ export function NavDropdown({ item, onClickLink }: NavDropdownProps) {
             
         }}
         className={cn(
-            "block text-lg xl:text-sm font-medium p-2 no-underline hover:no-underline focus:no-underline",
+            "block text-lg md:text-sm font-medium p-2 no-underline hover:no-underline focus:no-underline",
             isChildActive
                 ? `relative text-primary ${underline}`
                 : `text-text-secondary hover:text-text-primary ${hoverUnderline}`,
@@ -78,27 +87,25 @@ export function NavDropdown({ item, onClickLink }: NavDropdownProps) {
 
       <ul
         id={menuId}
-        role='menu'
         inert={!isOpen}
         className={cn(
-            "xl:absolute xl:left-0 xl:top-full xl:mt-1 xl:w-48 md:bg-bg-surface xl:shadow-md xl:rounded-md xl:border xl:border-(--color-border-subtle) p-2 flex flex-col gap-2",
+            "md:absolute md:left-0 md:top-full md:mt-1 md:w-48 md:bg-bg-surface md:shadow-md md:rounded-md md:border md:border-(--color-border-subtle) p-2 flex flex-col gap-2",
             isOpen ? "flex" : "hidden"
         )}
       >
         {item.children?.map((child) => {
             const isActive = pathname === child.href;
             return (
-                <li key={child.href} role='none'>
+                <li key={child.href}>
                 <ButtonLink
                     href={child.href}
-                    role='menuitem'
                     aria-current={isActive ? 'page' : undefined}
                     onClick={() => {
                         setIsOpen(false);
                         onClickLink?.();
                     }}
                     className={cn(
-                    "block text-lg xl:text-sm font-medium p-2 no-underline hover:no-underline focus:no-underline",
+                    "block text-lg md:text-sm font-medium p-2 no-underline hover:no-underline focus:no-underline",
                     isActive
                         ? `relative text-primary bg-primary-subtle ${underline}`
                         : `text-text-secondary hover:text-text-primary ${hoverUnderline} hover:bg-ghost-hover`

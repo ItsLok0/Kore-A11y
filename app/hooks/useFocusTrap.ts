@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-
+import React, { useEffect } from "react";
 
 export const useFocusTrap = (ref: React.RefObject<HTMLDivElement | null>, isActive: boolean) => {
   useEffect(() => {

@@ -59,11 +59,13 @@ export default function Navbar() {
       </Link>
 
       {/* Navigation Desktop */}
-      <nav aria-label="Navigation principale" className="hidden xl:block">
+      <nav aria-label="Navigation principale" className="hidden md:block">
         <NavLinks />
       </nav>
 
-      <div ref={mobileTrapRef}>
+      <div
+        ref={mobileTrapRef}
+      >
         {/* Bouton Burger Mobile */}
         <Button
             ref={burgerBtnRef}
@@ -73,7 +75,7 @@ export default function Navbar() {
             aria-controls="mobile-menu"
             aria-label={isOpen ? 'Fermer le menu de navigation' : 'Ouvrir le menu de navigation'}
             onClick={toggleMenu}
-            className="w-9 h-9 flex items-center justify-center xl:hidden text-text-secondary hover:bg-ghost-hover relative z-50 outline-hidden focus-visible:shadow-(--focus-ring) rounded-md"
+            className="w-9 h-9 flex items-center justify-center md:hidden text-text-secondary hover:bg-ghost-hover relative z-50 outline-hidden focus-visible:shadow-(--focus-ring) rounded-md"
         >
             <span className="sr-only">Menu</span>
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -90,13 +92,13 @@ export default function Navbar() {
             id="mobile-menu"
             inert={!isOpen}
             className={cn(
-                "fixed inset-0 bg-bg-surface border border-(--color-border-subtle) z-40 py-24 px-6 xl:hidden",
+                "fixed inset-0 bg-bg-surface border border-(--color-border-subtle) z-40 py-24 px-6 md:hidden",
                 "transition-transform duration-300 ease-in-out motion-reduce:transition-none",
                 isOpen ? "translate-x-0" : "translate-x-full"
             )}
             aria-hidden={!isOpen}
         >
-            <nav aria-label="Navigation principale" className='h-full'>
+            <nav aria-label="Navigation principale mobile" className='h-full'>
                 <NavLinks onClickLink={closeMenu} />
             </nav>
         </div>

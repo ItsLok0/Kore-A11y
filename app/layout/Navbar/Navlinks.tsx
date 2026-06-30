@@ -7,7 +7,7 @@ import { ButtonLink } from "@/app/ui/components/Button/buttonlink";
 import { cn } from "@/lib/utils";
 
 interface NavLinksProps {
-  onClickLink?: () => void;
+    onClickLink?: () => void;
 }
 
 export function NavLinks({ onClickLink }: NavLinksProps) {
@@ -17,15 +17,14 @@ export function NavLinks({ onClickLink }: NavLinksProps) {
 
     return (
         <ul
-            className="flex flex-col xl:flex-row gap-6 items-center w-full xl:w-auto"
-            role="menubar"
+            className="flex flex-col md:flex-row gap-6 items-center w-full md:w-auto"
             aria-label="Navigation principale"
         >
             {LINKS.map((item) => {
                 // Cas 1 : C'est un sous-menu
                 if (item.children) {
                     return (
-                        <li key={item.label} role="none" className="w-fit md:w-auto">
+                        <li key={item.label} className="w-fit md:w-auto">
                             <NavDropdown item={item} onClickLink={onClickLink} />
                         </li>
                     );
@@ -34,14 +33,13 @@ export function NavLinks({ onClickLink }: NavLinksProps) {
                 // Cas 2 : C'est un lien simple
                 const isActive = pathname === item.href;
                 return (
-                    <li key={item.href} role="none" className="w-fit xl:w-auto">
+                    <li key={item.href} className="w-fit md:w-auto">
                         <ButtonLink
                             href={item.href!}
-                            role='menuitem'
                             aria-current={isActive ? "page" : undefined}
                             onClick={onClickLink}
                             className={cn(
-                                "block text-lg xl:text-sm font-medium p-2 no-underline hover:no-underline focus:no-underline",
+                                "block text-lg md:text-sm font-medium p-2 no-underline hover:no-underline focus:no-underline",
                                 isActive
                                     ? `relative text-primary ${underline}`
                                     : `text-text-secondary hover:text-text-primary ${hoverUnderline}`
@@ -53,5 +51,5 @@ export function NavLinks({ onClickLink }: NavLinksProps) {
                 );
             })}
         </ul>
-  );
+    );
 }

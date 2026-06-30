@@ -93,7 +93,7 @@ Projet réalisé en autonomie avec une approche **SCRUM allégée** :
 ## Roadmap
 
 - [x] Composants de base (Text, Heading, Button, Input, Textarea)
-- [ ] Composants complexes (Modal, Accordion, Select, Toast...)
+- [x] Composants complexes (Modal, Accordion, Select, Toast...)
 - [ ] Page de documentation par composant
 - [ ] Tests automatisés accessibilité (axe-core / jest-axe)
 
