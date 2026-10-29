@@ -73,6 +73,24 @@ Ouvre ensuite [http://localhost:3000](http://localhost:3000).
 
 ---
 
+## Tests
+
+Les tests utilisent [Vitest](https://vitest.dev), [Testing Library](https://testing-library.com) et [vitest-axe](https://github.com/chaance/vitest-axe) (moteur axe-core).
+
+```bash
+pnpm test          # lance tous les tests une fois
+pnpm test:watch    # relance les tests à chaque modification
+```
+
+Chaque composant testé vérifie :
+- aucune violation d'accessibilité détectée par axe (`toHaveNoViolations`) ;
+- le nom accessible et les attributs ARIA (`aria-expanded`, `aria-invalid`, `aria-describedby`, `aria-busy`...) ;
+- l'usage au clavier (Entrée, Espace).
+
+Composants couverts pour l'instant : Button, Input, Checkbox, Accordion. Une CI GitHub Actions les lance à chaque pull request.
+
+---
+
 ## Structure du projet
 
 ```
@@ -95,7 +113,8 @@ Projet réalisé en autonomie avec une approche **SCRUM allégée** :
 - [x] Composants de base (Text, Heading, Button, Input, Textarea)
 - [x] Composants complexes (Modal, Accordion, Select, Toast...)
 - [ ] Page de documentation par composant
-- [ ] Tests automatisés accessibilité (axe-core / jest-axe)
+- [x] Tests automatisés accessibilité (Vitest + vitest-axe) : Button, Input, Checkbox, Accordion
+- [ ] Étendre les tests aux autres composants (Modal, Tab, Tooltip, Popover...)
 
 ---
 
