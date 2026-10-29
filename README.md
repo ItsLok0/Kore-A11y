@@ -87,7 +87,9 @@ Chaque composant testé vérifie :
 - le nom accessible et les attributs ARIA (`aria-expanded`, `aria-invalid`, `aria-describedby`, `aria-busy`...) ;
 - l'usage au clavier (Entrée, Espace).
 
-Composants couverts pour l'instant : Button, Input, Checkbox, Accordion. Une CI GitHub Actions les lance à chaque pull request.
+Composants couverts : Button, ButtonLink, Input, TextArea, Checkbox, CheckboxGroup, Accordion, Tab, Modal, Tooltip, Popover, Badge, StatusIndicator, Card, Heading, Text, Breadcrumbs, NavDropdown, SkipLink. Une CI GitHub Actions les lance à chaque pull request.
+
+**Limites à connaître** : les tests automatiques (jsdom + axe) ne détectent qu'une partie des problèmes. Ils ne remplacent pas un test manuel au clavier et avec un lecteur d'écran (NVDA, VoiceOver). Le comportement du Tooltip « survolable » (WCAG 1.4.13, `safePolygon`) se vérifie à la souris, jsdom n'ayant pas de géométrie.
 
 ---
 
@@ -114,7 +116,8 @@ Projet réalisé en autonomie avec une approche **SCRUM allégée** :
 - [x] Composants complexes (Modal, Accordion, Select, Toast...)
 - [ ] Page de documentation par composant
 - [x] Tests automatisés accessibilité (Vitest + vitest-axe) : Button, Input, Checkbox, Accordion
-- [ ] Étendre les tests aux autres composants (Modal, Tab, Tooltip, Popover...)
+- [x] Tests sur tous les composants existants (axe + ARIA + clavier)
+- [ ] Test manuel lecteur d'écran (NVDA / VoiceOver) sur chaque composant
 
 ---
 
