@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import "@/app/globals.css";
 import SkipLink from "@/app/layout/skip-link";
 import { open_sans } from "@/app/ui/fonts";
@@ -47,6 +48,7 @@ export default function RootLayout({
           />
         </main>
       </body>
+      <Analytics />
     </html>
   );
 }
