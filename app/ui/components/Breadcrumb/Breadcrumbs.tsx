@@ -33,27 +33,27 @@ export default function Breadcrumbs() {
           const isLast = index === segments.length - 1;
 
           return (
-            <React.Fragment key={index}>
-              {/* Séparateur dans un li — HTML valide */}
-              <li
+            <li key={index} className="flex items-center gap-1">
+              {/* Séparateur décoratif : dans le même li, pour ne pas fausser le nombre d'éléments de la liste */}
+              <FontAwesomeIcon
+                icon={faAngleRight}
                 aria-hidden="true"
                 className="text-text-muted select-none px-0.5"
-              >
-                <FontAwesomeIcon icon={faAngleRight} />
-              </li>
+              />
 
-              <li {...(isLast ? { 'aria-current': 'page' } : {})}>
-                {isLast ? (
-                  <span className="px-2 py-1 text-sm font-semibold text-text-primary">
-                    {label}
-                  </span>
-                ) : (
-                  <ButtonLink href={href} variant="ghost" size="sm">
-                    {label}
-                  </ButtonLink>
-                )}
-              </li>
-            </React.Fragment>
+              {isLast ? (
+                <span
+                  aria-current="page"
+                  className="px-2 py-1 text-sm font-semibold text-text-primary"
+                >
+                  {label}
+                </span>
+              ) : (
+                <ButtonLink href={href} variant="ghost" size="sm">
+                  {label}
+                </ButtonLink>
+              )}
+            </li>
           );
         })}
 

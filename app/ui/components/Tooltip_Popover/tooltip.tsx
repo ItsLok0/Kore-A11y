@@ -1,14 +1,14 @@
 'use client';
 
 import { cn } from "@/lib/utils";
-import { useState, forwardRef } from "react";
+import { useState, useId, forwardRef, cloneElement, isValidElement } from "react";
 import {
   useFloating,
   useInteractions,
   useHover,
   useFocus,
   useDismiss,
-  useRole,
+  safePolygon,
   offset,
   flip,
   shift,
@@ -38,6 +38,7 @@ export const Tooltip = forwardRef<HTMLSpanElement, TooltipProps>(
 ) => {
     {/** Variable pour afficher ou non le tooltip */}
     const [isOpen, setIsOpen] = useState(false);
+    const tooltipId = useId();
 
     {/** Donner une position et un context au tooltip */}
     const {refs, floatingStyles, context} = useFloating({
@@ -54,20 +55,27 @@ export const Tooltip = forwardRef<HTMLSpanElement, TooltipProps>(
     });
 
     {/** Création des intéractions */}
-    const hover = useHover(context, { move: false, delay: { open: delay, close: 0 } });
+    const hover = useHover(context, {
+        move: false,
+        delay: { open: delay, close: 0 },
+        // WCAG 1.4.13 : le contenu reste affiché quand le pointeur passe sur le tooltip
+        handleClose: safePolygon(),
+    });
     const focus = useFocus(context);
     const dismiss = useDismiss(context, { escapeKey: true, outsidePress: false });
-    const role = useRole(context, {
-        role: 'tooltip'
-    })
 
     {/** Récupérer les interactions pour les passer en prop */}
     const {getReferenceProps, getFloatingProps} = useInteractions([
         hover,
         focus,
         dismiss,
-        role,
     ]);
+
+    {/** Le lien tooltip -> élément focusable se fait sur l'enfant (pas sur le span englobant) */}
+    const describedBy = isOpen ? tooltipId : undefined;
+    const trigger = isValidElement<Record<string, unknown>>(children)
+        ? cloneElement(children, { 'aria-describedby': describedBy })
+        : children;
 
     return (
         <>
@@ -78,16 +86,19 @@ export const Tooltip = forwardRef<HTMLSpanElement, TooltipProps>(
                     if (typeof ref === 'function') ref(el);
                     else if (ref) ref.current = el;
                 }}
+                {...(isValidElement(children) ? {} : { 'aria-describedby': describedBy })}
                 {...getReferenceProps()}
                 className={cn("inline-flex", className)}
             >
-                {children}
+                {trigger}
             </span>
 
             {/** Tooltip */}
             {isOpen && (
                 <div
                     ref={refs.setFloating}
+                    id={tooltipId}
+                    role="tooltip"
                     style={floatingStyles}
                     {...getFloatingProps()}
                     className="max-w-xs rounded-md px-3 py-1.5 text-sm bg-neutral text-neutral-fg shadow-md"
