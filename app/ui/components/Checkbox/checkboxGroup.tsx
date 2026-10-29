@@ -69,22 +69,23 @@ export const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>
             className
         )}
         aria-describedby={ariaDescribedBy || undefined}
-        aria-required={required ? 'true' : undefined}
         {...props}
       >
-        <div className="space-y-1">
-          <Text as="legend">
-            {legend}
-            {required && (
+        {/* <legend> doit être l'enfant direct du <fieldset> pour nommer le groupe */}
+        <Text as="legend" className="mb-1">
+          {legend}
+          {required && (
+            <>
               <span aria-hidden="true" className="ml-1">*</span>
-            )}
-          </Text>
-          {description && (
-            <Text id={descId} as="p" className="text-sm text-text-secondary">
-              {description}
-            </Text>
+              <span className="sr-only"> (obligatoire)</span>
+            </>
           )}
-        </div>
+        </Text>
+        {description && (
+          <Text id={descId} as="p" className="text-sm text-text-secondary">
+            {description}
+          </Text>
+        )}
 
         <div className="flex flex-col gap-3">
           {options.map((option) => (
@@ -98,6 +99,7 @@ export const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>
                   tabIndex={0}
                   name={name}
                   value={option.value}
+                  aria-invalid={!!error}
                   className={cn(
                     "rounded border-border-subtle text-primary focus-visible:outline-none focus-visible:shadow-(--focus-ring) cursor-pointer",
                     inputSizeStyles[size],

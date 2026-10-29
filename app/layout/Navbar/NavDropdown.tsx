@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { NavItem } from './nav-data';
+import { Button } from '@/app/ui/components/Button/button';
 import { ButtonLink } from '@/app/ui/components/Button/buttonlink';
 import { cn } from '@/lib/utils';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
@@ -14,7 +15,7 @@ interface NavDropdownProps {
 export function NavDropdown({ item, onClickLink }: NavDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLAnchorElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -61,9 +62,8 @@ export function NavDropdown({ item, onClickLink }: NavDropdownProps) {
         }
       }}
     >
-      <ButtonLink
+      <Button
         ref={buttonRef}
-        href='#'
         type="button"
         variant='link'
         aria-expanded={isOpen}
@@ -83,7 +83,7 @@ export function NavDropdown({ item, onClickLink }: NavDropdownProps) {
         )}
       >
         {item.label}
-      </ButtonLink>
+      </Button>
 
       <ul
         id={menuId}

@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from "@/lib/utils";
-import { useState, forwardRef, useId, useEffect, useRef } from "react";
+import { useState, forwardRef, useId, useEffect, useRef, cloneElement, isValidElement } from "react";
 import {
   useFloating,
   useInteractions,
@@ -15,6 +15,7 @@ import {
 import { Placement } from "@floating-ui/react";
 import { Heading } from "@/app/ui/components/heading";
 import { Text } from "@/app/ui/components/text";
+import { useFocusTrap } from "@/app/hooks/useFocusTrap";
 
 {/** Props du popover */}
 interface PopoverProps {
@@ -28,39 +29,6 @@ interface PopoverProps {
     dialogTitle?: string;
     dialogDescription?: string;
 }
-
-{/** Focus trap */}
-const useFocusTrap = (ref: React.RefObject<HTMLDivElement | null>, isActive: boolean) => {
-  useEffect(() => {
-    if (!isActive || !ref.current) return;
- 
-    const container = ref.current;
- 
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key !== 'Tab') return;
- 
-      const focusable = container.querySelectorAll<HTMLElement>(
-        'a[href], button:not([disabled]), textarea, input:not([disabled]), select, [tabindex]:not([tabindex="-1"])'
-      );
-      if (!focusable.length) { e.preventDefault(); return; }
- 
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      const active = document.activeElement;
- 
-      if (e.shiftKey && active === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && active === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    };
- 
-    container.addEventListener('keydown', handleKeyDown);
-    return () => container.removeEventListener('keydown', handleKeyDown);
-  }, [isActive, ref]);
-};
 
 {/** Composant Popover */}
 export const Popover = forwardRef<HTMLSpanElement, PopoverProps>(
@@ -80,29 +48,46 @@ export const Popover = forwardRef<HTMLSpanElement, PopoverProps>(
         const popoverId = useId();
         const titleId = useId();
         const descId = useId();
-        const triggerRef = useRef<HTMLSpanElement | null>(null);
         const floatingRef = useRef<HTMLDivElement | null>(null);
+        const openerRef = useRef<HTMLElement | null>(null);
+        const restoreFocusRef = useRef(false);
 
-        const resolvedContent = typeof content === 'function' 
-            ? content(() => setIsOpen(false)) 
-            : content;
-        
         {/** Variable pour afficher ou non la popover */}
         const [isOpen, setIsOpen] = useState(false);
+
+        {/** Mémorise l'élément à re-focuser, et ne rend le focus que s'il était dans la popover */}
+        const handleOpenChange = (open: boolean) => {
+            if (open) {
+                openerRef.current = document.activeElement as HTMLElement | null;
+            } else {
+                restoreFocusRef.current = !!floatingRef.current?.contains(document.activeElement);
+            }
+            setIsOpen(open);
+        };
+
+        const resolvedContent = typeof content === 'function'
+            ? content(() => handleOpenChange(false))
+            : content;
 
         {/** Focus trap pour le mode dialog */}
         useFocusTrap(floatingRef, isDialog && isOpen);
 
         useEffect(() => {
-            if (!isOpen) {
-                triggerRef.current?.focus();
+            if (isOpen) {
+                // Mode dialog : le focus entre dans la popover à l'ouverture
+                if (isDialog) floatingRef.current?.focus();
+                return;
             }
-        }, [isOpen]);
+            if (restoreFocusRef.current) {
+                openerRef.current?.focus();
+                restoreFocusRef.current = false;
+            }
+        }, [isOpen, isDialog]);
 
         {/** Donner une position et un context à la popover */}
         const {refs, floatingStyles, context} = useFloating({
             open: isOpen,
-            onOpenChange: setIsOpen,
+            onOpenChange: handleOpenChange,
             placement: placement,
             middleware: [
                 offset(10),
@@ -145,6 +130,11 @@ export const Popover = forwardRef<HTMLSpanElement, PopoverProps>(
             }
         : {};
 
+        {/** Les attributs ARIA vont sur l'enfant interactif (bouton), pas sur le span englobant */}
+        const trigger = isValidElement<Record<string, unknown>>(children)
+            ? cloneElement(children, triggerAriaProps)
+            : children;
+
         return (
             <>
                 {/** Trigger */}
@@ -154,11 +144,11 @@ export const Popover = forwardRef<HTMLSpanElement, PopoverProps>(
                         if (typeof ref === 'function') ref(el);
                         else if (ref) ref.current = el;
                     }}
-                    {...triggerAriaProps}
+                    {...(isValidElement(children) ? {} : triggerAriaProps)}
                     {...getReferenceProps()}
                     className={cn("inline-flex", className)}
                 >
-                    {children}
+                    {trigger}
                 </span>
 
                 {/** Popover */}
@@ -193,7 +183,7 @@ export const Popover = forwardRef<HTMLSpanElement, PopoverProps>(
                                 </Heading>
                                 )}
                                 {dialogDescription && (
-                                    <Text variant="small" className="text-text-muted">
+                                    <Text id={descId} variant="small" className="text-text-muted">
                                         {dialogDescription}
                                     </Text>
                                 )}

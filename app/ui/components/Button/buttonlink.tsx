@@ -135,7 +135,10 @@ export const ButtonLink = React.forwardRef<HTMLAnchorElement, ButtonLinkProps>(
 
           {/* Pour les liens externes */}
           {external && (
-            <span className="sr-only">(ouvre dans un nouvel onglet)</span>
+            <>
+              {' '}
+              <span className="sr-only">(ouvre dans un nouvel onglet)</span>
+            </>
           )}
         </span>
       </Link>

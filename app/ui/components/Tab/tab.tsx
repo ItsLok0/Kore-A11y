@@ -86,6 +86,7 @@ const TabPanel = (
         <div
             id={tabPanelId}
             role="tabpanel"
+            tabIndex={0}
             aria-labelledby={tabId}
             hidden={!isActive}
             className={cn(
@@ -127,6 +128,8 @@ export const Tab = forwardRef<HTMLDivElement, TabProps>(
             const enabledIndexes = sections
                 .map((s, i) => (!s.disabled ? i : null))
                 .filter((i): i is number => i !== null);
+
+            if (enabledIndexes.length === 0) return;
 
             const currentPos = enabledIndexes.indexOf(index);
         

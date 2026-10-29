@@ -62,7 +62,7 @@ export const StatusIndicator = forwardRef<HTMLSpanElement, StatusIndicatorProps>
   }, [status, label, announce, critical]);
 
   return (
-    <span aria-label={label} ref={ref} className={cn('inline-flex items-center gap-2', className)}>
+    <span ref={ref} className={cn('inline-flex items-center gap-2', className)}>
       <FontAwesomeIcon
         icon={config.icon}
         className={cn(
@@ -72,7 +72,7 @@ export const StatusIndicator = forwardRef<HTMLSpanElement, StatusIndicatorProps>
         )}
         aria-hidden="true"
       />
-      <span aria-hidden="true" className={cn('text-sm font-medium', srOnly && 'sr-only')}>
+      <span className={cn('text-sm font-medium', srOnly && 'sr-only')}>
         {label}
       </span>
     </span>

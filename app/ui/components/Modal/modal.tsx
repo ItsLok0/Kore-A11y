@@ -52,6 +52,13 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
             }
         }, [isOpen]);
 
+        // Libère le scroll de la page si la modale est démontée alors qu'elle est ouverte
+        useEffect(() => {
+            return () => {
+                document.documentElement.style.overflowY = "";
+            };
+        }, []);
+
         // Focus trap
         const handleKeyDown = (e: React.KeyboardEvent<HTMLDialogElement>) => {
             if (e.key !== 'Tab') return;
@@ -67,7 +74,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
                 e.preventDefault();
                 return;
             }
-            const first = triggerRef.current = focusable[0];
+            const first = focusable[0];
             const last = focusable[focusable.length - 1];
             const currentActive = document.activeElement;
 
