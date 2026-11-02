@@ -65,7 +65,9 @@ export const Popover = forwardRef<HTMLSpanElement, PopoverProps>(
             setIsOpen(open);
         };
 
+        // Faux positif : `close` ne lit floatingRef que lorsqu'il est appelé (clic), jamais pendant le rendu
         const resolvedContent = typeof content === 'function'
+            // eslint-disable-next-line react-hooks/refs
             ? content(() => handleOpenChange(false))
             : content;
 

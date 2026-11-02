@@ -96,6 +96,8 @@ export const Tooltip = forwardRef<HTMLSpanElement, TooltipProps>(
             {/** Tooltip */}
             {isOpen && (
                 <div
+                    // Faux positif : pattern officiel de Floating UI, `setFloating` est une fonction de rappel
+                    // eslint-disable-next-line react-hooks/refs
                     ref={refs.setFloating}
                     id={tooltipId}
                     role="tooltip"
