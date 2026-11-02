@@ -194,6 +194,8 @@ export default function HomePage() {
                     </Text>
                 </div>
     
+                {/* role="list" conservé : Tailwind retire les puces (list-style: none) et Safari/VoiceOver supprime alors la sémantique de liste */}
+                {/* eslint-disable-next-line jsx-a11y/no-redundant-roles */}
                 <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6" role="list">
                     {atoms.map((atom) => (
                         <li key={atom.href}>

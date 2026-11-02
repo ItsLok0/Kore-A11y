@@ -100,6 +100,8 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
         };
 
         return (
+            // Les écouteurs sont voulus : focus trap (clavier) et fermeture au clic sur le fond
+            // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
             <dialog
                 ref={resolvedRef}
                 onKeyDown={handleKeyDown}
@@ -107,7 +109,6 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
                 onClick={(e) => e.target === e.currentTarget && onClose()}
                 id={id}
                 tabIndex={-1}
-                role="dialog"
                 aria-modal="true"
                 aria-labelledby={`${id}-title`}
                 aria-describedby={description ? `${id}-desc` : undefined}

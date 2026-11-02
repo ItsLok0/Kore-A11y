@@ -66,6 +66,8 @@ const TabButton = forwardRef<HTMLButtonElement, TabButtonProps> (
     }
 );
 
+TabButton.displayName = "TabButton";
+
 {/** TabPanel : Affichage du contenu */}
 interface TabPanelProps {
   tabPanelId: string;
