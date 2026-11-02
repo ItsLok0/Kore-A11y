@@ -1,39 +1,20 @@
-import js from "@eslint/js";
-import nextPlugin from "@next/eslint-plugin-next";
-import a11yPlugin from "eslint-plugin-jsx-a11y";
-import tsParser from "@typescript-eslint/parser";
-import tsPlugin from "@typescript-eslint/eslint-plugin";
+import { defineConfig, globalIgnores } from "eslint/config";
+import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTypescript from "eslint-config-next/typescript";
+import jsxA11y from "eslint-plugin-jsx-a11y";
 
-export default [
+export default defineConfig([
+  ...nextVitals,
+  ...nextTypescript,
+  // eslint-config-next enregistre déjà le plugin jsx-a11y mais n'active qu'une
+  // partie des règles : on ajoute ici toutes les règles "recommended".
   {
-    ignores: ["node_modules/**", ".next/**", "dist/**", "public/**"],
-  },
-  js.configs.recommended,
-  {
-    files: ["**/*.{ts,tsx}"],
-    languageOptions: {
-      parser: tsParser,
-      parserOptions: {
-        ecmaFeatures: { jsx: true },
-        project: "./tsconfig.json", 
-      },
-    },
-    plugins: {
-      "@typescript-eslint": tsPlugin,
-      "@next/next": nextPlugin,
-      "jsx-a11y": a11yPlugin,
-    },
     rules: {
-      ...tsPlugin.configs.recommended.rules,
-      ...nextPlugin.configs.recommended.rules,
-      ...nextPlugin.configs["core-web-vitals"].rules,
-      ...a11yPlugin.configs.recommended.rules,
-      "jsx-a11y/alt-text": "error",
-      "jsx-a11y/aria-props": "error",
-      "jsx-a11y/interactive-supports-focus": "error",
+      ...jsxA11y.flatConfigs.recommended.rules,
       "jsx-a11y/no-autofocus": "warn",
-      "no-unused-vars": "off",
-      "@typescript-eslint/no-unused-vars": ["warn"]
+      // Apostrophes et guillemets français dans le texte JSX : HTML valide, sans impact a11y.
+      "react/no-unescaped-entities": "off",
     },
   },
-];
+  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", "public/**"]),
+]);
