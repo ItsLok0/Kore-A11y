@@ -26,7 +26,10 @@ export default function RootLayout({
         { <SkipLink /> }
         <Header />
         <main id="main-content" tabIndex={-1} className="flex-1">
-          <ServerBreadcrumbs/>
+          {/* Marge alignée sur celle des pages de démo : sans elle, le fil d'Ariane touche le bord de l'écran et son anneau de focus est coupé */}
+          <div className="px-3 pt-2 sm:px-6">
+            <ServerBreadcrumbs/>
+          </div>
           { children }
 
           {/* Régions d'annonce pour les lecteurs d'écran */}
