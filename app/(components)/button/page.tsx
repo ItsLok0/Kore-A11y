@@ -373,25 +373,25 @@ export default function ButtonDemoPage() {
           keyboard={[
             { keys: 'Tab / Maj+Tab', action: 'Place le focus sur le bouton, sauf s\'il est désactivé.' },
             { keys: 'Entrée', action: 'Active le bouton (couvert par un test).' },
-            { keys: 'Espace', action: 'Active le bouton (comportement natif de <button>, sans test dédié).' },
+            { keys: 'Espace', action: 'Active le bouton (comportement natif de `<button>`, sans test dédié).' },
           ]}
           aria={[
-            { name: '<button>', description: 'Élément natif : le rôle « button » vient du HTML, aucun role ARIA n\'est ajouté.' },
-            { name: 'aria-label', description: 'Pour un bouton à icône seule (iconOnly) : le nom accessible vient de aria-label, ou du texte de children s\'il est une chaîne. Couvert par un test.' },
-            { name: 'aria-busy', description: '« true » pendant isLoading. Couvert par un test.' },
-            { name: 'aria-disabled', description: 'Reflète disabled (ou isLoading), en plus de l\'attribut natif disabled.' },
-            { name: 'ButtonLink external', description: 'Ajoute target="_blank", rel="noopener noreferrer" et un texte sr-only « (ouvre dans un nouvel onglet) » pour prévenir les lecteurs d\'écran.' },
+            { name: '<button>', description: 'Élément natif : le rôle « button » vient du HTML, aucun `role` ARIA n\'est ajouté.' },
+            { name: 'aria-label', description: 'Pour un bouton à icône seule (`iconOnly`) : le nom accessible vient de `aria-label`, ou du texte de `children` s\'il est une chaîne. Couvert par un test.' },
+            { name: 'aria-busy', description: '« true » pendant `isLoading`. Couvert par un test.' },
+            { name: 'aria-disabled', description: 'Reflète `disabled` (ou `isLoading`), en plus de l\'attribut natif `disabled`.' },
+            { name: 'ButtonLink external', description: 'Ajoute `target="_blank"`, `rel="noopener noreferrer"` et un texte `sr-only` « (ouvre dans un nouvel onglet) » pour prévenir les lecteurs d\'écran.' },
             { name: 'aria-hidden="true"', description: 'Appliqué aux icônes décoratives à l\'intérieur du bouton.' },
           ]}
           wcag={[
-            { criterion: '4.1.2 Nom, rôle et valeur', level: 'A', how: 'Bouton natif, nom accessible issu du contenu ou de aria-label (tests : getByRole avec name).' },
-            { criterion: '2.1.1 Clavier', level: 'A', how: 'Opérable au clavier grâce à <button> natif ; Entrée testée.' },
-            { criterion: '2.4.7 Focus visible', level: 'AA', how: 'Anneau de focus défini sur :focus-visible (--focus-ring). Rendu et contraste de l\'anneau non mesurés.' },
-            { criterion: '2.5.8 Taille de la cible (minimum)', level: 'AA', how: 'La plus petite taille (sm) fait 2 rem de haut (32 px à la taille de police par défaut), au-dessus des 24 px requis. Variant link : lien inline, hors exigence.' },
+            { criterion: '4.1.2 Nom, rôle et valeur', level: 'A', how: 'Bouton natif, nom accessible issu du contenu ou de `aria-label` (tests : `getByRole` avec `name`).' },
+            { criterion: '2.1.1 Clavier', level: 'A', how: 'Opérable au clavier grâce à `<button>` natif ; Entrée testée.' },
+            { criterion: '2.4.7 Focus visible', level: 'AA', how: 'Anneau de focus défini sur `:focus-visible` (`--focus-ring`). Rendu et contraste de l\'anneau non mesurés.' },
+            { criterion: '2.5.8 Taille de la cible (minimum)', level: 'AA', how: 'La plus petite taille (`sm`) fait 2 rem de haut (32 px à la taille de police par défaut), au-dessus des 24 px requis. Variant `link` : lien inline, hors exigence.' },
           ]}
           limits={[
             'Pendant le chargement, le bouton est désactivé : il sort de l\'ordre de tabulation et ne réagit plus à Entrée ni Espace. Vérifié dans Chromium : le focus reste sur le bouton jusqu\'au prochain Tab. Autres navigateurs non testés.',
-            'aria-busy ne garantit pas une annonce vocale du chargement. Une région live (voir le hook useAnnouncer) répondrait au critère 4.1.3 Messages d\'état (AA) : non implémenté ici.',
+            '`aria-busy` ne garantit pas une annonce vocale du chargement. Une région live (voir le hook `useAnnouncer`) répondrait au critère 4.1.3 Messages d\'état (AA) : non implémenté ici.',
             'Contraste des couleurs (1.4.3, 1.4.11) des variants et de l\'anneau de focus : non mesuré.',
             'Test manuel avec lecteur d\'écran (NVDA, VoiceOver) : à faire.',
           ]}
