@@ -76,6 +76,8 @@ describe('Popover', () => {
   it('ne vole pas le focus au montage', () => {
     render(
       <>
+        {/* autoFocus voulu : le test vérifie que la Popover ne vole pas ce focus */}
+        {/* eslint-disable-next-line jsx-a11y/no-autofocus */}
         <input aria-label="Champ" autoFocus />
         <Popover content={<p>Contenu</p>}>
           <button>Ouvrir</button>
