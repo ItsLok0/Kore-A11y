@@ -14,6 +14,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ButtonLoadingDemo } from "@/app/ui/components/Button/buttonLoadingDemo";
+import { A11yReference } from '../_components/A11yReference';
 
 export const metadata: Metadata = {
   title: 'Composant Button',
@@ -367,46 +368,34 @@ export default function ButtonDemoPage() {
           </div>
         </section>
 
-        {/* ── A11Y ── */}
-        <section className="rounded-2xl border border-border-subtle bg-primary-subtle p-6 sm:p-8">
-          <Heading as="h2" level={4} className="mb-4 italic text-primary">
-            Note accessibilité
-          </Heading>
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Focus visible</Text>
-              <Text variant="small">
-                Chaque bouton et lien affiche un double anneau de focus via{' '}
-                <Text as="span" variant="code">--focus-ring</Text> sur{' '}
-                <Text as="span" variant="code">focus-visible</Text>. Testable à la touche Tab.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">États communiqués</Text>
-              <Text variant="small">
-                <Text as="span" variant="code">disabled</Text> bloque nativement le focus.{' '}
-                <Text as="span" variant="code">aria-busy</Text> annonce le chargement aux
-                lecteurs d'écran sans retirer le focus de l'élément.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Icône seule</Text>
-              <Text variant="small">
-                Un bouton sans texte visible exige un{' '}
-                <Text as="span" variant="code">aria-label</Text> explicite pour être
-                compréhensible hors contexte visuel.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Liens externes</Text>
-              <Text variant="small">
-                La prop <Text as="span" variant="code">external</Text> ajoute automatiquement
-                un <Text as="span" variant="code">sr-only</Text> annonçant l'ouverture
-                dans un nouvel onglet, évitant toute surprise de navigation.
-              </Text>
-            </div>
-          </div>
-        </section>
+        {/* ── RÉFÉRENCE A11Y ── */}
+        <A11yReference
+          keyboard={[
+            { keys: 'Tab / Maj+Tab', action: 'Place le focus sur le bouton, sauf s\'il est désactivé.' },
+            { keys: 'Entrée', action: 'Active le bouton (couvert par un test).' },
+            { keys: 'Espace', action: 'Active le bouton (comportement natif de `<button>`, sans test dédié).' },
+          ]}
+          aria={[
+            { name: '<button>', description: 'Élément natif : le rôle « button » vient du HTML, aucun `role` ARIA n\'est ajouté.' },
+            { name: 'aria-label', description: 'Pour un bouton à icône seule (`iconOnly`) : le nom accessible vient de `aria-label`, ou du texte de `children` s\'il est une chaîne. Couvert par un test.' },
+            { name: 'aria-busy', description: '« true » pendant `isLoading`. Couvert par un test.' },
+            { name: 'aria-disabled', description: 'Reflète `disabled` (ou `isLoading`), en plus de l\'attribut natif `disabled`.' },
+            { name: 'ButtonLink external', description: 'Ajoute `target="_blank"`, `rel="noopener noreferrer"` et un texte `sr-only` « (ouvre dans un nouvel onglet) » pour prévenir les lecteurs d\'écran.' },
+            { name: 'aria-hidden="true"', description: 'Appliqué aux icônes décoratives à l\'intérieur du bouton.' },
+          ]}
+          wcag={[
+            { criterion: '4.1.2 Nom, rôle et valeur', level: 'A', how: 'Bouton natif, nom accessible issu du contenu ou de `aria-label` (tests : `getByRole` avec `name`).' },
+            { criterion: '2.1.1 Clavier', level: 'A', how: 'Opérable au clavier grâce à `<button>` natif ; Entrée testée.' },
+            { criterion: '2.4.7 Focus visible', level: 'AA', how: 'Anneau de focus défini sur `:focus-visible` (`--focus-ring`). Rendu et contraste de l\'anneau non mesurés.' },
+            { criterion: '2.5.8 Taille de la cible (minimum)', level: 'AA', how: 'La plus petite taille (`sm`) fait 2 rem de haut (32 px à la taille de police par défaut), au-dessus des 24 px requis. Variant `link` : lien inline, hors exigence.' },
+          ]}
+          limits={[
+            'Pendant le chargement, le bouton est désactivé : il sort de l\'ordre de tabulation et ne réagit plus à Entrée ni Espace. Vérifié dans Chromium : le focus reste sur le bouton jusqu\'au prochain Tab. Autres navigateurs non testés.',
+            '`aria-busy` ne garantit pas une annonce vocale du chargement. Une région live (voir le hook `useAnnouncer`) répondrait au critère 4.1.3 Messages d\'état (AA) : non implémenté ici.',
+            'Contraste des couleurs (1.4.3, 1.4.11) des variants et de l\'anneau de focus : non mesuré.',
+            'Test manuel avec lecteur d\'écran (NVDA, VoiceOver) : à faire.',
+          ]}
+        />
 
       </div>
     </div>
