@@ -12,12 +12,18 @@
 
 | Composant | Statut |
 |-----------|--------|
-| `<Text>` | ✅ Disponible |
-| `<Heading>` | ✅ Disponible |
-| `<Button>` | ✅ Disponible |
-| `<Input>` | ✅ Disponible |
-| `<Textarea>` | ✅ Disponible |
-| Autres composants | 🔲 En cours |
+| `<Text>`, `<Heading>` | ✅ Disponible, testé (axe, ARIA, clavier) |
+| `<Button>`, `<ButtonLink>` | ✅ Disponible, testé (axe, ARIA, clavier) |
+| `<Input>`, `<TextArea>` | ✅ Disponible, testé (axe, ARIA, clavier) |
+| `<Checkbox>`, `<CheckboxGroup>` | ✅ Disponible, testé (axe, ARIA, clavier) |
+| `<Accordion>`, `<Tab>` | ✅ Disponible, testé (axe, ARIA, clavier) |
+| `<Modal>` | ✅ Disponible, testé (axe, ARIA, clavier) |
+| `<Tooltip>`, `<Popover>` | ✅ Disponible, testé (axe, ARIA, clavier) |
+| `<Badge>`, `<StatusIndicator>`, `<Card>` | ✅ Disponible, testé (axe, ARIA, clavier) |
+| `<Breadcrumbs>`, `<NavDropdown>`, `<SkipLink>` | ✅ Disponible, testé (axe, ARIA, clavier) |
+| `<Select>`, `<Toast>` | 🔲 À venir |
+
+Les tests automatiques ne remplacent pas un test manuel au clavier et au lecteur d'écran : celui-ci reste à faire (voir la roadmap).
 
 ---
 
@@ -96,7 +102,7 @@ Composants couverts : Button, ButtonLink, Input, TextArea, Checkbox, CheckboxGro
 ## Structure du projet
 
 ```
-/app/ui/component    → Composants réutilisables (Text, Button, Input...)
+/app/ui/components   → Composants réutilisables (Text, Button, Input...)
 /app/layout/         → Éléments de structure (Header, SkipLink, ...)
 ```
 
@@ -113,10 +119,10 @@ Projet réalisé en autonomie avec une approche **SCRUM allégée** :
 ## Roadmap
 
 - [x] Composants de base (Text, Heading, Button, Input, Textarea)
-- [x] Composants complexes (Modal, Accordion, Select, Toast...)
+- [x] Composants complexes (Modal, Accordion, Tab, Tooltip, Popover...)
+- [ ] Composants Select et Toast
 - [ ] Page de documentation par composant
-- [x] Tests automatisés accessibilité (Vitest + vitest-axe) : Button, Input, Checkbox, Accordion
-- [x] Tests sur tous les composants existants (axe + ARIA + clavier)
+- [x] Tests automatisés accessibilité (Vitest + vitest-axe) sur tous les composants existants (axe + ARIA + clavier)
 - [ ] Test manuel lecteur d'écran (NVDA / VoiceOver) sur chaque composant
 
 ---
