@@ -50,7 +50,7 @@ export const Modal = forwardRef<HTMLDialogElement, ModalProps>(
                 // Restaure le focus
                 triggerRef.current?.focus();
             }
-        }, [isOpen]);
+        }, [isOpen, resolvedRef]);
 
         // Libère le scroll de la page si la modale est démontée alors qu'elle est ouverte
         useEffect(() => {
