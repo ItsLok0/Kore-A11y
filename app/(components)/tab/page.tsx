@@ -1,7 +1,4 @@
-import { Button } from '@/app/ui/components/Button/button';
 import { Tab } from '@/app/ui/components/Tab/tab';
-import { Popover } from '@/app/ui/components/Tooltip_Popover/popover';
-import { Tooltip } from '@/app/ui/components/Tooltip_Popover/tooltip';
 import { Heading } from '@/app/ui/components/heading';
 import { Input } from '@/app/ui/components/input';
 import { Text } from '@/app/ui/components/text';

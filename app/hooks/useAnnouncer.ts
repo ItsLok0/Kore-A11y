@@ -11,11 +11,9 @@ import { useCallback } from 'react';
 export function useAnnouncer() {
   const announce = useCallback((text: string, assertive = false) => {
     const id = assertive ? 'announcer-assertive' : 'announcer';
-    // eslint-disable-next-line no-undef
     const region = document.getElementById(id);
     if (!region) return;
     region.textContent = '';
-    // eslint-disable-next-line no-undef
     setTimeout(() => {
       region.textContent = text;
     }, 50);

@@ -49,12 +49,10 @@ export function AutoSaveDemo() {
     setStatus('loading');
     setLabel('Sauvegarde en cours...');
 
-    // eslint-disable-next-line no-undef
     setTimeout(() => {
       const success = Math.random() > 0.3;
       setStatus(success ? 'success' : 'danger');
       setLabel(success ? 'Sauvegardé avec succès' : 'Échec de la sauvegarde');
-      // eslint-disable-next-line no-undef
       setTimeout(() => {
         setStatus('neutral');
         setLabel('Modifications non sauvegardées');
@@ -97,7 +95,6 @@ export function ConnectionDemo() {
     if (status === 'success') {
       setStatus('loading');
       setLabel('Reconnexion...');
-      // eslint-disable-next-line no-undef
       setTimeout(() => {
         setStatus('danger');
         setLabel('Connexion perdue');
@@ -105,7 +102,6 @@ export function ConnectionDemo() {
     } else if (status === 'danger') {
       setStatus('loading');
       setLabel('Reconnexion...');
-      // eslint-disable-next-line no-undef
       setTimeout(() => {
         setStatus('success');
         setLabel('Connecté');
@@ -161,7 +157,6 @@ export function ValidationDemo() {
     setStep(0);
 
     steps.forEach((_, i) => {
-      // eslint-disable-next-line no-undef
       setTimeout(() => {
         setStep(i);
         if (i === steps.length - 1) setRunning(false);
