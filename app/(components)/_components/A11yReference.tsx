@@ -13,7 +13,7 @@ interface A11yReferenceProps {
   limits?: string[];
 }
 
-const cell = 'border-b border-border-subtle px-3 py-2 text-left align-top text-sm';
+const cell = 'border-b border-border-subtle px-3 py-2 text-left align-top';
 
 /**
  * Fiche de référence accessibilité d'un composant : clavier, rôles/ARIA, critères WCAG 2.2.
@@ -61,8 +61,8 @@ export function A11yReference({ keyboard, aria, wcag, limits }: A11yReferencePro
         <dl className="space-y-3">
           {aria.map(({ name, description }) => (
             <div key={name}>
-              <dt className="font-mono text-sm font-bold">{name}</dt>
-              <dd className="text-sm">{description}</dd>
+              <dt className="font-mono font-bold">{name}</dt>
+              <dd>{description}</dd>
             </div>
           ))}
         </dl>
@@ -99,7 +99,7 @@ export function A11yReference({ keyboard, aria, wcag, limits }: A11yReferencePro
           <ul className="list-disc space-y-2 pl-5">
             {limits.map((limit) => (
               <li key={limit}>
-                <Text variant="small">{limit}</Text>
+                <Text>{limit}</Text>
               </li>
             ))}
           </ul>

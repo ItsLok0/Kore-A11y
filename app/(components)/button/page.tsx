@@ -368,48 +368,6 @@ export default function ButtonDemoPage() {
           </div>
         </section>
 
-        {/* ── A11Y ── */}
-        <section className="rounded-2xl border border-border-subtle bg-primary-subtle p-6 sm:p-8">
-          <Heading as="h2" level={4} className="mb-4 italic text-primary">
-            Note accessibilité
-          </Heading>
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Focus visible</Text>
-              <Text variant="small">
-                Chaque bouton et lien affiche un double anneau de focus via{' '}
-                <Text as="span" variant="code">--focus-ring</Text> sur{' '}
-                <Text as="span" variant="code">focus-visible</Text>. Testable à la touche Tab.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">États communiqués</Text>
-              <Text variant="small">
-                <Text as="span" variant="code">disabled</Text> retire le bouton de l'ordre
-                de tabulation. Pendant le chargement, le bouton est aussi désactivé et reçoit{' '}
-                <Text as="span" variant="code">aria-busy="true"</Text> (voir les limites
-                dans la référence ci-dessous).
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Icône seule</Text>
-              <Text variant="small">
-                Un bouton sans texte visible exige un{' '}
-                <Text as="span" variant="code">aria-label</Text> explicite pour être
-                compréhensible hors contexte visuel.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Liens externes</Text>
-              <Text variant="small">
-                La prop <Text as="span" variant="code">external</Text> ajoute automatiquement
-                un <Text as="span" variant="code">sr-only</Text> annonçant l'ouverture
-                dans un nouvel onglet, évitant toute surprise de navigation.
-              </Text>
-            </div>
-          </div>
-        </section>
-
         {/* ── RÉFÉRENCE A11Y ── */}
         <A11yReference
           keyboard={[
@@ -422,6 +380,7 @@ export default function ButtonDemoPage() {
             { name: 'aria-label', description: 'Pour un bouton à icône seule (iconOnly) : le nom accessible vient de aria-label, ou du texte de children s\'il est une chaîne. Couvert par un test.' },
             { name: 'aria-busy', description: '« true » pendant isLoading. Couvert par un test.' },
             { name: 'aria-disabled', description: 'Reflète disabled (ou isLoading), en plus de l\'attribut natif disabled.' },
+            { name: 'ButtonLink external', description: 'Ajoute target="_blank", rel="noopener noreferrer" et un texte sr-only « (ouvre dans un nouvel onglet) » pour prévenir les lecteurs d\'écran.' },
             { name: 'aria-hidden="true"', description: 'Appliqué aux icônes décoratives à l\'intérieur du bouton.' },
           ]}
           wcag={[
