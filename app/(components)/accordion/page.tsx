@@ -2,6 +2,7 @@ import { Accordion } from '@/app/ui/components/Accordion/accordion';
 import { Heading } from '@/app/ui/components/heading';
 import { Input } from '@/app/ui/components/input';
 import { Text } from '@/app/ui/components/text';
+import { A11yReference } from '../_components/A11yReference';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -77,11 +78,11 @@ export default function AccordionDemoPage() {
       title: 'Le contenu masqué est-il indexé par les moteurs de recherche ?',
       content: (
         <Text variant="small">
-          Oui. Le contenu dans un panneau accordéon fermé reste présent dans le DOM
-          (via <Text as="span" variant="code">grid-template-rows: 0fr</Text>) et est
-          donc indexé par les moteurs de recherche. Contrairement à{' '}
-          <Text as="span" variant="code">display: none</Text>, cette technique ne retire
-          pas le contenu du flux de rendu.
+          Le contenu d'un panneau fermé reste dans le HTML, mais il est masqué avec{' '}
+          <Text as="span" variant="code">display: none</Text> (classe{' '}
+          <Text as="span" variant="code">hidden</Text>) : il est ignoré des lecteurs
+          d'écran et sorti de l'ordre de tabulation. L'effet sur l'indexation par les
+          moteurs de recherche n'a pas été vérifié.
         </Text>
       ),
     },
@@ -255,57 +256,34 @@ export default function AccordionDemoPage() {
         </section>
 
         {/* A11Y */}
-        <section className="rounded-2xl border border-border-subtle bg-primary-subtle p-6 sm:p-8">
-          <Heading as="h2" level={4} className="mb-4 italic text-primary">
-            Note accessibilité
-          </Heading>
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">
-                Balisage ARIA
-              </Text>
-              <Text variant="small">
-                Chaque trigger porte <Text as="span" variant="code">aria-expanded</Text> et{' '}
-                <Text as="span" variant="code">aria-controls</Text>. Le panel est un{' '}
-                <Text as="span" variant="code">role="region"</Text> lié par{' '}
-                <Text as="span" variant="code">aria-labelledby</Text>.
-                Conforme au pattern APG Accordion du W3C.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">
-                Hiérarchie des titres
-              </Text>
-              <Text variant="small">
-                Chaque trigger est wrappé dans un élément de titre dont le niveau
-                est configurable via <Text as="span" variant="code">headingLevel</Text>.
-                Les lecteurs d'écran peuvent ainsi naviguer entre les sections
-                en mode navigation par titres.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">
-                Identifiants uniques
-              </Text>
-              <Text variant="small">
-                Les ids des triggers et panels sont générés via{' '}
-                <Text as="span" variant="code">useId</Text> (React 18).
-                Aucun risque de collision, y compris en cas de rendu serveur.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">
-                Animations réduites
-              </Text>
-              <Text variant="small">
-                Les transitions utilisent le modificateur{' '}
-                <Text as="span" variant="code">motion-safe:</Text>. Elles sont
-                automatiquement désactivées si l'utilisateur a activé
-                "Réduire les animations" dans ses préférences système. Critère WCAG 2.3.3.
-              </Text>
-            </div>
-          </div>
-        </section>
+        <A11yReference
+          keyboard={[
+            { keys: "Tab / Maj+Tab", action: "Place le focus sur chaque bouton d'en-tête, un par un. Pas de navigation aux flèches : le pattern APG la rend facultative. Un bouton `disabled` est sauté (test)." },
+            { keys: "Entrée", action: "Ouvre ou ferme la section. Couvert par un test." },
+            { keys: "Espace", action: "Ouvre ou ferme la section. Couvert par un test." },
+          ]}
+          aria={[
+            { name: "button dans un titre", description: "Le déclencheur est un `button` natif, placé dans un élément de titre (`h3` par défaut, réglable avec `headingLevel`), comme le demande le pattern APG. Les lecteurs d'écran peuvent naviguer par titres." },
+            { name: "aria-expanded", description: "`true` ou `false` sur le bouton selon l'état de la section. Couvert par un test." },
+            { name: "aria-controls", description: "Référence l'`id` du panneau, généré avec `useId` (pas de collision, y compris au rendu serveur)." },
+            { name: "role=\"region\" + aria-labelledby", description: "Le panneau est une région nommée par son bouton (test). Fermé, il porte la classe `hidden` (test) et `display: none` (vérifié dans Chromium, pas en jsdom) : il sort de l'ordre de tabulation et des lecteurs d'écran." },
+            { name: "disabled", description: "Attribut natif sur le bouton : non focalisable, signalé comme indisponible. Le `Button` ajoute aussi `aria-disabled`." },
+          ]}
+          wcag={[
+            { criterion: "1.3.1 Info et relations", level: "A", how: "Titre + bouton + région nommée : la structure est exposée par le balisage." },
+            { criterion: "2.1.1 Clavier", level: "A", how: "Opérable au clavier grâce au `button` natif ; Entrée et Espace testés." },
+            { criterion: "4.1.2 Nom, rôle et valeur", level: "A", how: "Nom issu du titre de la section, état via `aria-expanded` (tests : `getByRole` avec `name`)." },
+            { criterion: "2.4.7 Focus visible", level: "AA", how: "Anneau `--focus-ring` sur `:focus-visible`. Rendu et contraste non mesurés." },
+            { criterion: "2.5.8 Taille de la cible (minimum)", level: "AA", how: "Le bouton d'en-tête occupe toute la largeur et mesure 56 px de haut (mesuré dans Chromium), au-dessus de 24 px." },
+            { criterion: "2.3.3 Animation à partir d'interactions", level: "AAA", how: "Les transitions utilisent `motion-safe:` : elles sont désactivées si l'utilisateur réduit les animations." },
+          ]}
+          limits={[
+            "Le pattern APG recommande d'éviter `role=\"region\"` quand il y a plus de six panneaux (trop de repères à la lecture). Le composant n'a pas de limite : à surveiller pour les longues listes.",
+            "Seule la rotation de l'icône est animée. L'ouverture du panneau est instantanée : `hidden` ne se prête pas à une transition, et `grid-template-rows` ne change jamais.",
+            "Chaque section s'ouvre indépendamment : il n'y a pas de mode « une seule section ouverte à la fois ».",
+            "Les tests jsdom ne mesurent ni le focus visible ni le contraste, et ne remplacent pas un test manuel avec lecteur d'écran (NVDA, VoiceOver) : à faire.",
+          ]}
+        />
 
       </div>
     </div>
