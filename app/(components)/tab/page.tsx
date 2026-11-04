@@ -2,6 +2,7 @@ import { Tab } from '@/app/ui/components/Tab/tab';
 import { Heading } from '@/app/ui/components/heading';
 import { Input } from '@/app/ui/components/input';
 import { Text } from '@/app/ui/components/text';
+import { A11yReference } from '../_components/A11yReference';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -316,62 +317,38 @@ export default function TabDemoPage() {
         </section>
 
         {/* A11Y */}
-        <section className="rounded-2xl border border-border-subtle bg-primary-subtle p-6 sm:p-8">
-          <Heading as="h2" level={4} className="mb-4 italic text-primary">
-            Note accessibilité
-          </Heading>
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">
-                Balisage ARIA
-              </Text>
-              <Text variant="small">
-                Chaque bouton porte <Text as="span" variant="code">role="tab"</Text>,{' '}
-                <Text as="span" variant="code">aria-selected</Text> et{' '}
-                <Text as="span" variant="code">aria-controls</Text>. Le panel actif est un{' '}
-                <Text as="span" variant="code">role="tabpanel"</Text> lié par{' '}
-                <Text as="span" variant="code">aria-labelledby</Text>.
-                Conforme au pattern APG Tabs du W3C.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">
-                Navigation clavier (pattern automatique)
-              </Text>
-              <Text variant="small">
-                <Text as="span" variant="code">←</Text> <Text as="span" variant="code">→</Text> déplacent
-                le focus entre les onglets et les activent automatiquement.{' '}
-                <Text as="span" variant="code">Début</Text> et{' '}
-                <Text as="span" variant="code">Fin</Text> sautent au premier et dernier onglet.
-                Les onglets désactivés sont ignorés lors de la navigation.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">
-                Roving tabindex
-              </Text>
-              <Text variant="small">
-                Seul l'onglet actif a <Text as="span" variant="code">tabIndex=0</Text>.
-                Les autres ont <Text as="span" variant="code">tabIndex=-1</Text>.
-                La touche <Text as="span" variant="code">Tab</Text> saute directement
-                du bouton actif au <Text as="span" variant="code">tabpanel</Text>,
-                sans traverser les boutons inactifs.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">
-                Identifiants uniques
-              </Text>
-              <Text variant="small">
-                Les ids des tabs et panels sont générés via{' '}
-                <Text as="span" variant="code">useId</Text> (React 18).
-                Plusieurs instances de <Text as="span" variant="code">Tab</Text> peuvent
-                coexister sur une même page sans collision d'identifiants,
-                y compris en rendu serveur.
-              </Text>
-            </div>
-          </div>
-        </section>
+        <A11yReference
+          keyboard={[
+            { keys: "Tab / Maj+Tab", action: "Entre dans la liste d'onglets sur l'onglet actif, puis passe directement au panneau actif (vérifié dans Chromium et testé). Les onglets inactifs ont `tabindex=\"-1\"` : un seul onglet est dans l'ordre de tabulation (test)." },
+            { keys: "← / →", action: "Déplace le focus sur l'onglet précédent ou suivant et l'active (activation automatique). Boucle aux extrémités et saute les onglets `disabled`. Couvert par des tests." },
+            { keys: "Début / Fin", action: "Va au premier ou au dernier onglet actif et l'active. Couvert par un test." },
+            { keys: "Entrée / Espace", action: "Activent le bouton, donc sélectionnent l'onglet. Comme les flèches activent déjà l'onglet, ce n'est utile que si le clic ou le focus n'a pas suffi. Non testé." },
+          ]}
+          aria={[
+            { name: "role=\"tablist\"", description: "Conteneur des onglets, nommé par le titre du composant (`aria-labelledby`). Couvert par un test." },
+            { name: "role=\"tab\" sur un button", description: "Le déclencheur reste un `button` natif auquel on ajoute le rôle `tab`, ce qui est la seule façon d'obtenir ce rôle : le HTML n'a pas d'élément natif pour les onglets." },
+            { name: "aria-selected", description: "`true` sur l'onglet actif, `false` sur les autres. Couvert par un test." },
+            { name: "aria-controls", description: "Référence l'`id` du panneau de l'onglet. Les ids viennent de `useId`." },
+            { name: "role=\"tabpanel\" + aria-labelledby", description: "Chaque panneau est nommé par son onglet (test). Les panneaux inactifs portent l'attribut `hidden` : `display: none`, vérifié dans Chromium." },
+            { name: "tabindex", description: "Roving tabindex : `0` sur l'onglet actif, `-1` sur les autres. Le panneau actif a `tabindex=\"0\"` pour recevoir le focus (test)." },
+            { name: "disabled", description: "Attribut natif sur le bouton : non focalisable, ignoré par les flèches. Le `Button` ajoute aussi `aria-disabled` et `aria-busy=\"false\"` sur chaque onglet." },
+          ]}
+          wcag={[
+            { criterion: "1.3.1 Info et relations", level: "A", how: "Liste, onglets et panneaux reliés par `aria-controls` et `aria-labelledby`." },
+            { criterion: "2.1.1 Clavier", level: "A", how: "Tout est opérable au clavier : flèches, Début, Fin et Tab (tests)." },
+            { criterion: "4.1.2 Nom, rôle et valeur", level: "A", how: "Nom issu du texte du bouton, état via `aria-selected` (tests : `getByRole` avec `name`)." },
+            { criterion: "2.4.3 Parcours du focus", level: "A", how: "Roving tabindex : un seul arrêt pour la liste, puis le panneau." },
+            { criterion: "2.4.7 Focus visible", level: "AA", how: "Anneau `--focus-ring` sur `:focus-visible` pour les onglets et le panneau. Rendu et contraste non mesurés." },
+            { criterion: "2.5.8 Taille de la cible (minimum)", level: "AA", how: "Les onglets mesurent 40 px de haut (mesuré dans Chromium), au-dessus de 24 px." },
+          ]}
+          limits={[
+            "Le panneau a toujours `tabindex=\"0\"`, même quand son contenu contient déjà un élément focalisable : l'APG ne le recommande que sans élément focalisable. C'est un arrêt de tabulation en plus.",
+            "L'onglet actif se distingue par le style du bouton (`primary` plein contre `outline`) en plus de `aria-selected` : contraste non mesuré (1.4.1, 1.4.11).",
+            "Si la section marquée `isActive` est aussi `disabled`, le comportement n'est pas défini ni testé.",
+            "Pas de variante verticale ni d'activation manuelle : seules les flèches gauche et droite sont gérées.",
+            "Test manuel avec lecteur d'écran (NVDA, VoiceOver) : à faire, notamment l'annonce de l'onglet au changement par les flèches.",
+          ]}
+        />
 
       </div>
     </div>
