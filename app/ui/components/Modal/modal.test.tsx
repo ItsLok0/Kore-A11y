@@ -77,4 +77,20 @@ describe('Modal', () => {
     unmount();
     expect(document.documentElement.style.overflowY).toBe('');
   });
+
+  it('se ferme au clic sur le fond (le dialog lui-même) mais pas au clic dans le contenu', async () => {
+    const user = userEvent.setup();
+    const onClose = vi.fn();
+    render(
+      <Modal isOpen onClose={onClose} title="Titre">
+        <button>Action</button>
+      </Modal>,
+    );
+
+    await user.click(screen.getByRole('button', { name: 'Action' }));
+    expect(onClose).not.toHaveBeenCalled();
+
+    await user.click(screen.getByRole('dialog', { name: 'Titre' }));
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
 });
