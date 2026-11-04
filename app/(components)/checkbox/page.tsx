@@ -2,6 +2,7 @@ import { Checkbox } from '@/app/ui/components/Checkbox/checkbox';
 import { CheckboxGroup } from '@/app/ui/components/Checkbox/checkboxGroup';
 import { Heading } from '@/app/ui/components/heading';
 import { Text } from '@/app/ui/components/text';
+import { A11yReference } from '../_components/A11yReference';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -206,58 +207,40 @@ export default function CheckboxDemoPage() {
           </div>
         </section>
 
-        {/* ── A11Y ── */}
-        <section className="rounded-2xl border border-border-subtle bg-primary-subtle p-6 sm:p-8">
-          <Heading as="h2" level={4} className="mb-4 italic text-primary">
-            Note accessibilité
-          </Heading>
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">
-                Label imbriqué
-              </Text>
-              <Text variant="small">
-                L'input est imbriqué dans le <Text as="span" variant="code">label</Text>{' '}
-                pour une liaison implicite. La zone de clic englobe le texte
-                entier, améliorant l'ergonomie sur mobile.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">
-                Fieldset & Legend
-              </Text>
-              <Text variant="small">
-                Le groupe utilise les balises sémantiques{' '}
-                <Text as="span" variant="code">fieldset</Text> +{' '}
-                <Text as="span" variant="code">legend</Text>. Indispensable pour que
-                les AT lisent le contexte avant chaque option.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">
-                Messages d'erreur
-              </Text>
-              <Text variant="small">
-                Les erreurs sont annoncées via{' '}
-                <Text as="span" variant="code">aria-live="polite"</Text>. Le champ
-                porte <Text as="span" variant="code">aria-invalid="true"</Text> et{' '}
-                <Text as="span" variant="code">aria-describedby</Text> pointe vers
-                le message.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">
-                Champ obligatoire
-              </Text>
-              <Text variant="small">
-                L'astérisque visuel est en{' '}
-                <Text as="span" variant="code">aria-hidden="true"</Text>. L'attribut
-                natif <Text as="span" variant="code">required</Text> porte
-                l'information pour les technologies d'assistance.
-              </Text>
-            </div>
-          </div>
-        </section>
+        {/* ── RÉFÉRENCE A11Y ── */}
+        <A11yReference
+          keyboard={[
+            { keys: "Tab / Maj+Tab", action: "Place le focus sur chaque case, une par une (pas de navigation aux flèches : c'est le comportement attendu pour des cases à cocher)." },
+            { keys: "Espace", action: "Coche ou décoche la case. Couvert par un test sur `Checkbox`." },
+            { keys: "Clic sur le label", action: "Coche ou décoche la case : le `label` englobe tout le texte. Couvert par un test." },
+          ]}
+          aria={[
+            { name: "input type=\"checkbox\"", description: "Élément natif : le rôle « checkbox » et l'état coché viennent du HTML." },
+            { name: "label imbriqué", description: "L'`input` est dans le `label` : liaison implicite, sans `id` à gérer, et zone cliquable étendue au texte." },
+            { name: "fieldset / legend", description: "`CheckboxGroup` : le groupe est exposé avec le rôle « group », nommé par sa légende. Couvert par un test." },
+            { name: "aria-describedby", description: "`Checkbox` : description puis erreur. `CheckboxGroup` : posé sur le `fieldset`, avec la description du groupe puis l'erreur. Couvert par des tests." },
+            { name: "aria-invalid", description: "`true` sur la case (ou sur chaque case du groupe) quand `error` est actif. Couvert par des tests." },
+            { name: "required", description: "`Checkbox` : attribut natif, astérisque visuel en `aria-hidden=\"true\"`. `CheckboxGroup` : astérisque masqué et texte `sr-only` « (obligatoire) » dans la légende (couvert par un test)." },
+            { name: "aria-live=\"polite\"", description: "Le message d'erreur est rendu dans une région live, pour être annoncé à son apparition." },
+          ]}
+          wcag={[
+            { criterion: "1.3.1 Info et relations", level: "A", how: "Case reliée à son label par imbrication ; cases d'un groupe regroupées par `fieldset` et `legend`." },
+            { criterion: "4.1.2 Nom, rôle et valeur", level: "A", how: "Case native : rôle et état coché natifs, nom issu du label (tests : `getByRole` avec `name`)." },
+            { criterion: "2.1.1 Clavier", level: "A", how: "Opérable au clavier grâce à l'`input` natif ; Espace testé." },
+            { criterion: "3.3.1 Identification des erreurs", level: "A", how: "L'erreur est un message texte relié à la case ou au groupe, avec `aria-invalid`." },
+            { criterion: "1.4.1 Utilisation de la couleur", level: "A", how: "L'erreur n'est pas portée par la couleur seule : bordure et texte rouges, plus un message texte." },
+            { criterion: "2.4.7 Focus visible", level: "AA", how: "Anneau `--focus-ring` sur `:focus-visible`, avec un contour spécifique pour Safari. Rendu et contraste non mesurés." },
+            { criterion: "2.5.8 Taille de la cible (minimum)", level: "AA", how: "La case seule fait 14 px (`sm`), 16 px (`md`) ou 20 px (`lg`), sous 24 px ; mais le `label` entier est cliquable et mesure au moins 24 px de haut (mesuré dans Chromium)." },
+          ]}
+          limits={[
+            "La description est dans le `label` : elle fait partie du nom accessible (mesuré dans Chromium : « Mode Sombre Recommandé pour réduire la fatigue oculaire. »). Sur `Checkbox`, elle figure aussi dans `aria-describedby` : un lecteur d'écran peut donc la lire deux fois. Non testé avec NVDA ni VoiceOver.",
+            "Le `required` de `CheckboxGroup` est informatif : les cases n'ont pas l'attribut `required` et rien n'empêche l'envoi sans choix. La validation « au moins une case » reste à écrire côté formulaire.",
+            "Le message d'erreur par défaut est « Ce champ est obligatoire. », quelle que soit la cause : passe toujours `errorMessage`.",
+            "`CheckboxGroup` utilise `text-slate-900` et `text-secondary` (gris #6B7280) pour le texte des options, alors que `Checkbox` utilise les jetons `text-text-primary` et `text-text-secondary` : incohérence à corriger, contraste non mesuré (1.4.3, 1.4.11).",
+            "`CheckboxGroup` n'a pas de test pour une case cochée au clavier ; les tests clavier portent sur `Checkbox`.",
+            "Test manuel avec lecteur d'écran (NVDA, VoiceOver) : à faire.",
+          ]}
+        />
 
       </div>
     </div>
