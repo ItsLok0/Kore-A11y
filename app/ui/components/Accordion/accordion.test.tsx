@@ -48,4 +48,41 @@ describe('Accordion', () => {
     await user.click(c);
     expect(c).toHaveAttribute('aria-expanded', 'false');
   });
+
+  it('ouvre et ferme une section au clavier (Espace)', async () => {
+    const user = userEvent.setup();
+    render(<Accordion sections={sections} />);
+    const b = screen.getByRole('button', { name: 'Section B' });
+
+    b.focus();
+    await user.keyboard(' ');
+    expect(b).toHaveAttribute('aria-expanded', 'true');
+    await user.keyboard(' ');
+    expect(b).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('saute le bouton désactivé avec Tab', async () => {
+    const user = userEvent.setup();
+    render(<Accordion sections={sections} />);
+
+    await user.tab();
+    expect(screen.getByRole('button', { name: 'Section A' })).toHaveFocus();
+    await user.tab();
+    expect(screen.getByRole('button', { name: 'Section B' })).toHaveFocus();
+    await user.tab();
+    expect(screen.getByRole('button', { name: 'Section C' })).not.toHaveFocus();
+  });
+
+  it('nomme la région du panneau par son bouton et pose hidden sur le panneau fermé', () => {
+    render(<Accordion sections={sections} />);
+
+    const regionA = screen.getByRole('region', { name: 'Section A' });
+    expect(regionA).not.toHaveClass('hidden');
+
+    // jsdom n'applique pas Tailwind : on vérifie la classe, pas le display réel.
+    const buttonB = screen.getByRole('button', { name: 'Section B' });
+    const panelB = document.getElementById(buttonB.getAttribute('aria-controls')!);
+    expect(panelB).toHaveAttribute('aria-labelledby', buttonB.id);
+    expect(panelB).toHaveClass('hidden');
+  });
 });
