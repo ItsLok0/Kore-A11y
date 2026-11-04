@@ -2,6 +2,7 @@ import { Input } from '@/app/ui/components/input';
 import { Heading } from '@/app/ui/components/heading';
 import { Text } from '@/app/ui/components/text';
 import { TextArea } from '@/app/ui/components/textarea';
+import { A11yReference } from '../_components/A11yReference';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -227,56 +228,38 @@ export default function InputDemoPage() {
           </div>
         </section>
 
-        {/* ── A11Y ── */}
-        <section className="rounded-2xl border border-border-subtle bg-primary-subtle p-6 sm:p-8">
-          <Heading as="h2" level={4} className="mb-4 italic text-primary">
-            Note accessibilité
-          </Heading>
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">
-                Liaison label / champ
-              </Text>
-              <Text variant="small">
-                Chaque champ est lié à son label via un <Text as="span" variant="code">id</Text>{' '}
-                généré par <Text as="span" variant="code">useId()</Text>, garantissant
-                l'unicité même avec plusieurs instances sur la même page.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">
-                Messages d'erreur
-              </Text>
-              <Text variant="small">
-                Les erreurs sont annoncées via <Text as="span" variant="code">aria-live="polite"</Text> +{' '}
-                <Text as="span" variant="code">role="alert"</Text>. Le champ porte{' '}
-                <Text as="span" variant="code">aria-invalid="true"</Text> et{' '}
-                <Text as="span" variant="code">aria-describedby</Text> pointe vers le message.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">
-                Champ obligatoire
-              </Text>
-              <Text variant="small">
-                L'astérisque visuel est en <Text as="span" variant="code">aria-hidden="true"</Text>.
-                L'attribut natif <Text as="span" variant="code">required</Text> porte
-                l'information pour les technologies d'assistance.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">
-                Description masquée en erreur
-              </Text>
-              <Text variant="small">
-                Quand une erreur est active, la description passe en{' '}
-                <Text as="span" variant="code">sr-only</Text> pour éviter la double
-                annonce. L'erreur reste prioritaire dans{' '}
-                <Text as="span" variant="code">aria-describedby</Text>.
-              </Text>
-            </div>
-          </div>
-        </section>
+        {/* ── RÉFÉRENCE A11Y ── */}
+        <A11yReference
+          keyboard={[
+            { keys: "Tab / Maj+Tab", action: "Place le focus sur le champ ; un champ `disabled` est ignoré." },
+            { keys: "Entrée", action: "`Input` : peut soumettre le formulaire parent ; `TextArea` : saute une ligne (comportements natifs, sans test dédié)." },
+          ]}
+          aria={[
+            { name: "label / htmlFor", description: "Chaque champ est relié à son label par un `id` généré avec `useId()`, unique même avec plusieurs instances. Le label est obligatoire (prop `label`). Couvert par un test." },
+            { name: "aria-describedby", description: "Pointe vers la description, puis vers le message d'erreur s'il y en a un. Couvert par des tests." },
+            { name: "aria-invalid", description: "`true` quand `error` est actif. Couvert par un test." },
+            { name: "role=\"alert\"", description: "Posé sur le message d'erreur, placé dans une région `aria-live=\"polite\"`. Présence couverte par un test, annonce vocale non testée." },
+            { name: "required", description: "L'attribut natif porte l'information ; l'astérisque visuel est en `aria-hidden=\"true\"`. Couvert par un test." },
+          ]}
+          wcag={[
+            { criterion: "1.3.1 Info et relations", level: "A", how: "Label relié au champ ; description et erreur reliées par `aria-describedby` (tests : `getByLabelText`, `toHaveAccessibleDescription`)." },
+            { criterion: "3.3.2 Étiquettes ou instructions", level: "A", how: "Label obligatoire (typage TypeScript) et description optionnelle." },
+            { criterion: "3.3.1 Identification des erreurs", level: "A", how: "L'erreur est un message texte relié au champ, avec `aria-invalid`." },
+            { criterion: "1.4.1 Utilisation de la couleur", level: "A", how: "L'erreur n'est pas portée par la couleur seule : un message texte l'accompagne." },
+            { criterion: "4.1.3 Messages d'état", level: "AA", how: "Message d'erreur en `role=\"alert\"`. Annonce réelle à vérifier avec un lecteur d'écran." },
+            { criterion: "2.4.7 Focus visible", level: "AA", how: "Anneau défini globalement sur `:focus-visible` (`--focus-ring`, ou `--focus-ring-error` si le champ a la classe `error`). Rendu et contraste non mesurés." },
+            { criterion: "2.5.8 Taille de la cible (minimum)", level: "AA", how: "`Input` de taille `sm` : 2 rem de haut (32 px à la taille de police par défaut), au-dessus des 24 px requis." },
+          ]}
+          limits={[
+            "En erreur, la description passe en `sr-only` : elle est masquée visuellement mais reste dans `aria-describedby`, donc toujours lue (vérifié : la description accessible contient la description puis l'erreur). Elle n'est pas retirée pour éviter une double annonce.",
+            "La région `aria-live=\"polite\"` contient un `role=\"alert\"` : selon les lecteurs d'écran, l'erreur peut être annoncée deux fois. Non testé avec NVDA ni VoiceOver.",
+            "Le message d'erreur par défaut est « Ce champ est obligatoire », quelle que soit la cause : passe toujours `errorMessage`.",
+            "Pas d'`autocomplete` par défaut (1.3.5 Identifier la finalité de la saisie, AA) : à fournir via la prop pour les champs de données personnelles.",
+            "`TextArea` reprend les mêmes mécanismes, mais n'est couvert que par 2 tests (axe, association label / description / erreur).",
+            "Contraste du texte, des bordures, du placeholder et de l'état désactivé (`opacity-50`) : non mesuré (1.4.3, 1.4.11).",
+            "Test manuel avec lecteur d'écran (NVDA, VoiceOver) : à faire.",
+          ]}
+        />
 
       </div>
     </div>
