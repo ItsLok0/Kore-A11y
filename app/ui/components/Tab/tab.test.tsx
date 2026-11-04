@@ -56,4 +56,28 @@ describe('Tab', () => {
     await user.keyboard('{Home}');
     expect(screen.getByRole('tab', { name: 'Profil' })).toHaveFocus();
   });
+
+  it('← revient en arrière en bouclant, et le clic sélectionne un onglet', async () => {
+    const user = userEvent.setup();
+    render(<Tab title="Compte" sections={sections} />);
+
+    screen.getByRole('tab', { name: 'Profil' }).focus();
+    await user.keyboard('{ArrowLeft}'); // boucle vers « Aide » (saute « Facturation »)
+    expect(screen.getByRole('tab', { name: 'Aide' })).toHaveFocus();
+    expect(screen.getByRole('tab', { name: 'Aide' })).toHaveAttribute('aria-selected', 'true');
+
+    await user.click(screen.getByRole('tab', { name: 'Sécurité' }));
+    expect(screen.getByRole('tab', { name: 'Sécurité' })).toHaveAttribute('aria-selected', 'true');
+    expect(screen.getByRole('tabpanel', { name: 'Sécurité' })).toBeVisible();
+  });
+
+  it('Tab passe de l’onglet actif au panneau actif', async () => {
+    const user = userEvent.setup();
+    render(<Tab title="Compte" sections={sections} />);
+
+    await user.tab();
+    expect(screen.getByRole('tab', { name: 'Profil' })).toHaveFocus();
+    await user.tab();
+    expect(screen.getByRole('tabpanel', { name: 'Profil' })).toHaveFocus();
+  });
 });
