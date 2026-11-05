@@ -6,6 +6,7 @@ import { Heading } from '@/app/ui/components/heading';
 import { Text } from '@/app/ui/components/text';
 import { Button } from '@/app/ui/components/Button/button';
 import { Badge } from '@/app/ui/components/badge';
+import { A11yReference } from '@/app/(components)/_components/A11yReference';
 
 export default function TooltipPopoverDemo () {
     return (
@@ -289,52 +290,36 @@ export default function TooltipPopoverDemo () {
             </section>
     
             {/* A11Y */}
-            <section className="rounded-2xl border border-border-subtle bg-primary-subtle p-6 sm:p-8">
-                <Heading as="h2" level={4} className="mb-4 italic text-primary">
-                Note accessibilité
-                </Heading>
-                <div className="grid gap-8 md:grid-cols-2">
-                <div className="space-y-2">
-                    <Text className="text-sm font-bold underline">Tooltip</Text>
-                    <Text variant="small">
-                    Le contenu apparaissant au survol doit être rejetable (<Text as="span" variant="code">Escape</Text>),
-                    survolable (la souris peut atteindre le tooltip sans le fermer) et persistant
-                    (reste visible jusqu'au blur ou mouseLeave). Ces trois critères sont couverts
-                    par <Text as="span" variant="code">useHover</Text>, <Text as="span" variant="code">useFocus</Text> et{' '}
-                    <Text as="span" variant="code">useDismiss</Text> de Floating UI.
-                    </Text>
-                </div>
-                <div className="space-y-2">
-                    <Text className="text-sm font-bold underline">Tooltip — Trigger focusable</Text>
-                    <Text variant="small">
-                    Le <Text as="span" variant="code">children</Text> du Tooltip doit toujours être
-                    un élément interactif natif (<Text as="span" variant="code">button</Text>,{' '}
-                    <Text as="span" variant="code">a</Text>). Un texte brut dans un{' '}
-                    <Text as="span" variant="code">span</Text> non focusable ne satisfait pas
-                    WCAG 2.1.1 — l'information ne serait pas accessible au clavier.
-                    </Text>
-                </div>
-                <div className="space-y-2">
-                    <Text className="text-sm font-bold underline">Popover — aria-expanded</Text>
-                    <Text variant="small">
-                    Le trigger porte <Text as="span" variant="code">aria-expanded</Text> et{' '}
-                    <Text as="span" variant="code">aria-controls</Text> pour signaler l'état
-                    du panneau aux technologies d'assistance. Le panneau est lié par son{' '}
-                    <Text as="span" variant="code">id</Text> correspondant.
-                    </Text>
-                </div>
-                <div className="space-y-2">
-                    <Text className="text-sm font-bold underline">Popover — Contenu complexe</Text>
-                    <Text variant="small">
-                    Si le <Text as="span" variant="code">content</Text> contient un formulaire
-                    ou plusieurs éléments interactifs, ajouter <Text as="span" variant="code">role="dialog"</Text>{' '}
-                    et un focus trap. Sans focus trap, un utilisateur clavier peut sortir du
-                    panneau sans le fermer — expérience dégradée pour les lecteurs d'écran.
-                    </Text>
-                </div>
-                </div>
-            </section>
-    
+            <A11yReference
+                keyboard={[
+                    { keys: "Tab / Maj+Tab", action: "Tooltip : le focus sur le déclencheur affiche l'infobulle (test). Popover : le panneau est rendu juste après son déclencheur ; en mode `isDialog`, le focus y entre et reste piégé (test)." },
+                    { keys: "Échap", action: "Tooltip : ferme l'infobulle sans déplacer le focus (test, vérifié dans Chromium). Popover : ferme le panneau et, en mode `isDialog`, rend le focus au déclencheur (test)." },
+                    { keys: "Entrée / Espace", action: "Popover : ouvrent ou ferment le panneau via le `button` natif du déclencheur (Entrée testée, Espace non testé)." },
+                ]}
+                aria={[
+                    { name: "role=\"tooltip\"", description: "Tooltip : l'infobulle est un `div` avec ce rôle. Couvert par des tests." },
+                    { name: "aria-describedby", description: "Tooltip : posé sur le bouton enfant, seulement pendant l'ouverture (test ; `null` une fois fermé, mesuré dans Chromium). Il décrit le bouton sans changer son nom." },
+                    { name: "aria-expanded", description: "Popover : `false` ou `true` sur le déclencheur selon l'état. Couvert par des tests." },
+                    { name: "aria-controls", description: "Popover : référence le panneau, seulement pendant l'ouverture (test)." },
+                    { name: "aria-haspopup=\"dialog\"", description: "Popover en mode `isDialog` uniquement. Couvert par un test." },
+                    { name: "role=\"dialog\" + aria-labelledby / aria-describedby", description: "Popover en mode `isDialog` : nom issu de `dialogTitle`, description issue de `dialogDescription`. `aria-modal=\"false\"` : le reste de la page n'est pas masqué. Sans `isDialog`, le panneau n'a aucun rôle. Couvert par des tests." },
+                ]}
+                wcag={[
+                    { criterion: "1.4.13 Contenu au survol ou au focus", level: "AA", how: "Rejetable : Échap (test). Persistant : l'infobulle reste tant que survol ou focus. Survolable : `safePolygon()` de Floating UI, qui n'est pas vérifié automatiquement (jsdom sans géométrie, et pas confirmé dans Chromium) : à tester à la souris." },
+                    { criterion: "2.1.1 Clavier", level: "A", how: "Tooltip : accessible au focus d'un élément focalisable. Popover : ouvert et fermé au clavier (tests)." },
+                    { criterion: "4.1.2 Nom, rôle et valeur", level: "A", how: "Rôles et états ARIA ci-dessus ; `dialog` nommé par son titre (test : `getByRole` avec `name`)." },
+                    { criterion: "2.4.3 Parcours du focus", level: "A", how: "Popover `isDialog` : le focus entre dans le panneau, y est piégé, puis revient au déclencheur à la fermeture (tests)." },
+                ]}
+                limits={[
+                    "Le Tooltip ne marche que sur un enfant focalisable. La démo « Cas d'usage » enveloppe pourtant un Badge non focalisable : 60 appuis sur Tab n'atteignent jamais cette infobulle (mesuré dans Chromium). L'information reste donc inaccessible au clavier : à corriger dans la démo.",
+                    "`aria-describedby` n'apparaît qu'à l'ouverture, donc après le focus : certains lecteurs d'écran peuvent ne pas annoncer l'infobulle. Non testé avec VoiceOver ni NVDA.",
+                    "Dans la carte « Délai », l'infobulle s'affiche décalée à droite du bouton (vu dans Chromium). Cause probable : le `span` déclencheur s'étire dans un conteneur flex en colonne. Non corrigé ici.",
+                    "Popover `isDialog` : le focus est piégé mais `aria-modal` vaut `false`, donc le reste de la page reste exposé aux lecteurs d'écran. On sort par Échap ou clic extérieur (comportement par défaut de Floating UI, non testé).",
+                    "Popover sans `isDialog` : aucun rôle, aucun piège à focus. N'y mets pas de formulaire ; utilise `isDialog`.",
+                    "Focus visible et contraste non mesurés. Test manuel avec lecteur d'écran (NVDA, VoiceOver) : à faire.",
+                ]}
+            />
+
             </div>
         </div>
     )

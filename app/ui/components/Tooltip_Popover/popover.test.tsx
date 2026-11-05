@@ -86,4 +86,25 @@ describe('Popover', () => {
     );
     expect(screen.getByLabelText('Champ')).toHaveFocus();
   });
+
+  it('sans isDialog : aucun rôle dialog, ouverture au clavier (Entrée), aria-controls seulement ouverte', async () => {
+    const user = userEvent.setup();
+    render(
+      <Popover content={<p>Contenu</p>}>
+        <button>Ouvrir</button>
+      </Popover>,
+    );
+    const trigger = screen.getByRole('button', { name: 'Ouvrir' });
+    expect(trigger).not.toHaveAttribute('aria-haspopup');
+    expect(trigger).not.toHaveAttribute('aria-controls');
+
+    trigger.focus();
+    await user.keyboard('{Enter}');
+    expect(trigger).toHaveAttribute('aria-expanded', 'true');
+    expect(trigger).toHaveAttribute('aria-controls');
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+
+    await user.keyboard('{Escape}');
+    expect(trigger).toHaveAttribute('aria-expanded', 'false');
+  });
 });

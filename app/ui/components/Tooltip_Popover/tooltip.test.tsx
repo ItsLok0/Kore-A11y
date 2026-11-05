@@ -59,4 +59,22 @@ describe('Tooltip', () => {
     await user.hover(screen.getByRole('button', { name: 'Aide' }));
     expect(await screen.findByRole('tooltip')).toHaveTextContent('Aide contextuelle');
   });
+
+  it('n’ajoute aria-describedby que pendant l’ouverture', async () => {
+    const user = userEvent.setup();
+    render(
+      <Tooltip content="Aide contextuelle" delay={0}>
+        <button>Aide</button>
+      </Tooltip>,
+    );
+    const button = screen.getByRole('button', { name: 'Aide' });
+    expect(button).not.toHaveAttribute('aria-describedby');
+
+    await user.tab();
+    await screen.findByRole('tooltip');
+    expect(button).toHaveAttribute('aria-describedby');
+
+    await user.keyboard('{Escape}');
+    expect(button).not.toHaveAttribute('aria-describedby');
+  });
 });
