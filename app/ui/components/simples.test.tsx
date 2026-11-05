@@ -48,6 +48,23 @@ describe('Badge', () => {
   });
 });
 
+describe('Badge, rôle et texte pour les lecteurs d’écran', () => {
+  it('expose un rôle status, masque l’icône et remplace le texte par srText', () => {
+    render(
+      <Badge variant="danger" icon={faCheckCircle} srText="Paiement refusé" />,
+    );
+    const badge = screen.getByRole('status');
+    expect(badge).toHaveTextContent('Paiement refusé');
+    expect(badge.querySelector('svg')).toHaveAttribute('aria-hidden', 'true');
+  });
+
+  it('masque le texte visible aux lecteurs d’écran au profit du texte sr-only', () => {
+    render(<Badge variant="success">Validé</Badge>);
+    expect(screen.getByText('Validé')).toHaveAttribute('aria-hidden', 'true');
+    expect(screen.getByRole('status')).toHaveTextContent('Validé');
+  });
+});
+
 describe('Card', () => {
   it('n’a aucune violation (statique et cliquable) et utilise un titre', async () => {
     const { container } = render(

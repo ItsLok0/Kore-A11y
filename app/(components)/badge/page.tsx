@@ -1,6 +1,7 @@
 import { Badge } from '@/app/ui/components/badge';
 import { Heading } from '@/app/ui/components/heading';
 import { Text } from '@/app/ui/components/text';
+import { A11yReference } from '../_components/A11yReference';
 import { Metadata } from 'next';
 import {
   faTriangleExclamation,
@@ -135,19 +136,31 @@ export default function BadgeDemoPage() {
         </section>
 
         {/* A11Y */}
-        <section className="rounded-2xl border border-border-subtle bg-primary-subtle p-6 sm:p-8">
-          <Heading as="h2" level={4} className="mb-4 italic text-primary">Note accessibilité</Heading>
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Couleur non exclusive</Text>
-              <Text variant="small">L'information est toujours lisible sans perception des couleurs.</Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Lecteurs d'écran</Text>
-              <Text variant="small">Utilisation de <Text as="span" variant="code">aria-hidden</Text>, <Text as="span" variant="code">sr-only</Text> et <Text as="span" variant="code">role="status"</Text>.</Text>
-            </div>
-          </div>
-        </section>
+        <A11yReference
+          keyboard={[
+            { keys: "Aucune", action: "Le Badge n'est pas interactif : il n'est pas dans l'ordre de tabulation et n'a aucune touche propre. Pour déclencher une action, utilise un `Button`." },
+          ]}
+          aria={[
+            { name: "role=\"status\"", description: "Posé sur chaque Badge : c'est une région live polie. La page de démo en compte 26 (mesuré dans Chromium). Voir les limites." },
+            { name: "aria-hidden sur l'icône", description: "L'icône est décorative : elle est toujours masquée aux lecteurs d'écran." },
+            { name: "aria-hidden sur le texte visible + sr-only", description: "Le texte affiché est masqué ; un texte `sr-only` le remplace : « Préfixe : texte », ou la prop `srText` si elle est fournie. Couvert par un test." },
+            { name: "prop srText", description: "Obligatoire pour un Badge avec icône seule (imposé par TypeScript) : sans elle, le Badge n'aurait aucun nom. Couvert par un test." },
+          ]}
+          wcag={[
+            { criterion: "1.4.1 Utilisation de la couleur", level: "A", how: "Le sens est porté par le texte et l'icône, pas par la couleur seule." },
+            { criterion: "1.4.3 Contraste (minimum)", level: "AA", how: "Texte blanc de 12 px en gras sur le fond : 7,68 (success), 6,47 (danger), 5,02 (warning), 5,93 (info), 10,31 (neutral), tous au-dessus de 4,5. Calculé depuis les couleurs affichées dans Chromium." },
+            { criterion: "1.1.1 Contenu non textuel", level: "A", how: "Icône décorative masquée ; le sens est dans le texte. Un Badge à icône seule exige `srText` (TypeScript)." },
+            { criterion: "4.1.2 Nom, rôle et valeur", level: "A", how: "Le texte `sr-only` donne le contenu ; le rôle `status` est discutable pour un Badge statique (voir les limites)." },
+          ]}
+          limits={[
+            "Le préfixe lu par défaut est en anglais (« Success : Succès », « Danger : Erreur », « Warning : Avertissement », « Info », « Neutral ») alors que la page est en français (`lang=\"fr\"`) : un lecteur d'écran français le prononcera mal. Passer `srText` le remplace (WCAG 3.1.2 : langue d'un passage). À corriger dans le composant.",
+            "`role=\"status\"` fait de chaque Badge une région live. Pour un Badge statique, ce n'est pas nécessaire et ça multiplie les régions. Il ne se justifie que si le texte change dynamiquement. Non testé avec un lecteur d'écran.",
+            "Le texte lu est construit avec le premier enfant converti en chaîne : un enfant qui est un élément React (ex. `<strong>Validé</strong>`) donne « Success : [object Object] » (vérifié en test). Passe du texte brut, ou `srText`.",
+            "Seul le contraste texte/fond est mesuré. Le contraste de l'icône (1.4.11) n'est pas mesuré.",
+            "Test manuel avec lecteur d'écran (NVDA, VoiceOver) : à faire.",
+          ]}
+        />
+
       </div>
     </div>
   );
