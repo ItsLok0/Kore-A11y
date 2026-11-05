@@ -5,7 +5,6 @@ import { Popover } from '@/app/ui/components/Tooltip_Popover/popover';
 import { Heading } from '@/app/ui/components/heading';
 import { Text } from '@/app/ui/components/text';
 import { Button } from '@/app/ui/components/Button/button';
-import { Badge } from '@/app/ui/components/badge';
 import { A11yReference } from '@/app/(components)/_components/A11yReference';
 
 export default function TooltipPopoverDemo () {
@@ -59,10 +58,8 @@ export default function TooltipPopoverDemo () {
                     <Button variant="primary">Enregistrer</Button>
                     </Tooltip>
     
-                    <Tooltip content="Ce badge indique un statut actif">
-                    <span className="inline-flex">
-                        <Badge variant="success">Actif</Badge>
-                    </span>
+                    <Tooltip content="Le service est actif et répond normalement">
+                    <Button variant="outline">Statut</Button>
                     </Tooltip>
     
                 </div>
@@ -311,7 +308,7 @@ export default function TooltipPopoverDemo () {
                     { criterion: "2.4.3 Parcours du focus", level: "A", how: "Popover `isDialog` : le focus entre dans le panneau, y est piégé, puis revient au déclencheur à la fermeture (tests)." },
                 ]}
                 limits={[
-                    "Le Tooltip ne marche que sur un enfant focalisable. La démo « Cas d'usage » enveloppe pourtant un Badge non focalisable : 60 appuis sur Tab n'atteignent jamais cette infobulle (mesuré dans Chromium). L'information reste donc inaccessible au clavier : à corriger dans la démo.",
+                    "Le Tooltip ne marche que sur un enfant focalisable (`button`, `a`). Sur un élément statique comme un Badge, l'infobulle ne s'afficherait qu'à la souris : l'information serait inaccessible au clavier.",
                     "`aria-describedby` n'apparaît qu'à l'ouverture, donc après le focus : certains lecteurs d'écran peuvent ne pas annoncer l'infobulle. Non testé avec VoiceOver ni NVDA.",
                     "Dans la carte « Délai », l'infobulle s'affiche décalée à droite du bouton (vu dans Chromium). Cause probable : le `span` déclencheur s'étire dans un conteneur flex en colonne. Non corrigé ici.",
                     "Popover `isDialog` : le focus est piégé mais `aria-modal` vaut `false`, donc le reste de la page reste exposé aux lecteurs d'écran. On sort par Échap ou clic extérieur (comportement par défaut de Floating UI, non testé).",
