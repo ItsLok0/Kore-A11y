@@ -120,4 +120,21 @@ describe('Popover', () => {
     // jsdom n'applique pas Tailwind : on vérifie la classe, la largeur réelle est mesurée dans Chromium.
     expect(screen.getByRole('button', { name: 'Cible' }).parentElement).toHaveClass('w-fit');
   });
+
+  it('mode dialogue : le focus d’ouverture ne fait pas défiler la page (preventScroll)', async () => {
+    const user = userEvent.setup();
+    const focusSpy = vi.spyOn(HTMLElement.prototype, 'focus');
+    render(
+      <Popover isDialog dialogTitle="Options" content={<button>Appliquer</button>}>
+        <button>Ouvrir</button>
+      </Popover>,
+    );
+    await user.click(screen.getByRole('button', { name: 'Ouvrir' }));
+
+    const dialog = screen.getByRole('dialog', { name: 'Options' });
+    const dialogFocusIndex = focusSpy.mock.contexts.indexOf(dialog);
+    expect(dialogFocusIndex).toBeGreaterThanOrEqual(0);
+    expect(focusSpy.mock.calls[dialogFocusIndex][0]).toEqual({ preventScroll: true });
+    focusSpy.mockRestore();
+  });
 });
