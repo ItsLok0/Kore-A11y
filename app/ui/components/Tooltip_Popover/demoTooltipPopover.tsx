@@ -310,7 +310,6 @@ export default function TooltipPopoverDemo () {
                 limits={[
                     "Le Tooltip ne marche que sur un enfant focalisable (`button`, `a`). Sur un élément statique comme un Badge, l'infobulle ne s'afficherait qu'à la souris : l'information serait inaccessible au clavier.",
                     "`aria-describedby` n'apparaît qu'à l'ouverture, donc après le focus : certains lecteurs d'écran peuvent ne pas annoncer l'infobulle. Non testé avec VoiceOver ni NVDA.",
-                    "Dans la carte « Délai », l'infobulle s'affiche décalée à droite du bouton (vu dans Chromium). Cause probable : le `span` déclencheur s'étire dans un conteneur flex en colonne. Non corrigé ici.",
                     "Popover `isDialog` : le focus est piégé mais `aria-modal` vaut `false`, donc le reste de la page reste exposé aux lecteurs d'écran. On sort par Échap ou clic extérieur (comportement par défaut de Floating UI, non testé).",
                     "Popover sans `isDialog` : aucun rôle, aucun piège à focus. N'y mets pas de formulaire ; utilise `isDialog`.",
                     "Focus visible et contraste non mesurés. Test manuel avec lecteur d'écran (NVDA, VoiceOver) : à faire.",
