@@ -77,7 +77,7 @@ export const Popover = forwardRef<HTMLSpanElement, PopoverProps>(
         useEffect(() => {
             if (isOpen) {
                 // Mode dialog : le focus entre dans la popover à l'ouverture
-                if (isDialog) floatingRef.current?.focus();
+                if (isDialog) floatingRef.current?.focus({ preventScroll: true });
                 return;
             }
             if (restoreFocusRef.current) {
