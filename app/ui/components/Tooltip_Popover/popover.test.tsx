@@ -42,6 +42,7 @@ describe('Popover', () => {
     await user.click(screen.getByRole('button', { name: 'Ouvrir' }));
     const dialog = screen.getByRole('dialog', { name: 'Options' });
     expect(dialog).toHaveAccessibleDescription('Réglages rapides');
+    expect(dialog).toHaveAttribute('aria-modal', 'true');
     expect(dialog).toHaveFocus();
   });
 
