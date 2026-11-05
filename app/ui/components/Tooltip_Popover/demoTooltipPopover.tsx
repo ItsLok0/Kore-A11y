@@ -299,7 +299,7 @@ export default function TooltipPopoverDemo () {
                     { name: "aria-expanded", description: "Popover : `false` ou `true` sur le déclencheur selon l'état. Couvert par des tests." },
                     { name: "aria-controls", description: "Popover : référence le panneau, seulement pendant l'ouverture (test)." },
                     { name: "aria-haspopup=\"dialog\"", description: "Popover en mode `isDialog` uniquement. Couvert par un test." },
-                    { name: "role=\"dialog\" + aria-labelledby / aria-describedby", description: "Popover en mode `isDialog` : nom issu de `dialogTitle`, description issue de `dialogDescription`. `aria-modal=\"false\"` : le reste de la page n'est pas masqué. Sans `isDialog`, le panneau n'a aucun rôle. Couvert par des tests." },
+                    { name: "role=\"dialog\" + aria-labelledby / aria-describedby", description: "Popover en mode `isDialog` : nom issu de `dialogTitle`, description issue de `dialogDescription`. `aria-modal=\"true\"` : cohérent avec le focus piégé, le reste de la page est masqué aux lecteurs d'écran. Sans `isDialog`, le panneau n'a aucun rôle. Couvert par des tests." },
                 ]}
                 wcag={[
                     { criterion: "1.4.13 Contenu au survol ou au focus", level: "AA", how: "Rejetable : Échap (test). Persistant : l'infobulle reste tant que survol ou focus. Survolable : `safePolygon()` de Floating UI, qui n'est pas vérifié automatiquement (jsdom sans géométrie, et pas confirmé dans Chromium) : à tester à la souris." },
@@ -310,7 +310,7 @@ export default function TooltipPopoverDemo () {
                 limits={[
                     "Le Tooltip ne marche que sur un enfant focalisable (`button`, `a`). Sur un élément statique comme un Badge, l'infobulle ne s'afficherait qu'à la souris : l'information serait inaccessible au clavier.",
                     "`aria-describedby` n'apparaît qu'à l'ouverture, donc après le focus : certains lecteurs d'écran peuvent ne pas annoncer l'infobulle. Non testé avec VoiceOver ni NVDA.",
-                    "Popover `isDialog` : le focus est piégé mais `aria-modal` vaut `false`, donc le reste de la page reste exposé aux lecteurs d'écran. On sort par Échap ou clic extérieur (comportement par défaut de Floating UI, non testé).",
+                    "Popover `isDialog` : `aria-modal=\"true\"` est posé pour aller avec le piège à focus. Non testé avec un lecteur d'écran : à vérifier au VoiceOver que le reste de la page est bien masqué. On sort par Échap ou clic extérieur (comportement par défaut de Floating UI, non testé).",
                     "Popover sans `isDialog` : aucun rôle, aucun piège à focus. N'y mets pas de formulaire ; utilise `isDialog`.",
                     "Focus visible et contraste non mesurés. Test manuel avec lecteur d'écran (NVDA, VoiceOver) : à faire.",
                 ]}

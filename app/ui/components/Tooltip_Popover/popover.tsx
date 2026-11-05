@@ -126,7 +126,7 @@ export const Popover = forwardRef<HTMLSpanElement, PopoverProps>(
         const floatingAriaProps = isDialog
         ? {
             role: 'dialog' as const,
-            'aria-modal': false,
+            'aria-modal': true,
             'aria-labelledby': dialogTitle ? titleId : undefined,
             'aria-describedby': dialogDescription ? descId : undefined,
             }
