@@ -88,7 +88,7 @@ export const Tooltip = forwardRef<HTMLSpanElement, TooltipProps>(
                 }}
                 {...(isValidElement(children) ? {} : { 'aria-describedby': describedBy })}
                 {...getReferenceProps()}
-                className={cn("inline-flex", className)}
+                className={cn("inline-flex w-fit", className)}
             >
                 {trigger}
             </span>

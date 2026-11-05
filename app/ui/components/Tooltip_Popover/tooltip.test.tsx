@@ -77,4 +77,16 @@ describe('Tooltip', () => {
     await user.keyboard('{Escape}');
     expect(button).not.toHaveAttribute('aria-describedby');
   });
+
+  it('le déclencheur ne s’étire pas dans un conteneur flex (classe w-fit)', () => {
+    render(
+      <div className="flex flex-col">
+        <Tooltip content="Aide contextuelle" delay={0}>
+          <button>Cible</button>
+        </Tooltip>
+      </div>,
+    );
+    // jsdom n'applique pas Tailwind : on vérifie la classe, la largeur réelle est mesurée dans Chromium.
+    expect(screen.getByRole('button', { name: 'Cible' }).parentElement).toHaveClass('w-fit');
+  });
 });

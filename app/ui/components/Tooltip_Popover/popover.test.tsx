@@ -107,4 +107,16 @@ describe('Popover', () => {
     await user.keyboard('{Escape}');
     expect(trigger).toHaveAttribute('aria-expanded', 'false');
   });
+
+  it('le déclencheur ne s’étire pas dans un conteneur flex (classe w-fit)', () => {
+    render(
+      <div className="flex flex-col">
+        <Popover content={<p>Contenu</p>}>
+          <button>Cible</button>
+        </Popover>
+      </div>,
+    );
+    // jsdom n'applique pas Tailwind : on vérifie la classe, la largeur réelle est mesurée dans Chromium.
+    expect(screen.getByRole('button', { name: 'Cible' }).parentElement).toHaveClass('w-fit');
+  });
 });

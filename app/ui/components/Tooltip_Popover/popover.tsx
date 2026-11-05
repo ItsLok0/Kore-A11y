@@ -148,7 +148,7 @@ export const Popover = forwardRef<HTMLSpanElement, PopoverProps>(
                     }}
                     {...(isValidElement(children) ? {} : triggerAriaProps)}
                     {...getReferenceProps()}
-                    className={cn("inline-flex", className)}
+                    className={cn("inline-flex w-fit", className)}
                 >
                     {trigger}
                 </span>
