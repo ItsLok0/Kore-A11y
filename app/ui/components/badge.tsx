@@ -68,6 +68,14 @@ const variantStyles: Record<BadgeVariant, {
     },
 };
 
+// Extrait le texte d'un nœud React (chaîne, nombre, tableau, élément). Ignore le reste.
+function getText(node: React.ReactNode): string {
+    if (typeof node === "string" || typeof node === "number") return String(node);
+    if (Array.isArray(node)) return node.map(getText).join("");
+    if (React.isValidElement<{ children?: React.ReactNode }>(node)) return getText(node.props.children);
+    return "";
+}
+
 export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
     (
         {
@@ -80,9 +88,8 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
         const config = variantStyles[variant];
         const icon   = props.icon ?? config.defaultIcon;
 
-        // Récupération du contenu de children pour les AT
-        const childrenArray = React.Children.toArray(children);
-        const label = childrenArray[0]?.toString();
+        // Texte de children pour les AT (récursif : gère éléments, nombres et plusieurs enfants)
+        const label = getText(children).trim();
 
         const srText = 'srText' in props ? props.srText : undefined;
 

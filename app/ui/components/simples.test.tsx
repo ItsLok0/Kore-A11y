@@ -78,6 +78,17 @@ describe('Badge, rôle et texte pour les lecteurs d’écran', () => {
     ]);
   });
 
+  it('lit le texte des enfants même s’ils contiennent des éléments, des nombres ou plusieurs nœuds', () => {
+    render(
+      <>
+        <Badge variant="success"><strong>Validé</strong></Badge>
+        <Badge variant="info">{3} <em>nouveaux</em> messages</Badge>
+      </>,
+    );
+    const texts = screen.getAllByRole('status').map((el) => el.querySelector('.sr-only')?.textContent);
+    expect(texts).toEqual(['Succès : Validé', 'Information : 3 nouveaux messages']);
+  });
+
   it('masque le texte visible aux lecteurs d’écran au profit du texte sr-only', () => {
     render(<Badge variant="success">Validé</Badge>);
     expect(screen.getByText('Validé')).toHaveAttribute('aria-hidden', 'true');
