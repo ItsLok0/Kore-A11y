@@ -3,6 +3,7 @@ import { Heading } from "@/app/ui/components/heading";
 import { Text } from "@/app/ui/components/text";
 import { Button } from "@/app/ui/components/Button/button";
 import { Card } from "@/app/ui/components/Card/card";
+import { A11yReference } from "../_components/A11yReference";
 import {
   faStar,
   faBookmark,
@@ -223,47 +224,32 @@ export default function CardDemoPage() {
         </section>
 
         {/* ── A11Y ── */}
-        <section className="rounded-2xl border border-border-subtle bg-primary-subtle p-6 sm:p-8">
-          <Heading as="h2" level={4} className="mb-4 italic text-primary">
-            Note accessibilité
-          </Heading>
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Redundant Click</Text>
-              <Text variant="small">
-                Le pseudo-élément <Text as="span" variant="code">::after</Text> du lien
-                de titre couvre toute la carte. Un seul élément est exposé aux
-                technologies d'assistance (pas de doublon de liens).
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Focus visible</Text>
-              <Text variant="small">
-                La pseudo-classe CSS <Text as="span" variant="code">:has()</Text> propage
-                le focus du lien vers la carte parente. Aucun JavaScript, rendu
-                natif du navigateur, robuste aux technologies d'assistance.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Sémantique</Text>
-              <Text variant="small">
-                La carte utilise <Text as="span" variant="code">&lt;article&gt;</Text>{' '}
-                comme landmark sémantique. La prop{' '}
-                <Text as="span" variant="code">titleLevel</Text> garantit une hiérarchie
-                de titres correcte selon le contexte d'intégration.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Actions secondaires — z-index</Text>
-              <Text variant="small">
-                Les actions dans <Text as="span" variant="code">children</Text> doivent
-                utiliser <Text as="span" variant="code">relative z-1</Text> pour
-                passer au-dessus du <Text as="span" variant="code">::after</Text>.
-                Sans cela, elles sont inaccessibles au clic souris.
-              </Text>
-            </div>
-          </div>
-        </section>
+        <A11yReference
+          keyboard={[
+            { keys: "Tab / Maj+Tab", action: "Une carte avec `href` a un seul arrêt : le lien du titre. Une carte statique n'en a aucun (test). Les actions secondaires placées dans `children` ont chacune leur arrêt." },
+            { keys: "Entrée", action: "Suit le lien du titre (comportement natif d'un lien)." },
+          ]}
+          aria={[
+            { name: "article", description: "La carte est un `<article>` : un élément de section, rôle `article` implicite. Ce n'est pas un landmark (l'ancienne note le disait à tort). Il n'a pas de nom propre ; l'`id` généré par `useId` ne sert qu'au lien." },
+            { name: "Titre + lien", description: "Le titre est un `Heading` (`h3` par défaut, réglable avec `titleLevel`) ; avec `href`, le lien est à l'intérieur du titre et son nom est le texte du titre. Couvert par un test." },
+            { name: "Lien étiré (::after)", description: "Le `::after` du lien couvre toute la carte : un seul lien est exposé aux technologies d'assistance. Mesuré dans Chromium : le centre des 11 cartes à lien tombe sur le lien, et les boutons secondaires restent cliquables dans les 4 cartes qui en ont (avec `relative z-1`)." },
+            { name: "tabIndex={0} sur le lien", description: "Redondant : un `<a href>` est déjà focalisable. Sans effet." },
+          ]}
+          wcag={[
+            { criterion: "1.3.1 Info et relations", level: "A", how: "`article` et titre de niveau réglable : la structure est dans le balisage." },
+            { criterion: "2.1.1 Clavier", level: "A", how: "Le lien est atteint par Tab et activé par Entrée (test pour l'arrêt de tabulation)." },
+            { criterion: "2.4.4 Fonction du lien (en contexte)", level: "A", how: "Le nom du lien est le titre de la carte." },
+            { criterion: "2.4.7 Focus visible", level: "AA", how: "L'outline du lien est supprimé ; `:has(a:focus-visible)` dessine sur l'article un anneau de 3 px blanc puis 2 px `#3730a3`. Mesuré dans Chromium au clavier, après la transition de 200 ms. Contraste de l'anneau non mesuré." },
+            { criterion: "2.5.8 Taille de la cible (minimum)", level: "AA", how: "Toute la surface de la carte est la cible du lien." },
+          ]}
+          limits={[
+            "L'anneau de focus est animé (`transition-shadow`, 200 ms) : il apparaît avec un léger retard, vu en mesure immédiate (aucune ombre) puis après 600 ms (anneau présent).",
+            "Un lien qui couvre la carte empêche de sélectionner le texte à la souris (déduit du code, non mesuré).",
+            "Les actions secondaires doivent avoir `relative z-1`, sinon elles passent sous le `::after` et deviennent inaccessibles à la souris (vérifié sur les cartes de la démo qui en ont).",
+            "`titleLevel` est laissé à l'intégrateur : rien ne garantit que la hiérarchie de titres de la page reste cohérente.",
+            "Test manuel avec lecteur d'écran (NVDA, VoiceOver) : à faire.",
+          ]}
+        />
 
       </div>
     </div>

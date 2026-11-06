@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { axe } from 'vitest-axe';
 import { faCheckCircle, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { Heading } from './heading';
@@ -96,6 +97,25 @@ describe('Card', () => {
     expect(await axe(container)).toHaveNoViolations();
     expect(screen.getByRole('heading', { name: 'Lien' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Lien' })).toHaveAttribute('href', '/page');
+  });
+  it('place le lien dans le titre et respecte titleLevel', () => {
+    render(<Card title="Niveau 2" titleLevel="h2" href="/p"><p>Contenu</p></Card>);
+    const heading = screen.getByRole('heading', { level: 2, name: 'Niveau 2' });
+    expect(heading).toContainElement(screen.getByRole('link', { name: 'Niveau 2' }));
+  });
+
+  it('au clavier : un seul arrêt pour une carte avec lien, aucun pour une carte statique', async () => {
+    const user = userEvent.setup();
+    render(
+      <>
+        <Card title="Statique"><p>Contenu</p></Card>
+        <Card title="Lien" href="/page"><p>Contenu</p></Card>
+      </>,
+    );
+    await user.tab();
+    expect(screen.getByRole('link', { name: 'Lien' })).toHaveFocus();
+    await user.tab();
+    expect(document.body).toHaveFocus();
   });
 });
 
