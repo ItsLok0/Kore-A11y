@@ -58,6 +58,26 @@ describe('Badge, rôle et texte pour les lecteurs d’écran', () => {
     expect(badge.querySelector('svg')).toHaveAttribute('aria-hidden', 'true');
   });
 
+  it('lit un préfixe en français par défaut, pour chaque variante', () => {
+    render(
+      <>
+        <Badge variant="neutral">A</Badge>
+        <Badge variant="success">B</Badge>
+        <Badge variant="danger">C</Badge>
+        <Badge variant="warning">D</Badge>
+        <Badge variant="info">E</Badge>
+      </>,
+    );
+    const texts = screen.getAllByRole('status').map((el) => el.querySelector('.sr-only')?.textContent);
+    expect(texts).toEqual([
+      'Neutre : A',
+      'Succès : B',
+      'Erreur : C',
+      'Avertissement : D',
+      'Information : E',
+    ]);
+  });
+
   it('masque le texte visible aux lecteurs d’écran au profit du texte sr-only', () => {
     render(<Badge variant="success">Validé</Badge>);
     expect(screen.getByText('Validé')).toHaveAttribute('aria-hidden', 'true');

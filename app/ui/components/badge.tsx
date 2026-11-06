@@ -44,27 +44,27 @@ const variantStyles: Record<BadgeVariant, {
     neutral: {
         classes: "bg-neutral text-neutral-fg!",
         defaultIcon: faCircle,
-        defaultPrefix: "Neutral"
+        defaultPrefix: "Neutre"
     },
     success: {
         classes: "bg-success text-success-fg",
         defaultIcon: faCheckCircle,
-        defaultPrefix: "Success"
+        defaultPrefix: "Succès"
     },
     danger: {
         classes: "bg-danger text-danger-fg",
         defaultIcon: faTimesCircle,
-        defaultPrefix: "Danger"
+        defaultPrefix: "Erreur"
     },
     warning: {
         classes: "bg-warning text-warning-fg",
         defaultIcon: faTriangleExclamation,
-        defaultPrefix: "Warning"
+        defaultPrefix: "Avertissement"
     },
     info: {
         classes: "bg-info text-info-fg",
         defaultIcon: faInfoCircle,
-        defaultPrefix: "Info"
+        defaultPrefix: "Information"
     },
 };
 
