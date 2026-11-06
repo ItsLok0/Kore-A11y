@@ -153,7 +153,6 @@ export default function BadgeDemoPage() {
             { criterion: "4.1.2 Nom, rôle et valeur", level: "A", how: "Le texte `sr-only` donne le contenu ; le rôle `status` est discutable pour un Badge statique (voir les limites)." },
           ]}
           limits={[
-            "Le préfixe lu par défaut est en anglais (« Success : Succès », « Danger : Erreur », « Warning : Avertissement », « Info », « Neutral ») alors que la page est en français (`lang=\"fr\"`) : un lecteur d'écran français le prononcera mal. Passer `srText` le remplace (WCAG 3.1.2 : langue d'un passage). À corriger dans le composant.",
             "`role=\"status\"` fait de chaque Badge une région live. Pour un Badge statique, ce n'est pas nécessaire et ça multiplie les régions. Il ne se justifie que si le texte change dynamiquement. Non testé avec un lecteur d'écran.",
             "Le texte lu est construit avec le premier enfant converti en chaîne : un enfant qui est un élément React (ex. `<strong>Validé</strong>`) donne « Success : [object Object] » (vérifié en test). Passe du texte brut, ou `srText`.",
             "Seul le contraste texte/fond est mesuré. Le contraste de l'icône (1.4.11) n'est pas mesuré.",
