@@ -39,4 +39,21 @@ describe('Breadcrumbs', () => {
     const { container } = render(<Breadcrumbs />);
     expect(container).toBeEmptyDOMElement();
   });
+
+  it('masque les séparateurs et ne met que des <li> dans la liste', () => {
+    const { container } = render(<Breadcrumbs />);
+    const ol = container.querySelector('ol')!;
+    expect([...ol.children].every((c) => c.tagName === 'LI')).toBe(true);
+    // le chevron est dans le <li> de la page, masqué aux lecteurs d'écran
+    expect(container.querySelector('li svg')).toHaveAttribute('aria-hidden', 'true');
+  });
+
+  it('crée un lien vers chaque segment intermédiaire et formate les libellés', () => {
+    segments.value = ['(components)', 'tooltip_&_popover', 'cas-usage'];
+    render(<Breadcrumbs />);
+    expect(screen.getByRole('link', { name: 'Tooltip & popover' })).toHaveAttribute('href', '/tooltip_&_popover');
+    const current = screen.getByText('Cas usage');
+    expect(current).toHaveAttribute('aria-current', 'page');
+    expect(current.tagName).toBe('SPAN'); // la page courante n'est pas un lien
+  });
 });

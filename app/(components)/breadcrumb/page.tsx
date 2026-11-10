@@ -1,5 +1,6 @@
 import { Heading } from '@/app/ui/components/heading';
 import { Text } from '@/app/ui/components/text';
+import { A11yReference } from '../_components/A11yReference';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -133,59 +134,32 @@ export default function BreadcrumbDemoPage() {
         </section>
 
         {/* A11Y */}
-        <section className="rounded-2xl border border-border-subtle bg-primary-subtle p-6 sm:p-8">
-          <Heading as="h2" level={4} className="mb-4 italic text-primary">
-            Note accessibilité
-          </Heading>
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">
-                Landmark de navigation
-              </Text>
-              <Text variant="small">
-                Le composant est wrappé dans un{' '}
-                <Text as="span" variant="code">{'<nav>'}</Text> avec{' '}
-                <Text as="span" variant="code">aria-label="Fil d'Ariane"</Text>.
-                Les lecteurs d'écran peuvent naviguer directement vers ce landmark.
-                Critère RGAA 12.2.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">
-                Page courante
-              </Text>
-              <Text variant="small">
-                Le dernier segment porte <Text as="span" variant="code">aria-current="page"</Text>
-                sur son <Text as="span" variant="code">{'<li>'}</Text>.
-                Il est rendu en <Text as="span" variant="code">{'<span>'}</Text> non cliquable —
-                naviguer vers la page courante n'a pas de sens. Critère WCAG 2.4.8.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">
-                Séparateur masqué
-              </Text>
-              <Text variant="small">
-                Le séparateur <Text as="span" variant="code">›</Text> est dans un{' '}
-                <Text as="span" variant="code">{'<li aria-hidden="true">'}</Text>.
-                Il est ignoré par les lecteurs d'écran — la structure de liste suffit
-                à communiquer la hiérarchie. Critère RGAA 10.1.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">
-                Structure HTML valide
-              </Text>
-              <Text variant="small">
-                Seuls des <Text as="span" variant="code">{'<li>'}</Text> sont enfants directs
-                du <Text as="span" variant="code">{'<ol>'}</Text>, séparateur inclus.
-                Un <Text as="span" variant="code">{'<span>'}</Text> hors{' '}
-                <Text as="span" variant="code">{'<li>'}</Text> serait invalide et
-                pourrait désorienter les technologies d'assistance.
-              </Text>
-            </div>
-          </div>
-        </section>
+        <A11yReference
+          keyboard={[
+            { keys: "Tab / Maj+Tab", action: "Chaque lien du fil (Accueil et segments intermédiaires) a un arrêt. La page courante est un `span` : aucun arrêt (tabindex -1, mesuré). Le fil est placé avant le contenu de la page : 7 Tab depuis le haut de la page pour atteindre le premier lien." },
+            { keys: "Entrée", action: "Suit le lien (comportement natif d'un `<a href>`)." },
+          ]}
+          aria={[
+            { name: "nav aria-label=\"Fil d'Ariane\"", description: "Repère de navigation nommé, distinct des autres `nav` de la page. Couvert par un test." },
+            { name: "ol / li", description: "Liste ordonnée : le lecteur d'écran annonce le nombre d'éléments. Seuls des `li` sont enfants de l'`ol` (mesuré). Test : 2 `listitem` pour Accueil + page." },
+            { name: "aria-current=\"page\"", description: "Posé sur le `span` de la page courante, pas sur le `li` (l'ancienne note le disait à tort). Couvert par un test." },
+            { name: "Séparateur", description: "Icône `aria-hidden=\"true\"` placée dans le même `li` que le segment (mesuré), pas dans un `li` à part : le nombre d'éléments annoncé reste juste." },
+          ]}
+          wcag={[
+            { criterion: "1.3.1 Info et relations", level: "A", how: "Hiérarchie portée par `nav` + `ol` + `li`, pas par les chevrons." },
+            { criterion: "2.4.8 Localisation", level: "AAA", how: "Le fil indique la position dans le site ; la page courante est signalée par `aria-current`." },
+            { criterion: "2.4.7 Focus visible", level: "AA", how: "Anneau de 3 px blanc puis 2 px `#3730a3` sur le lien (mesuré dans Chromium au clavier). Contraste de l'anneau non mesuré." },
+            { criterion: "1.4.3 Contraste (minimum)", level: "AA", how: "Texte du lien et de la page courante : 16,12 (mesuré). Le chevron (6,36) est décoratif." },
+            { criterion: "2.5.8 Taille de la cible (minimum)", level: "AA", how: "Le lien Accueil mesure 70 × 32 px (mesuré), au-dessus des 24 px requis." },
+            { criterion: "1.4.10 Redistribution", level: "AA", how: "`flex-wrap` : pas de défilement horizontal à 320 px de large (mesuré)." },
+          ]}
+          limits={[
+            "Le libellé vient du segment d'URL (tirets et underscores remplacés par des espaces, première lettre en majuscule) : « Tooltip & popover » pour `/tooltip_&_popover`. Il ne vient pas du titre de la page ; les accents ou majuscules d'un titre ne sont pas restitués.",
+            "Le fil lit les segments de la route : une page dont l'URL est peu parlante donne un libellé peu parlant. Rien ne vérifie que chaque segment intermédiaire correspond à une page existante.",
+            "Contraste de l'anneau de focus : non mesuré. Rendu mobile réel : seulement vérifié par l'absence de défilement horizontal à 320 px.",
+            "Test manuel avec lecteur d'écran (annonce de la liste et de la page courante) : à faire.",
+          ]}
+        />
 
       </div>
     </div>
