@@ -129,7 +129,7 @@ Projet réalisé en autonomie avec une approche **SCRUM allégée** :
 
 ## Auteur
 
-**Pierre Parent** — Développeur Frontend | Next.js · Angular · TypeScript | Accessibilité RGAA
+**Pierre Parent** — Développeur Fullstack | Next.js · Angular · TypeScript | Accessibilité RGAA
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-000?style=flat&logo=vercel&logoColor=white)](https://portfolio-pp-gamma.vercel.app/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/pierre-parent-dev/)
