@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Heading } from '@/app/ui/components/heading';
 import { Text } from '@/app/ui/components/text';
+import { A11yReference } from '../_components/A11yReference';
 
 export const metadata: Metadata = {
     title: 'Composant Navbar',
@@ -265,46 +266,40 @@ export default function NavbarDemoPage() {
           </div>
         </section>
 
-        {/* ── NOTE A11Y ── */}
-        <section className="rounded-2xl border border-border-subtle bg-primary-subtle p-6 sm:p-8">
-          <Heading as="h2" level={4} className="mb-4 italic text-primary">
-            Note accessibilité
-          </Heading>
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Focus visible</Text>
-              <Text variant="small">
-                Double anneau de focus via <Text as="span" variant="code">--focus-ring</Text>{' '}
-                (3px blanc / 5px primaire) sur tous les éléments interactifs :
-                logo, liens, bouton burger.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Landmarks</Text>
-              <Text variant="small">
-                Deux landmarks <Text as="span" variant="code">&lt;nav&gt;</Text> distincts
-                avec <Text as="span" variant="code">aria-label</Text> différents :
-                "Navigation principale" (desktop) et "Navigation principale mobile".
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Focus trap</Text>
-              <Text variant="small">
-                Le menu mobile piège le focus dans le panneau tant qu'il est ouvert.
-                <Text as="span" variant="code">inert</Text> neutralise les liens
-                masqués visuellement pour éviter un piège de focus invisible.
-              </Text>
-            </div>
-            <div className="space-y-2">
-              <Text className="text-sm font-bold underline">Pattern Disclosure</Text>
-              <Text variant="small">
-                Le dropdown suit le pattern Disclosure (et non Menubar) recommandé
-                par l'APG W3C pour les navigations de sites vitrine. Navigation
-                au <Text as="span" variant="code">Tab</Text> séquentiel, sans flèches.
-              </Text>
-            </div>
-          </div>
-        </section>
+        {/* ── A11Y ── */}
+        <A11yReference
+          keyboard={[
+            { keys: "Tab / Maj+Tab", action: "Parcours séquentiel : logo, Accueil, puis un arrêt par bouton de sous-menu. Les liens d'un sous-menu fermé n'ont aucun arrêt (`inert`, test). Pas de flèches : c'est le pattern Disclosure, pas Menubar." },
+            { keys: "Entrée / Espace", action: "Sur un bouton de sous-menu : ouvre ou ferme (mesuré). Tab suivant : premier lien du sous-menu." },
+            { keys: "Échap", action: "Ferme le sous-menu ouvert et rend le focus à son bouton ; ferme le menu mobile et rend le focus au burger (tests, mesuré dans Chromium)." },
+            { keys: "Tab hors du sous-menu", action: "Ferme le sous-menu quand le focus en sort (`onBlurCapture`, mesuré)." },
+          ]}
+          aria={[
+            { name: "nav aria-label", description: "Deux `nav` : « Navigation principale » (visible dès `md`) et « Navigation principale mobile ». L'autre est en `display: none` selon la largeur, donc un seul est exposé à la fois (mesuré à 1280 px)." },
+            { name: "Bouton de sous-menu", description: "Vrai `<button>` avec `aria-expanded` et `aria-controls` vers la liste (test). La liste fermée est `inert` et `hidden`. Pas de `role=\"menu\"` : volontaire, ce n'est pas un menu d'application." },
+            { name: "Burger", description: "`aria-label` « Ouvrir / Fermer le menu de navigation » selon l'état, `aria-expanded`, `aria-controls=\"mobile-menu\"`, icône SVG `aria-hidden`. Le `span` sr-only « Menu » est écrasé par l'`aria-label` : redondant. Couvert par un test." },
+            { name: "Panneau mobile", description: "`inert` + `aria-hidden` quand il est fermé, retirés à l'ouverture (test, mesuré). `inert` suffit à retirer les liens du clavier ; `aria-hidden` est redondant." },
+            { name: "aria-current=\"page\"", description: "Sur le lien de la page courante, dans un sous-menu comme au premier niveau (test). Le bouton d'un sous-menu qui contient la page courante est seulement coloré et souligné : l'état n'est pas exposé aux technologies d'assistance." },
+          ]}
+          wcag={[
+            { criterion: "2.1.1 Clavier", level: "A", how: "Tout se fait au clavier : ouvrir, parcourir, fermer (mesuré)." },
+            { criterion: "2.1.2 Pas de piège au clavier", level: "A", how: "Le menu mobile se ferme avec Échap. Voir les limites : le piège à focus laisse en plus sortir le focus vers la page cachée." },
+            { criterion: "2.4.7 Focus visible", level: "AA", how: "Anneau de 3 px blanc puis 2 px `#3730a3` mesuré sur le burger et sur le lien Accueil. Contraste de l'anneau non mesuré." },
+            { criterion: "1.4.3 Contraste (minimum)", level: "AA", how: "Texte des liens de 7,56 à 9,93, logo 17,74 (mesuré dans Chromium)." },
+            { criterion: "2.5.8 Taille de la cible (minimum)", level: "AA", how: "Mesuré : Accueil 44 × 36 px, boutons de sous-menu 66 × 36 px et plus, burger 36 × 24 px (juste au seuil de 24 px)." },
+            { criterion: "2.3.3 Animation à partir des interactions", level: "AAA", how: "Le panneau mobile a `motion-reduce:transition-none` ; mesure avec `prefers-reduced-motion` : la propriété de transition passe à `none`." },
+            { criterion: "1.4.10 Redistribution", level: "AA", how: "Pas de défilement horizontal à 320 px (mesuré)." },
+          ]}
+          limits={[
+            "Piège à focus du menu mobile : `useFocusTrap` prend le dernier élément de `querySelectorAll`, qui est un lien caché d'un sous-menu fermé. Mesuré : depuis « Global UI », Tab sort du menu vers le fil d'Ariane (derrière le panneau), puis vers le lien d'évitement. À corriger.",
+            "Les `id` des sous-menus (`dropdown-atomes`, etc.) sont en double, car `NavLinks` est monté deux fois (desktop et mobile) : `aria-controls` du bouton mobile pointe vers la liste du menu desktop (mesuré). À corriger, par exemple avec `useId`.",
+            "La liste interne porte aussi `aria-label=\"Navigation principale\"`, comme son `nav` : le nom est redondant (déduit du code).",
+            "À l'ouverture du menu mobile, le focus reste sur le burger : il n'est pas déplacé vers le premier lien (mesuré).",
+            "Échap avec un sous-menu ouvert dans le menu mobile ferme les deux d'un coup (mesuré).",
+            "Burger : 36 × 24 px, juste au seuil de WCAG 2.5.8 ; contraste de l'anneau de focus non mesuré.",
+            "Test manuel avec lecteur d'écran (annonce de l'état des boutons, de la page courante) : à faire.",
+          ]}
+        />
 
       </div>
     </div>
