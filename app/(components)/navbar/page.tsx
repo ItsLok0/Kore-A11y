@@ -283,7 +283,7 @@ export default function NavbarDemoPage() {
           ]}
           wcag={[
             { criterion: "2.1.1 Clavier", level: "A", how: "Tout se fait au clavier : ouvrir, parcourir, fermer (mesuré)." },
-            { criterion: "2.1.2 Pas de piège au clavier", level: "A", how: "Le menu mobile se ferme avec Échap. Voir les limites : le piège à focus laisse en plus sortir le focus vers la page cachée." },
+            { criterion: "2.1.2 Pas de piège au clavier", level: "A", how: "Le menu mobile se ferme avec Échap, et le piège à focus boucle dans le panneau : 10 Tab puis 6 Maj+Tab sans sortie (mesuré dans Chromium à 375 px)." },
             { criterion: "2.4.7 Focus visible", level: "AA", how: "Anneau de 3 px blanc puis 2 px `#3730a3` mesuré sur le burger et sur le lien Accueil. Contraste de l'anneau non mesuré." },
             { criterion: "1.4.3 Contraste (minimum)", level: "AA", how: "Texte des liens de 7,56 à 9,93, logo 17,74 (mesuré dans Chromium)." },
             { criterion: "2.5.8 Taille de la cible (minimum)", level: "AA", how: "Mesuré : Accueil 44 × 36 px, boutons de sous-menu 66 × 36 px et plus, burger 36 × 24 px (juste au seuil de 24 px)." },
@@ -291,7 +291,6 @@ export default function NavbarDemoPage() {
             { criterion: "1.4.10 Redistribution", level: "AA", how: "Pas de défilement horizontal à 320 px (mesuré)." },
           ]}
           limits={[
-            "Piège à focus du menu mobile : `useFocusTrap` prend le dernier élément de `querySelectorAll`, qui est un lien caché d'un sous-menu fermé. Mesuré : depuis « Global UI », Tab sort du menu vers le fil d'Ariane (derrière le panneau), puis vers le lien d'évitement. À corriger.",
             "Les `id` des sous-menus (`dropdown-atomes`, etc.) sont en double, car `NavLinks` est monté deux fois (desktop et mobile) : `aria-controls` du bouton mobile pointe vers la liste du menu desktop (mesuré). À corriger, par exemple avec `useId`.",
             "La liste interne porte aussi `aria-label=\"Navigation principale\"`, comme son `nav` : le nom est redondant (déduit du code).",
             "À l'ouverture du menu mobile, le focus reste sur le burger : il n'est pas déplacé vers le premier lien (mesuré).",

@@ -9,9 +9,15 @@ export const useFocusTrap = (ref: React.RefObject<HTMLDivElement | null>, isActi
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key !== 'Tab') return;
  
-      const focusable = container.querySelectorAll<HTMLElement>(
-        'a[href], button:not([disabled]), textarea, input:not([disabled]), select, [tabindex]:not([tabindex="-1"])'
-      );
+      // On ignore les éléments inatteignables (sous un ancêtre `inert` ou `hidden`) :
+      // s'ils comptaient comme « premier » ou « dernier », `focus()` serait sans effet
+      // et Tab sortirait du piège.
+      const focusable = Array.from(
+        container.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), textarea, input:not([disabled]), select, [tabindex]:not([tabindex="-1"])'
+        )
+      ).filter((el) => !el.closest('[inert], [hidden]'));
+ 
       if (!focusable.length) { e.preventDefault(); return; }
  
       const first = focusable[0];
