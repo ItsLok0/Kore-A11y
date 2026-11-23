@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'vitest-axe';
 import Navbar from './Navbar';
@@ -32,6 +32,23 @@ describe('Navbar (menu mobile)', () => {
     await user.keyboard('{Escape}');
     expect(burger).toHaveAttribute('aria-expanded', 'false');
     expect(burger).toHaveFocus();
+  });
+
+  it('le piège à focus boucle sur le dernier lien visible, pas sur un lien caché d’un sous-menu fermé', async () => {
+    const user = userEvent.setup();
+    const { container } = render(<Navbar />);
+    const burger = screen.getByRole('button', { name: 'Ouvrir le menu de navigation' });
+    await user.click(burger);
+
+    const panel = within(container.querySelector<HTMLElement>('#mobile-menu')!);
+    // Dernier élément atteignable du panneau : le bouton « Global UI » (ses liens sont dans un sous-menu fermé, inert)
+    const last = panel.getByRole('button', { name: 'Global UI' });
+    last.focus();
+    await user.tab();
+    expect(burger).toHaveFocus(); // retour au premier élément du piège
+
+    await user.tab({ shift: true });
+    expect(last).toHaveFocus(); // et dans l'autre sens
   });
 
   it('n’a aucune violation d’accessibilité (axe), menu fermé', async () => {
